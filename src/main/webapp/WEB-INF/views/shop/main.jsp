@@ -27,7 +27,7 @@
     </head>
     <body>
 
-        <!-- Header-->
+        <!-- Header
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
@@ -36,7 +36,11 @@
                 </div>
             </div>
         </header>
-
+-->
+        <div style="text-align:center; margin-top:60px;">
+           <h2 class="display-6">NEW 오늘의 신상</h2>
+            <br> 매일 매일 업데이트되는 기원몰 신상
+        </div>
 
         <!-- Section-->
         <section class="py-5">

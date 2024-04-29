@@ -60,6 +60,12 @@ public class ShopController {
 
     }
 
+    @GetMapping("/main2")
+    public void mainPage2() throws  Exception{
+
+
+    }
+
     @GetMapping("/get")
     public void getPage(@RequestParam("p_id") int p_id, Criteria cri, Model model){
 

@@ -57,6 +57,7 @@ public class MemberController {
 
         return "redirect:/member/login";
     }
+    
 
     //로그인 처리
     @PostMapping("/login")

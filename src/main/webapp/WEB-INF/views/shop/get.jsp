@@ -19,6 +19,14 @@
     </style>
 </head>
 <body>
+
+   <div style="text-align:center; margin-top:60px;">
+           <h2 class="display-6"></h2>
+            <br> 매일 매일 업데이트되는 신상
+        </div>
+    <br><br>
+
+
 <div class="container mt-3">
     <div class="row">
         <!-- 첫 번째 열: 이미지 슬라이드와 상품 정보 -->
@@ -30,7 +38,7 @@
                     </div>
                   <!--
                     <div class="carousel-item">
-                        <img src="https://atimg.sonyunara.com/files/attrangs/goods/155186/64c218a716986.jpg" class="d-block w-100" alt="Slide 2">
+                        <img src="https://atimg.sonyunara.com/files/attrangs/goods/155186/64c218a716986.jpg" class="d-block w-100" alt="Slide 2" style="width:800px; height:800px;">
                     </div>
                      다른 슬라이드 이미지를 추가하려면 여기에 추가하면 됩니다. -->
                 </div>
@@ -43,32 +51,64 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
-            <div class="card mt-3">
-                <div class="card-body">
-                    <p class="card-text text-muted mb-3"><c:out value="${product.p_id}"/></p>
-                    <h2 class="card-title mb-3"><c:out value="${product.p_title}"/></h2>
-                    <p class="card-text fw-bold mb-3">가격: <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p>
-                    <p class="card-text mb-3"><c:out value="${product.p_content}"/></p>
-                    <button type="button" class="btn btn-primary" style="float:right">장바구니 담기</button>
-                </div>
-            </div>
+
         </div>
 
         <!-- 두 번째 열: 댓글 창 -->
         <div class="col-lg-6">
-            <div class="card">
-
+             <div class="card mt-3" style="border:none">
                 <div class="card-body">
-                    <h3 class="card-title mb-3">리뷰</h3>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰 작성하기 </button>
-                    <!-- 댓글 내용을 여기에 추가하세요 -->
+                    <p class="card-text text-muted mb-3">상품번호: <c:out value="${product.p_id}"/></p>
+                    <h2 class="card-title mb-3"><c:out value="${product.p_title}"/></h2>
+                    <p class="card-text fw-bold mb-3">가격: <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p>
+                    <p class="card-text mb-3"><c:out value="${product.p_content}"/></p>
+                    <hr>
+                    <p>수량:</p>
+                    <select id="quantitySelect" class="form-select" aria-label="Default select example">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                    <br>
+                    <p id="selectedValue"> 총 금액 : <fmt:formatNumber value="${product.p_price}" pattern="#,###"/> 원 </p>
+                    <br>
+                   <c:if test="${member != null }" >
+                    <div class="btn-group" style="float:right">
+                     <button type="button" class="btn btn-lg btn-success" >구매하기</button>
+                     <button type="button" class="btn btn-secondary btn-lg" style="margin-left:2px;" id="bucket_btn">장바구니</button>
+                    </div>
+                   </c:if>
+                    <c:if test="${member == null }" >
+                            <h1>로그인해야 구매 가능합니다.</h1>
+                      </c:if>
                 </div>
-                <div class="card-body" id="review_body">
-
-                </div>
-            </div>
+             </div>
         </div>
     </div>
+    <br>
+    <div class="card">
+           <div class="card-body">
+           <h3 class="card-title mb-3">리뷰</h3>
+           <c:if test="${member != null }" >
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰 작성하기 </button>
+           </c:if>
+           <c:if test="${member == null }" >
+               <p>로그인 후 작성 가능합니다. </p>
+           </c:if>
+   </div>
+
+           <div class="card-body" id="review_body">1
+
+          </div>
+    </div>
+
 </div>
 
 
@@ -89,7 +129,7 @@
           </div>
           <div class="mb-3">
             <label for="r_replyer" class="form-label">작성자:</label>
-            <input type="text" class="form-control" id="r_replyer" name="r_replyer" value="${r_replyer}">
+            <input type="text" class="form-control" id="r_replyer" name="r_replyer" value="${member.member_id}" readOnly>
           </div>
           <div class="mb-3">
             <label for="r_reply" class="form-label">내용:</label>
@@ -113,10 +153,12 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script>
+
     $(document).ready(function(){
 
         var p_id = '<c:out value="${product.p_id}"/>';
         var uploadResult = $("#uploadResult");
+
 
         $.getJSON("/shop/getAttachList", {p_id : p_id}, function(arr){
 
@@ -130,9 +172,9 @@
 		        uploadResult.html(str);
         });
 
+        //리뷰 달기
         $("#reply_btn").on("click", function(e) {
                 e.preventDefault();
-
 
                 var formData = new FormData();
                 formData.append('p_id', $('#p_id').val());
@@ -159,13 +201,12 @@
 
         });
 
-
+        // 리뷰 목록
         $.getJSON("/reply/list?p_id=" + p_id , function(data) {
-            // 요청이 성공하면 이 함수가 실행됩니다.
 
-            console.log("서버로부터 받은 데이터:", data);
             var str ="";
             var review_body = $("#review_body");
+
 
              for (var i = 0; i < data.length; i++) {
                 str += "<p>" + data[i].r_reply + "</p>";
@@ -176,8 +217,11 @@
                 str += "</div>";
                 str += "<div class='col'></div>"; // 오른쪽 여백을 위한 빈 컬럼
                 str += "<div class='col-auto'>";
+
+                str += '<c:if test="${member.member_id == null}" >';
                 str += "<button class='btn btn-danger dRplyBtn' style='float:right' data-r_no='" + data[i].r_no + "'> 삭제 </button>";
                 str += "<button class='btn btn-info uRplyBtn' data-r_no='"+data[i].r_no +"'style='margin-right: 5px''> 수정 </button>";
+                str += '</c:if>';
                 str += "</div>";
                 str += "</div>";
                 str += "<hr>";
@@ -245,6 +289,59 @@
                             return;
                         }
                 });// 수정 버튼
+
+
+        // 옵션 선택이 변경될 때마다 선택된 값을 가져와서 표시
+            $("#quantitySelect").change(function() {
+
+                var price = <c:out value="${product.p_price}"/>;
+
+                var selectedValue = $(this).val();
+                $("#selectedValue").text("총 금액 : " +addCommas(selectedValue * price) + "원");
+                // 선택된 값을 다른 작업에 활용할 수도 있습니다.
+            });
+
+            // ex) 1000 -> 1,000
+            function addCommas(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+         // 장바구니 버튼 눌렀을때.
+         $("#bucket_btn").on("click",function(){
+
+                var price =  <c:out value="${product.p_price}"/>; // 상품 가격
+                var quantity = $("#quantitySelect").val(); // 상품 갯수
+                var finalPrice = price * quantity; // 상품 가격 * 상품 갯수 = 최종금액
+                var p_id = '<c:out value="${product.p_id}"/>'; // 상품 번호
+
+                var formData = new FormData();
+                formData.append("price",finalPrice);
+                formData.append("p_id",p_id);
+                formData.append("quantity",quantity);
+
+                var data = {
+                    price: finalPrice,
+                    p_id: p_id,
+                    quantity: quantity
+                };
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/bucket/insert",
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                         console.log("전송 성공!");
+                         console.log("서버 응답:", response);
+                         alert("장바구니에 담겼습니다.");
+                         location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                         console.error("전송 실패:", error);
+                    }
+                }); // ajax
+         });
 
 
 

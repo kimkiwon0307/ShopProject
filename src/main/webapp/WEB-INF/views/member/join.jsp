@@ -294,6 +294,12 @@ form button{
            }).open();
    }// 다음 주소 연동
 
+        $("#loginBtn").on("click",function(){
+
+            location.href="/member/login";
+
+        });
+
 
     </script>
 

@@ -130,5 +130,16 @@ class AdminMapperTest {
 
     }
 
+    @Test
+    @DisplayName("상품등록테스트")
+    public void insertTest(){
+
+        ProductVO productVO = new ProductVO();
+
+
+
+
+    }
+
 
 }

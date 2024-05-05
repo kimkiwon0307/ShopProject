@@ -64,17 +64,15 @@ public class AdminController {
         log.info(product.toString());
 
         if(product.getAttachList() == null){
-            log.info("널이다");
+            log.info("null");
         }else {
-            log.info("널이아니다");
-            service.productRegister(product);
+            log.info("NotNull");
 
+            service.productRegister(product);
             service.ImageRegister(product, product.getP_id());
 
             log.info(product.getAttachList().toString());
         }
-
-
         return "redirect:/admin/main";
     }
 
@@ -177,13 +175,6 @@ public class AdminController {
         }
         return list;
     }
-
-/*    //이미지 정보 반환
-    @GetMapping"/getAttachList")
-    public ResponseEntity<List<AttachImageVO>> getAttachList(int p_id){
-
-        return new ResponseEntity<List<AttachImageVO>>();
-    }*/
 
 
 

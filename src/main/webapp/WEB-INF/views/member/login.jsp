@@ -36,7 +36,7 @@ form {
         <div class="wrapper d-flex align-items-center justify-content-center h-100">
             <div class="card login-form">
                 <div class="card-body">
-                    <h5 class="card-title text-center"><a href="/album/list"> <i class="bi bi-house-door-fill"></i> </a></h5>
+                    <h5 class="card-title text-center"><a href="/shop/main"> <i class="bi bi-house-door-fill"></i> </a></h5>
                      <a href="/member/join" style="float:right">회원가입</a>
                     <form action="/member/login" method="post" id="formObj">
                         <div class="mb-3">

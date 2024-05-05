@@ -25,7 +25,6 @@
                     </ul>
                     <div class="login_success_area">
                         <c:if test="${member != null }" >
-
                                <div class="dropdown">
                                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                       <span> ${member.member_id}</span></a>

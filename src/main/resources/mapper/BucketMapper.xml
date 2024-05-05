@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kwShop.Shop.mall.mapper.BucketMapper">
+
+    <insert id="insert" parameterType="com.kwShop.Shop.mall.vo.BucketVO">
+
+        insert into tbl_bucket (p_id, member_id, price, quantity)
+        values (#{p_id}, #{member_id}, #{price}, #{quantity})
+
+    </insert>
+    
+    <select id="list" resultType="com.kwShop.Shop.mall.vo.BucketVO">
+
+        SELECT *
+        FROM tbl_bucket AS b
+        LEFT OUTER JOIN tbl_member AS m ON b.member_id = m.member_id
+        LEFT OUTER JOIN tbl_product AS p ON b.p_id = p.p_id
+        LEFT OUTER JOIN tbl_attach AS a ON p.p_id = a.p_id
+        WHERE m.member_id = #{member_id};
+
+    </select>
+
+    <delete id="delete">
+        delete from tbl_bucket where b_id = #{b_id}
+    </delete>
+    
+</mapper>

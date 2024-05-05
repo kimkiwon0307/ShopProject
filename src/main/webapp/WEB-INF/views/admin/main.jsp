@@ -51,7 +51,7 @@
                           <td><c:out value="${product.p_content}"/></td>
                           <td><fmt:formatDate value="${product.p_date}" pattern="yyyy-MM-dd"/></td>
                           <td><fmt:formatDate value="${product.p_udate}" pattern="yyyy-MM-dd"/></td>
-                          <td><c:out value="${product.p_count}"/></td>
+                          <td><c:out value="${product.p_quantity}"/></td>
                           <td><button type="button" class="btn btn-info u_btn" data-p_id='<c:out value="${product.p_id}"/>'>수정</button></td>
                           <td><button type="button" class="btn btn-warning d_btn" data-p_id='<c:out value="${product.p_id}"/>'>삭제</button></td>
                         </tr>
@@ -115,12 +115,12 @@
             </div>
             <div class="card-body" id="product_register_card">
                 <form role="form" method="post" action="/admin/productRegister" id="formObj" style="display:none">
-                  <!-- 여기에 상품 추가 폼 내용을 작성하세요 -->
 
                     <div class="form-group">
                       <label for="product_name">상품 이름</label>
                      <input type="text" class="form-control"name="p_name" placeholder="상품 이름을 입력하세요" required>
                    </div>
+
                    <div class="form-group">
                      <label for="product_price">상품 가격</label>
                      <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
@@ -136,24 +136,22 @@
                        <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용" required>
                     </div>
                     <div class="form-group">
-                        <label for="product_price">상품 코드</label>
-                        <input type="text" class="form-control" id="p_cateCode" placeholder="상품 코드" required>
+                        <label for="product_price">상품 수량</label>
+                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량" required>
                     </div>
-                <br>
 
+                <br>
                 <div class="form-group">
                     <label for="product_image">상품 이미지</label>
                     <input type="file" id="product_image" name="uploadFile" style="height: 30px;" multiple>
-
                 </div>
 
                 <div id='uploadResult'>
                 	<ul id="uUl">
                 	</ul>
                 </div>
-                     <!-- 추가적인 폼 요소를 필요에 맞게 작성하세요 -->
-                         <button type="submit" class="btn btn-primary" id="product_register_btn1">상품 등록</button>
-                         <button type="button" class="btn btn-danger" id="cancle_btn">취소</button>
+                        <button type="submit" class="btn btn-primary" id="product_register_btn1">상품 등록</button>
+                        <button type="button" class="btn btn-danger" id="cancle_btn">취소</button>
                 </form>
             </div>
         </div>
@@ -194,7 +192,7 @@
                    </div>
                    <div class="form-group">
                      <label for="product_code">재고 수량</label>
-                     <input type="text" class="form-control" name="p_count" placeholder="상품 수량" required>
+                     <input type="text" class="form-control" name="p_quantity" placeholder="상품 수량" required>
                    </div>
                    <div class="form-group">
                      <label for="product_image">상품 이미지</label>

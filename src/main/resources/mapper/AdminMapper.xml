@@ -6,8 +6,8 @@
 
     <insert id="productRegister" parameterType="com.kwShop.Shop.admin.vo.ProductVO" useGeneratedKeys="true" keyProperty="p_id">
 
-        insert into tbl_product (p_name, p_price, p_title, p_content, p_date, p_udate, p_cateCode)
-        VALUES ( #{p_name}, #{p_price}, #{p_title}, #{p_content},  NOW(),  NOW(), #{p_cateCode});
+        insert into tbl_product (p_name, p_price, p_title, p_content, p_date, p_udate, p_quantity)
+        VALUES ( #{p_name}, #{p_price}, #{p_title}, #{p_content},  NOW(),  NOW(), #{p_quantity});
 
     </insert>
 
@@ -23,7 +23,7 @@
 
     </select>-->
     <select id="productList" resultType="com.kwShop.Shop.admin.vo.ProductVO">
-        SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_count,
+        SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity,
         a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename
         FROM tbl_product p
         LEFT JOIN tbl_attach a ON p.p_id = a.p_id
@@ -67,7 +67,7 @@
     </insert>
 
     <update id="productUpdate">
-        update tbl_product set p_name = #{p_name}, p_price = #{p_price}, p_title = #{p_title}, p_content = #{p_content}, p_count=#{p_count}, p_udate = NOW() where p_id = #{p_id}
+        update tbl_product set p_name = #{p_name}, p_price = #{p_price}, p_title = #{p_title}, p_content = #{p_content}, p_quantity=#{p_quantity}, p_udate = NOW() where p_id = #{p_id}
     </update>
 
     <update id="update">
@@ -77,7 +77,7 @@
 
     <select id="ImageByProduct" resultType="com.kwShop.Shop.admin.vo.ProductVO">
 
-        SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_count,
+        SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity,
         a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename
         FROM tbl_product p
         LEFT JOIN tbl_attach a ON p.p_id = a.p_id

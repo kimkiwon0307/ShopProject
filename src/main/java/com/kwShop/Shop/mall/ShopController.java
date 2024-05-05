@@ -5,6 +5,7 @@ import com.kwShop.Shop.admin.vo.AttachImageVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.PageDTO;
 import com.kwShop.Shop.admin.vo.ProductVO;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -35,8 +38,8 @@ public class ShopController {
     }
 
     
-    @GetMapping("/main")
-    public void mainPage(Model model, Criteria cri) throws  Exception{
+    @GetMapping({"/main","/main2"})
+    public void mainPage(Model model, Criteria cri,  HttpServletRequest request) throws  Exception{
 
         log.info("메인페이지");
 
@@ -44,29 +47,34 @@ public class ShopController {
 
         PageDTO pageMaker = new PageDTO(cri, total);
 
-        List<ProductVO> products = service.productList(cri);
+        List<ProductVO> productss = service.productList(cri);
 
-       List<String> list = new ArrayList<>();
+        List<ProductVO> product = new ArrayList<>();
 
-        for(ProductVO product : products){
-            log.info("C:\\upload2\\"+product.getAttachUploadPath()+"/"+product.getAttachUuid()+"_"+product.getAttachFilename());
 
-            list.add(product.getAttachUploadPath()+"/"+product.getAttachUuid()+"_"+product.getAttachFilename());
 
+        for(ProductVO products : productss){
+            log.info("C:\\upload2\\"+products.getAttachUploadPath()+"/"+products.getAttachUuid()+"_"+products.getAttachFilename());
+
+            products.setAttachUploadPath(products.getAttachUploadPath().replaceAll("\\\\","\\\\\\\\"));
+
+            log.info("여기야" + products.getAttachUploadPath());
+
+            product.add(products);
         }
 
+
+
         model.addAttribute("pageMaker", pageMaker);
-        model.addAttribute("product", service.productList(cri));
-
-    }
-
-    @GetMapping("/main2")
-    public void mainPage2() throws  Exception{
+        model.addAttribute("product", product);
 
 
     }
 
-    @GetMapping("/get")
+
+
+
+    @GetMapping({"/get","/get2"})
     public void getPage(@RequestParam("p_id") int p_id, Criteria cri, Model model){
 
         log.info("상품 조회 페이지");

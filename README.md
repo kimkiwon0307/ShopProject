@@ -25,6 +25,8 @@ Data-Base
 ## 패키지 구조
 ![image](https://github.com/kimkiwon0307/ShopProject/assets/46276548/338a93cb-78d6-454a-a8a7-847cd02c8a36)
 
+## ERD
+![image](https://github.com/kimkiwon0307/ShopProject/assets/46276548/a7fb8264-ed32-4100-8374-fc69e3e1df53)
 
 ## 주요기능
 ### * 회원 기능 : 회원 CRUD, 아이디 및 비밀번호 중복확인, 다음주소API, 이메일 인증 구현

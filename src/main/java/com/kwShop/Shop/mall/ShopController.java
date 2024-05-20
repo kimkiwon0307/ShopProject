@@ -5,6 +5,7 @@ import com.kwShop.Shop.admin.vo.AttachImageVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.PageDTO;
 import com.kwShop.Shop.admin.vo.ProductVO;
+import com.kwShop.Shop.mall.service.BucketService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -32,8 +33,10 @@ import java.util.List;
 public class ShopController {
 
     private final AdminService service;
+    private final BucketService bucketService;
 
-    public ShopController(AdminService service){
+    public ShopController(AdminService service, BucketService bucketService){
+        this.bucketService = bucketService;
         this.service = service;
     }
 
@@ -52,7 +55,6 @@ public class ShopController {
         List<ProductVO> product = new ArrayList<>();
 
 
-
         for(ProductVO products : productss){
             log.info("C:\\upload2\\"+products.getAttachUploadPath()+"/"+products.getAttachUuid()+"_"+products.getAttachFilename());
 
@@ -62,7 +64,6 @@ public class ShopController {
 
             product.add(products);
         }
-
 
 
         model.addAttribute("pageMaker", pageMaker);
@@ -123,6 +124,14 @@ public class ShopController {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @GetMapping("/getBucketSize")
+    @ResponseBody
+    public int getSize(@RequestParam("member_id") String member_id, Model model){
+
+        return bucketService.list(member_id).size();
+
     }
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@include file="../common/header.jsp"%>
+<%@include file="../common/adminHeader.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -260,6 +260,7 @@
 
              var formObj = $("#formObj");
 
+
             $("#product_register_btn").on("click",function(){
                 formObj.show();
             }); //$("#product_register_btn").on("click",function()
@@ -292,7 +293,7 @@
 
                 	let searchForm = $('#searchForm');
 
-                	/* 작거 검색 버튼 동작 */
+
                 	$("#searchForm button").on("click", function(e){
 
                 		e.preventDefault();
@@ -318,11 +319,12 @@
                 // $("input[type='file']").on("change", function(e){
                  $("#product_image").on("change",function(e){
 
-                        let formData = new FormData();
-                		let fileInput = $('input[name="uploadFile"]');
-                        let fileList = fileInput[0].files;
-                        let fileObj = fileList[0];
+                        var formData = new FormData();
+                		var fileInput = $('input[name="uploadFile"]');
+                        var fileList = fileInput[0].files;
+                        var fileObj = fileList[0];
 
+                        alert(fileInput);
 
                     	if(!fileCheck(fileObj.name, fileObj.size)){
                     	    alert("잘못된 사진 또는 이름 입니다");
@@ -348,6 +350,7 @@
 
                         alert("통과");
                 	});
+
 
                     $("#product_image_update").on("change", function(e) {
                         e.preventDefault();

@@ -48,8 +48,11 @@ public class MemberController {
     public String join(@Valid MemberVO member, BindingResult bindingResult,Model model)throws  Exception {
         
         if(bindingResult.hasErrors()){
-            log.info("유효성검사");
+            log.info("유효성 검사 실패");
+
             model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("member", member);
+            log.info("에러멤버" + member.toString());
             return "/member/join";
         }
 
@@ -83,12 +86,6 @@ public class MemberController {
         HttpSession session = request.getSession();
         session.invalidate();
     }
-
-
-
-
-
-
 
     //ID 중복 체크
     @PostMapping("/m_id_check")
@@ -133,7 +130,7 @@ public class MemberController {
         helper.setTo(toMail);
         helper.setSubject(title);
         helper.setText(content, true);
-         //mailSender.send(message);
+        mailSender.send(message);
 
         String num = Integer.toString(checkNum);
 

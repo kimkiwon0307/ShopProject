@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'war'
 }
+apply plugin: 'war'
 
 group = 'com.kwShop'
 version = '0.0.1-SNAPSHOT'
@@ -28,6 +29,12 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	//implementation 'mysql:mysql-connector-java:8.0.32'
+	// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
+	//implementation group: 'com.mysql', name: 'mysql-connector-j', version: '8.0.33'
+
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
@@ -46,8 +53,20 @@ dependencies {
 
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
+
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+bootWar.enabled = false
+war.enabled = true
+
+war {
+	archiveFileName = 'ROOT.war' // 원하는 WAR 파일 이름으로 변경
+	from sourceSets.main.output // JSP 파일 및 정적 리소스를 포함하기 위해 main 소스셋을 추가
+}
+

@@ -2,153 +2,123 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../common/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 상세 페이지</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-   .carousel-item img {
-             width: 100%; /* 이미지의 가로 너비를 100%로 설정하여 부모 요소에 맞춥니다. */
-             height: auto; /* 이미지의 세로 높이를 자동으로 조정합니다. */
-         }
-    </style>
-</head>
-<body>
-
-   <div style="text-align:center; margin-top:60px;">
-           <h2 class="display-6"></h2>
-            <br> 매일 매일 업데이트되는 신상
-        </div>
-    <br><br>
 
 
-<div class="container mt-3">
-    <div class="row">
-        <!-- 첫 번째 열: 이미지 슬라이드와 상품 정보 -->
-        <div class="col-lg-6">
-            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active" id="uploadResult">
+        <!-- Single Product Start -->
+        <div class="container-fluid py-5 mt-5">
+            <div class="container d-flex justify-content-center">
 
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border rounded" id="uploadResult"">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="fw-bold mb-3"><c:out value="${product.p_title}"/></h4>
+                                <p class="mb-3">상품번호: <c:out value="${product.p_id}"/></p>
+                                <h5 class="fw-bold mb-3"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</h5>
+
+                                <p class="mb-4"><c:out value="${product.p_content}"/></p>
+
+                                <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="1" id="quantityValue">
+
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                 <c:if test="${member != null}">
+                                     <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="bucketBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                                 </c:if>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                            aria-controls="nav-mission" aria-selected="false">리뷰</button>
+                                    </div>
+                                </nav>
+                                <br>
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+
+                                    </div>
+
+                                    <div class="tab-pane active" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <form action="#">
+                                <h4 class="mb-5 fw-bold">리뷰 남기기</h4>
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                          <c:if test="${member != null}">
+                                               <input type="text" class="form-control" id="r_replyer" name="r_replyer" value="${member.member_id}" readOnly>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="border-bottom rounded">
+                                         <c:if test="${member != null}">
+                                              <input type="text" class="form-control" id="p_id" name="p_id" value="<c:out value="${product.p_id}"/>" readOnly>
+                                        </c:if>
+                                         </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="border-bottom rounded my-4">
+                                           <c:if test="${member == null}">
+                                            <textarea name="r_reply" id="r_reply" class="form-control " cols="30" rows="8" placeholder="로그인 후 작성 가능합니다." spellcheck="false" readOnly></textarea>
+                                          </c:if>
+                                         <c:if test="${member != null}">
+                                           <textarea name="r_reply" id="r_reply" class="form-control " cols="30" rows="8" placeholder="리뷰를 작성하세요." spellcheck="false"></textarea>
+                                       </c:if>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                     <c:if test="${member != null}">
+                                            <a href="#" id="reply_btn" class="btn border border-secondary text-primary rounded-pill px-4 py-3" style="float:right;"> 리뷰 등록</a>
+                                     </c:if>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                  <!--
-                    <div class="carousel-item">
-                        <img src="https://atimg.sonyunara.com/files/attrangs/goods/155186/64c218a716986.jpg" class="d-block w-100" alt="Slide 2" style="width:800px; height:800px;">
-                    </div>
-                     다른 슬라이드 이미지를 추가하려면 여기에 추가하면 됩니다. -->
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
 
-        </div>
+   <!-- Footer Start -->
 
-        <!-- 두 번째 열: 댓글 창 -->
-        <div class="col-lg-6">
-             <div class="card mt-3" style="border:none">
-                <div class="card-body">
-                    <p class="card-text text-muted mb-3">상품번호: <c:out value="${product.p_id}"/></p>
-                    <h2 class="card-title mb-3"><c:out value="${product.p_title}"/></h2>
-                    <p class="card-text fw-bold mb-3">가격: <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</p>
-                    <p class="card-text mb-3"><c:out value="${product.p_content}"/></p>
-                    <hr>
-                    <p>수량:</p>
-                    <select id="quantitySelect" class="form-select" aria-label="Default select example">
-                      <option value="1" selected>1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
-                    <br>
-                    <p id="selectedValue"> 총 금액 : <fmt:formatNumber value="${product.p_price}" pattern="#,###"/> 원 </p>
-                    <br>
-                   <c:if test="${member != null }" >
-                    <div class="btn-group" style="float:right">
-                     <button type="button" class="btn btn-lg btn-success" >구매하기</button>
-                     <button type="button" class="btn btn-secondary btn-lg" style="margin-left:2px;" id="bucket_btn">장바구니</button>
-                    </div>
-                   </c:if>
-                    <c:if test="${member == null }" >
-                            <h1>로그인해야 구매 가능합니다.</h1>
-                      </c:if>
-                </div>
-             </div>
-        </div>
-    </div>
-    <br>
-    <div class="card">
-           <div class="card-body">
-           <h3 class="card-title mb-3">리뷰</h3>
-           <c:if test="${member != null }" >
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰 작성하기 </button>
-           </c:if>
-           <c:if test="${member == null }" >
-               <p>로그인 후 작성 가능합니다. </p>
-           </c:if>
-   </div>
-
-           <div class="card-body" id="review_body">1
-
-          </div>
-    </div>
-
-</div>
+  <footer class="py-3 bg-dark" style="position:relative; transform : translateY(80%); width:100%; height:120px;">
+         <br>
+         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2024</p></div>
+    </footer>
 
 
+        <!-- Footer End -->
 
-<!-- 모달 창 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">리뷰 정보</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="/reply/insert" method="post">
-          <div class="mb-3">
-            <label for="p_id" class="form-label">상품 ID:</label>
-            <input type="text" class="form-control" id="p_id" name="p_id" value="<c:out value="${product.p_id}"/>" readOnly>
-          </div>
-          <div class="mb-3">
-            <label for="r_replyer" class="form-label">작성자:</label>
-            <input type="text" class="form-control" id="r_replyer" name="r_replyer" value="${member.member_id}" readOnly>
-          </div>
-          <div class="mb-3">
-            <label for="r_reply" class="form-label">내용:</label>
-            <textarea class="form-control" id="r_reply" name="r_reply" >${r_reply}</textarea>
-          </div>
-           <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reply_btn">작성</button>
-           </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-  <!-- Footer-->
-        <footer class="py-5 bg-dark" style="margin-top:20px;">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-<!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/shop/main/lib/easing/easing.min.js"></script>
+    <script src="/shop/main/lib/waypoints/waypoints.min.js"></script>
+
+    <script src="/shop/main/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/shop/main/js/main.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -165,10 +135,10 @@
                 var str ="";
                 var obj = arr[0];
 
-                var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
-		        str += "<img src='/shop/display?fileName=" + fileCallPath + "' class='d-block w-100' alt='Slide 2'>";
+                //var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+                var fileCallPath = encodeURIComponent("//tmp//img//"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+		        str += "<img src='/shop/display?fileName=" + fileCallPath + "'class='img-fluid rounded' alt='Slide 2'>";
 		        str += "</div>";
-
 		        uploadResult.html(str);
         });
 
@@ -190,7 +160,7 @@
                     success: function(response) {
                         console.log("전송 성공!");
                         console.log("서버 응답:", response);
-                        alert("댓글이 등록되었습니다.");
+                        alert("리뷰 등록 되었습니다.");
                         location.reload();
                     },
                     error: function(xhr, status, error) {
@@ -205,29 +175,29 @@
         $.getJSON("/reply/list?p_id=" + p_id , function(data) {
 
             var str ="";
-            var review_body = $("#review_body");
+            var review_body = $("#nav-mission");
+
+            var member_id = '<c:out value="${member.member_id}"/>';
+            for (var i = 0; i < data.length; i++) {
 
 
-             for (var i = 0; i < data.length; i++) {
-                str += "<p>" + data[i].r_reply + "</p>";
-                str += "<div class='d-flex justify-content-between'>";
-                str += "<div class='d-flex flex-row align-items-center'>";
-                str += "<img src='https://cdn.pixabay.com/photo/2012/04/16/11/39/plumber-35611_1280.png' alt='avatar' width='25' height='25' />";
-                str += "<p class='small mb-0 ms-2'>" + data[i].r_replyer + "</p>";
-                str += "</div>";
-                str += "<div class='col'></div>"; // 오른쪽 여백을 위한 빈 컬럼
-                str += "<div class='col-auto'>";
+            str += "<div class='d-flex'>"; // 닫는 div 태그가 누락되어 있었습니다.
+            str += "<img src='/shop/main/img/avatar.jpg' class='img-fluid rounded-circle p-3' style='width: 100px; height: 100px;' alt=''>";
+            str += "<div>"; // p 태그 앞에 div 태그가 열려야 합니다.
+            str += "<h5>" + data[i].r_replyer + "</h5>";
+            str += "<p>" + data[i].r_reply + "</p>";
+            if(member_id === data[i].r_replyer || member_id === 'admin'){
+              str += "<button class='btn btn-danger dRplyBtn' style='float:right' data-r_no='" + data[i].r_no + "'> 삭제 </button>";
+              str += "<button class='btn btn-info uRplyBtn' data-r_no='"+data[i].r_no +"'style='margin-right: 5px''> 수정 </button>";
+            }
 
-                str += '<c:if test="${member.member_id == null}" >';
-                str += "<button class='btn btn-danger dRplyBtn' style='float:right' data-r_no='" + data[i].r_no + "'> 삭제 </button>";
-                str += "<button class='btn btn-info uRplyBtn' data-r_no='"+data[i].r_no +"'style='margin-right: 5px''> 수정 </button>";
-                str += '</c:if>';
-                str += "</div>";
-                str += "</div>";
-                str += "<hr>";
-                str += "</br></br>";
+            str += "</div>";
+
+            str += "</div>";
+
+
                }
-            review_body.html(str);
+            review_body.append(str);
         });
 
         // 수정 버튼 누르면 발동
@@ -307,22 +277,21 @@
             }
 
          // 장바구니 버튼 눌렀을때.
-         $("#bucket_btn").on("click",function(){
+         $("#bucketBtn").on("click",function(){
+
 
                 var price =  <c:out value="${product.p_price}"/>; // 상품 가격
-                var quantity = $("#quantitySelect").val(); // 상품 갯수
+                var quantity = $('#quantityValue').val(); // 상품 갯수
                 var finalPrice = price * quantity; // 상품 가격 * 상품 갯수 = 최종금액
                 var p_id = '<c:out value="${product.p_id}"/>'; // 상품 번호
+                var member_id = '<c:out value="${member.member_id}"/>';
 
-                var formData = new FormData();
-                formData.append("price",finalPrice);
-                formData.append("p_id",p_id);
-                formData.append("quantity",quantity);
 
                 var data = {
                     price: finalPrice,
                     p_id: p_id,
-                    quantity: quantity
+                    quantity: quantity,
+                    member_id: member_id
                 };
 
 
@@ -342,6 +311,33 @@
                     }
                 }); // ajax
          });
+                           $("#logout_btn").on("click",function(e){
+                                      $.ajax({
+                                        type: "post",
+                                        url: "/member/logout",
+                                        success : function(){
+                                            alert("로그아웃 되었습니다.");
+                                            self.location = "/shop/main";
+                                        }
+                                      }); // ajax
+
+                                    }); // logoutBtn
+                                              var member_id = '<c:out value="${member.member_id}"/>';
+                                                  $.getJSON("/shop/getBucketSize", {member_id : member_id}, function(size){
+                                                        console.log("사이즈" + size);
+
+                                                        var str ="";
+
+
+                                                        str += "<i class='fa fa-shopping-bag fa-2x'></i>";
+                                                        str += "<span class='position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1' style='top: -5px; left: 15px; height: 20px; min-width: 20px;'>" + size + "</span>";
+
+                                                        $(".my-auto").append(str);
+
+
+
+
+                                                        });
 
 
 
@@ -350,5 +346,7 @@
 </script>
 
 
-</body>
+
+    </body>
+
 </html>

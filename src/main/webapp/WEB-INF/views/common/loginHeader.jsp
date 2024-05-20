@@ -47,7 +47,7 @@
             <body>
 
                 <!-- Navbar start -->
-                <div class="container-fluid fixed-top">
+                <div class="container-fluid fixed-top" style="border-bottom: 2px solid black;">
 
                     <div class="container px-0">
                         <nav class="navbar navbar-light bg-white navbar-expand-xl">
@@ -60,7 +60,7 @@
                             </button>
                             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                                 <div class="navbar-nav mx-auto">
-                                    <a href="/shop/main" class="nav-item nav-link active">홈</a>
+
 
                                 </div>
                                 <div class="d-flex m-3 me-0">
@@ -102,8 +102,3 @@
 
 
 
-                <!-- Single Page Header start -->
-                <div class="container-fluid page-header py-5">
-                    <h1 class="text-center text-white display-6">장바구니</h1>
-                </div>
-                <!-- Single Page Header End -->

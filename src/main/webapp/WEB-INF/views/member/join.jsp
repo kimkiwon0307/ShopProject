@@ -1,97 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+   <link href="/member/join.css" rel="stylesheet">
 
-  <style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-}
-
-.signup-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-}
-
-.signup-form {
-    width: 400px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-    margin: auto;
-}
-
-.signup-form h2 {
-    margin: 0 0 20px;
-}
-
-.signup-form input {
-    width: calc(100% - 24px);
-    height: 40px;
-    margin-top: 20px;
-    padding: 0 8px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.signup-form input:hover {
-    border-color: #007bff;
-}
-
-#joinBtn, #loginBtn{
-    width: calc(100%);
-    height: 40px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;ф
-    margin-left: -10px;
-    transition: background-color 0.3s ease;
-}
-
-.signup-form button:hover {
-    background-color: #0056b3;
-}
-#s_nick_check_success,#s_pwd_check_success,#s_mail_check_success{
-	color:green;
-	display:none;
-}
-#s_nick_check_fail,#s_pwd_check_fail, #s_mail_check_fail{
-	color:red;
-	display:none;
-}
-
-form button{
-	margin-top:20px;
-}
-
-  </style>
+  <title>회원가입</title>
 </head>
 
 <body>
   <div class="signup-container">
 
-    <form class="signup-form" action="/member/join" method="post">
+    <form class="signup-form" action="/member/join" method="post" id="joinForm">
            <c:if test="${not empty errors}">
                  <div class="alert alert-danger" role="alert">
                      <strong>유효성 검사 에러:</strong>
@@ -102,40 +31,63 @@ form button{
                         </ul>
                   </div>
               </c:if>
+
       <h2>회원가입</h2>
-      <input type="text" id="id_check" placeholder="아이디"  name='member_id' required>
-      	<span  class="input-group" id="s_nick_check_success">사용 가능한 닉네임 입니다.</span>
-	 	<span  class="input-group" id="s_nick_check_fail">존재하는 닉네임 입니다.</span>
+
+       <div class="input-group" style="margin-bottom:20px;">
+             <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' >
+        	<span  class="input-group" id="s_nick_check_success">사용 가능한 닉네임 입니다.</span>
+	    	<span  class="input-group" id="s_nick_check_fail">존재하는 닉네임 입니다.</span>
+      </div>
+
+      <div class="input-group" style="margin-bottom:20px;">
+        <span class="input-group-text"><i class="bi bi-key"></i></span>
+        <input type="password" class="form-control" placeholder="비밀번호" id="member_password"  name= 'member_pw' >
+        <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+        <input type="password"  class="form-control" id="pw_check" placeholder="비밀번호 확인" >
+     	<span  class="input-group" id="s_pwd_check_success">비밀번호가 같습니다.</span>
+	 	<span  class="input-group" id="s_pwd_check_fail">비밀번호가 다릅니다.</span>
+      </div>
 
 
-      <input type="password" placeholder="비밀번호" id="member_password"  name= 'member_pw' required>
-      <input type="password"  id="pw_check" placeholder="비밀번호 확인" required>
-     	 <span  class="input-group" id="s_pwd_check_success">비밀번호가 같습니다.</span>
-	 	 <span  class="input-group" id="s_pwd_check_fail">비밀번호가 다릅니다.</span>
+       <div class="input-group" style="margin-bottom:20px;">
+             <span class="input-group-text"><i class="bi bi-vector-pen"></i></span>
+            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" >
+
+      </div>
 
 
-       <input type="text" name="member_name" placeholder="이름" >
 
-
-        <div class="input-group mb-3">
-           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' required>
+     <div class="input-group" style="margin-bottom:20px;">
+           <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
+           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' >
            <button class="btn btn-outline-secondary" type="button" id="email_chcK_btn"  >인증번호 전송</button>
-
-              <input type="text" id="check_mailNum" placeholder="인증번호" name=''   required>
+      </div>
+     <div class="input-group" style="margin-bottom:20px;">
+             <span class="input-group-text"><i class="bi bi-mailbox2"></i></span>
+              <input type="text" class="form-control" id="check_mailNum" placeholder="인증번호" name=''   >
               <span  class="input-group" id="s_mail_check_success">인증번호가 같습니다.</span>
               <span  class="input-group" id="s_mail_check_fail">인증번호가 다릅니다. </span>
-         </div>
+     </div>
 
-     <div class="input-group mb-3">
-       <input type="text" class="form-control" placeholder="주소1" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1'  required>
+    <div class="input-group" style="margin-bottom:20px;">
+       <span class="input-group-text"><i class="bi bi-building"></i></span>
+       <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1'  >
        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="execution_daum_address()" >주소찾기</button>
      </div>
 
-         <input type="text" placeholder="주소2" id='address_input_2'name='member_Addr2'  readonly="readonly" required>
-         <input type="text" placeholder="주소3" id='address_input_3'name='member_Addr3'  readonly="readonly" required>
+      <div class="input-group" style="margin-bottom:20px;">
+       <span class="input-group-text"><i class="bi bi-building"></i></span>
+         <input type="text" class="form-control" placeholder="주소" id='address_input_2'name='member_Addr2' >
+      </div>
 
+      <div class="input-group" style="margin-bottom:20px;">
+       <span class="input-group-text"><i class="bi bi-building"></i></span>
+         <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3'  >
+      </div>
 
-      <button type="submit" id="joinBtn">회원가입</button>
+      <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">회원가입</button>
       <button type="button" class="btn btn-danger" id="loginBtn">로그인</button>
     </form>
   </div>
@@ -148,24 +100,93 @@ form button{
 
 	$(document).ready(function(){
 
+         var idckCheck = false;            // 아이디 중복 확인
+         var pwCheck = false;            // 비번 일치 확인
+         var nameCheck = false;            // 이름 빈값 확인
+         var mailCheck = false;            // 이메일 인증번호 확인
+         var addressCheck = false         // 상세 주소 빈값확인
+
+
+	    // 유효성 검사
+	    $('#joinBtn').on("click",function(e){
+
+	         e.preventDefault();
+
+	         var member_id = $('#id_check').val();  // 입력 받은 ID
+	         var pw = $("#member_password").val();
+             var pw_check = $("#pw_check").val();
+             var name = $("#nameCk").val();
+             var mail_check = $("#check_mailNum").val();
+             var addr = $("#address_input_3").val();
+             var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
+
+            $.ajax({             // Ajax를 이용한 비동기 중복검사
+
+            				type: "post",
+            				url : "/member/m_id_check",
+            				data : data,
+            				success : function(result){
+            				console.log(result);
+            					if(result != 'fail'){ // 성공일때
+            						$("#s_nick_check_fail").css("display","none");
+            						$("#s_nick_check_success").css("display","inline-block");
+            						$("#signUp_btn").attr("type","submit");
+            						idckCheck = true;
+
+            					}else{
+            						$("#s_nick_check_fail").css("display","inline-block");
+            						$("#s_nick_check_success").css("display","none");
+            						$("#signUp_btn").attr("type","button");
+            					}
+            				}
+            }); // ajax
+
+            if (pw == pw_check ) {
+                pwCheck = true;
+              }else {
+                pwCheck = false;
+                 $("#s_pwd_check_fail").css("display","inline-block");
+                 $("#s_pwd_check_success").css("display","none");
+
+              }
+            if (name !=''){
+                nameCheck = true;
+            }
+            if(mail_check == num){
+                mailCheck = true;
+            }
+            if(addr != ''){
+                addressCheck = true;
+            }
+
+              if(idckCheck && pwCheck && nameCheck && mailCheck && addressCheck) {
+                     $("#joinForm").submit();
+                    alert(member_id + "님 환영합니다.")
+            }else {
+                   alert("틀린부분을 수정해주세요.");
+            }
+
+	    })
+
+
 		// 아이디 중복검사
-		$('#id_check').on("propertychange change keyup paste input", function(){
+		$('#id_check').on("propertychange change keyup paste input", function(){  // 아이디를 입력할때마다 중복검사를 한다.
+
+			var member_id = $('#id_check').val();  // 입력 받은 ID
 
 
-			var member_id = $('#id_check').val();
-			var data = {member_id : member_id};
+			var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
 
+			if($(this).val() != 0){    // 아이디 체크할때 값이 있을때만 실행된다.
 
-			if($(this).val() != 0){
-
-			$.ajax({
+			$.ajax({                   // Ajax를 이용한 비동기 중복검사
 
 				type: "post",
 				url : "/member/m_id_check",
 				data : data,
 				success : function(result){
 				console.log(result);
-					if(result != 'fail'){
+					if(result != 'fail'){ // 성공일때
 						$("#s_nick_check_fail").css("display","none");
 						$("#s_nick_check_success").css("display","inline-block");
 						$("#signUp_btn").attr("type","submit");
@@ -182,6 +203,7 @@ form button{
 		   }
 		}); // 아이디 중복검사
 
+
         // 비밀번호 체크
         $('#pw_check').on("propertychange change keyup paste input", function(){
 
@@ -191,6 +213,8 @@ form button{
             if (pw == pw_check) {
             	$("#s_pwd_check_fail").css("display","none");
             	$("#s_pwd_check_success").css("display","inline-block");
+
+
             }else {
                 $("#s_pwd_check_fail").css("display","inline-block");
                 $("#s_pwd_check_success").css("display","none");
@@ -237,7 +261,6 @@ form button{
 
     // 다음 주소 연동
    function execution_daum_address(){
-
           new daum.Postcode({
                oncomplete: function(data) {
                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.

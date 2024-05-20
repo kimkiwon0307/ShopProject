@@ -2,18 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../common/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>장바구니</title>
-</head>
-<body>
     <div class="container">
-        <br><br>
-        <h1 class="text-center"><b>장바구니</b></h1>
 
-        <br><br>
         <ul class="list-group d-flex justify-content-center">
            <c:if test="${empty list}">
                 <h1 class="text-center"> 장바구니가 비었습니다. </h1> <br><br>
@@ -38,11 +28,14 @@
                     </div>
                 </li>
             </c:forEach>
-
-
         </ul>
+        <div>
+            <button type="button" class="btn btn-info buyBtn" style="float:right; margin-top:10px;"> 구매하기 </button>
+        </div>
     </div>
 
+    <br>
+    <br>
       <!-- Footer-->
             <footer class="py-5 bg-dark" style="margin-top : 20px;">
                 <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
@@ -59,7 +52,8 @@
                         var uuid = '<c:out value="${list.uuid}"/>';
                         var filename = '<c:out value="${list.fileName}"/>';
                         var uploadResult = $(".result-${list.b_id}");
-                        var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename)
+                        //var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename)
+                        var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename)
                         var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..."  style="height:300px;">';
 
                         uploadResult.append(imageTag);
@@ -96,6 +90,41 @@
 
                      });
 
+                     $(".buyBtn").on("click",function(){
+
+                        alert("구매되었습니다.");
+
+                        self.location="/shop/main";
+                     })
+
+                       $("#logout_btn").on("click",function(e){
+                                  $.ajax({
+                                    type: "post",
+                                    url: "/member/logout",
+                                    success : function(){
+                                        alert("로그아웃 되었습니다.");
+                                        self.location = "/shop/main";
+                                    }
+                                  }); // ajax
+
+                                }); // logoutBtn
+
+                             var member_id = '<c:out value="${member.member_id}"/>';
+                                                                             $.getJSON("/shop/getBucketSize", {member_id : member_id}, function(size){
+                                                                                   console.log("사이즈" + size);
+
+                                                                                   var str ="";
+
+
+                                                                                   str += "<i class='fa fa-shopping-bag fa-2x'></i>";
+                                                                                   str += "<span class='position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1' style='top: -5px; left: 15px; height: 20px; min-width: 20px;'>" + size + "</span>";
+
+                                                                                   $(".my-auto").append(str);
+
+
+
+
+                                                                                   });
 
 
         });

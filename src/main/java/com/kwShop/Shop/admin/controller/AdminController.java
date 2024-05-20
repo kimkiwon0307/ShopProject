@@ -124,8 +124,8 @@ public class AdminController {
     public List<AttachImageVO> uploadAjaxPost(@RequestParam("uploadFiles") MultipartFile[] uploadFiles){
         log.info("파일업로드");
 
-        String uploadFolder = "C:\\upload2";
-
+        //String uploadFolder = "C:\\upload2";
+        String uploadFolder = "//tmp//img";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = sdf.format(date);
@@ -175,11 +175,5 @@ public class AdminController {
         }
         return list;
     }
-
-
-
-
-
-
 
 }

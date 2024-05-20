@@ -2,13 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>kiwon's shop mall </title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -52,20 +51,22 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="index.html" class="nav-item nav-link active">홈</a>
-                            <a href="shop.html" class="nav-item nav-link">고객센터</a>
+                            <a href="/shop/main" class="nav-item nav-link active">홈</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                            <c:if test="${member != null }" >
                             <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">1</span>
+
                             </a>
+                            </c:if>
                                   <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
                                         <li class="nav-item dropdown">
+
                                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fas fa-user fa-2x"></i>
                                           </a>
+
                                           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                           <c:if test="${member == null }" >
                                             <li><a class="dropdown-item" href="/member/login"> 로그인</a></li>
@@ -98,10 +99,16 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
+                                            <form id="searchForm" action="/shop/main" method="get" style="width:100%;">
+                                                   <div class="input-group w-75 mx-auto d-flex">
+                                                    <input type="text" name="keyword" class="form-control p-3"  aria-describedby="search-icon-1" placeholder="키워드" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+                                                    <input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+                                                    <input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+                                                    <span id="search-icon-1" class="input-group-text p-3"><button type="button" class="btn btn info" id="searchBtn">검색</button></span>
+                                                </div>
+                                            </form>
+
+
                     </div>
                 </div>
             </div>
@@ -172,8 +179,14 @@
                                                     <p><c:out value="${product.p_content}"/></p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-5 fw-bold mb-0"> <fmt:formatNumber value="${product.p_price}" pattern="#,###"/> 원</p>
+                                                        <c:if test="${member != null }" >
                                                           <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary bucket_btn" id="${product.p_id}">
                                                           <i class="fa fa-shopping-bag me-2 text-primary"></i>장바구니</a>
+                                                        </c:if>
+                                                         <c:if test="${member == null }" >
+                                                           <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary bucket_noLoginBtn" id="${product.p_id}">
+                                                                 <i class="fa fa-shopping-bag me-2 text-primary"></i>장바구니</a>
+                                                         </c:if>
                                                 </div>
                                                 </div>
                                             </div>
@@ -233,22 +246,22 @@
 
                    });
 
-                   	let searchForm = $('#searchForm');
+                   	var searchForm = $('#searchForm');
 
-                   	/* 작거 검색 버튼 동작 */
-                   	$("#searchForm button").on("click", function(e){
 
-                   		e.preventDefault();
+                   $("#searchBtn").on("click", function(e){
 
-                   		/* 검색 키워드 유효성 검사 */
-                   		if(!searchForm.find("input[name='keyword']").val()){
-                   			alert("키워드를 입력하십시오");
-                   			return false;
-                   		}
-                   		searchForm.find("input[name='pageNum']").val("1");
+                                   		e.preventDefault();
 
-                   		searchForm.submit();
-                   	});
+                                   		/* 검색 키워드 유효성 검사 */
+                                   		if(!searchForm.find("input[name='keyword']").val()){
+                                   			alert("키워드를 입력하십시오");
+                                   			return false;
+                                   		}
+                                   		searchForm.find("input[name='pageNum']").val("1");
+
+                                   		searchForm.submit();
+                                   	});
 
                            $("#resetBtn").on("click",function(){
                                searchForm.find("input[name='keyword']").val('');
@@ -274,6 +287,7 @@
                       var filename = '<c:out value="${product.attachFilename}"/>';
                       var uploadResult = $(".result-${product.p_id}");
                       var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename);
+                     // var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename);
                       var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..."  style="height:400px;">';
 
                        uploadResult.append(imageTag);
@@ -287,7 +301,6 @@
                         var quantity = 1;
                         var p_id = $(this).attr('id');
                         var member_id = '<c:out value="${member.member_id}"/>';
-
 
                 var data = {
                     price: productPrice,
@@ -313,12 +326,13 @@
                     }
                 }); // ajax
 
+              });
 
+              $(".bucket_noLoginBtn").on("click",function(){
 
+                                      alert("로그인후 이용가능합니다.");
 
-
-
-                  });
+                              });
 
 
 
@@ -334,6 +348,23 @@
 
                 }); // logoutBtn
 
+              var member_id = '<c:out value="${member.member_id}"/>';
+
+              $.getJSON("/shop/getBucketSize", {member_id : member_id}, function(size){
+                    console.log("사이즈" + size);
+
+                    var str ="";
+
+
+                    str += "<i class='fa fa-shopping-bag fa-2x'></i>";
+                    str += "<span class='position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1' style='top: -5px; left: 15px; height: 20px; min-width: 20px;'>" + size + "</span>";
+
+                    $(".my-auto").append(str);
+
+
+
+
+                    });
 
 
 

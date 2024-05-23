@@ -6,8 +6,8 @@
 
     <insert id="productRegister" parameterType="com.kwShop.Shop.admin.vo.ProductVO" useGeneratedKeys="true" keyProperty="p_id">
 
-        insert into tbl_product (p_name, p_price, p_title, p_content, p_date, p_udate, p_quantity)
-        VALUES ( #{p_name}, #{p_price}, #{p_title}, #{p_content},  NOW(),  NOW(), #{p_quantity});
+        insert into tbl_product (p_name, p_price, p_title, p_content, p_date, p_udate, p_quantity, p_categoryCode, p_discount)
+        VALUES ( #{p_name}, #{p_price}, #{p_title}, #{p_content},  NOW(),  NOW(), #{p_quantity}, #{p_categoryCode}, #{p_discount} );
 
     </insert>
 

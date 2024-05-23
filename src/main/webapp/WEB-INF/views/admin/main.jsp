@@ -116,33 +116,50 @@
             <div class="card-body" id="product_register_card">
                 <form role="form" method="post" action="/admin/productRegister" id="formObj" style="display:none">
 
-                    <div class="form-group">
-                      <label for="product_name">상품 이름</label>
+                      <div class="form-group" style="margin-bottom:20px;">
+                            <label for="product_name"><span class="badge bg-primary">분류</span></label>
+                            <select class="form-select" name="p_categoryCode">
+                              <option value="1" class="bg-secondary text-light">1.상의</option>
+                              <option value="2" class="bg-secondary text-light">2.하의</option>
+                              <option value="3" class="bg-secondary text-light">3.아우터</option>
+                              <option value="4" class="bg-secondary text-light">4.원피스</option>
+                              <option value="5" class="bg-secondary text-light">5.속옷</option>
+                            </select>
+                      </div>
+
+
+                    <div class="form-group" style="margin-bottom:20px;">
+                      <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
                      <input type="text" class="form-control"name="p_name" placeholder="상품 이름을 입력하세요" required>
                    </div>
 
-                   <div class="form-group">
-                     <label for="product_price">상품 가격</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_price"><span class="badge bg-primary">상품 가격</span></label>
                      <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
                    </div>
 
-                    <div class="form-group">
-                      <label for="product_price">등록 제목</label>
-                      <input type="text" class="form-control" name="p_title"  placeholder="상품 가격을 입력하세요" required>
+                    <div class="form-group" style="margin-bottom:20px;">
+                      <label for="product_price"><span class="badge bg-primary">상품 할인율</span></label>
+                      <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율을 입력하세요. (1.00 ~ 99.00)" required>
                     </div>
 
-                    <div class="form-group">
-                       <label for="product_price">등록 내용</label>
-                       <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product_price">상품 수량</label>
-                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량" required>
+
+                    <div class="form-group" style="margin-bottom:20px;">
+                      <label for="product_price"><span class="badge bg-primary">등록 제목</span></label>
+                      <input type="text" class="form-control" name="p_title"  placeholder="상품 등록 제목을 입력하세요" required>
                     </div>
 
+                    <div class="form-group" style="margin-bottom:20px;">
+                       <label for="product_price"><span class="badge bg-primary">등록 내용</span></label>
+                       <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용을 입력하세요." required>
+                    </div>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label for="product_price"><span class="badge bg-primary">상품 수량</span></label>
+                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량을 입력하세요." required>
+                    </div>
                 <br>
-                <div class="form-group">
-                    <label for="product_image">상품 이미지</label>
+                <div class="form-group" style="margin-bottom:20px;">
+                    <label for="product_image"><span class="badge bg-primary">상품 이미지</span></label>
                     <input type="file" id="product_image" name="uploadFile" style="height: 30px;" multiple>
                 </div>
 
@@ -183,11 +200,11 @@
                      <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
                    </div>
                    <div class="form-group">
-                     <label for="product_title">등록 제목</label>
+                     <label for="product_title">상품 등록 제목</label>
                      <input type="text" class="form-control" name="p_title" placeholder="상품 제목을 입력하세요" required>
                    </div>
                    <div class="form-group">
-                     <label for="product_content">등록 내용</label>
+                     <label for="product_content">상품 등록 내용</label>
                      <input type="text" class="form-control" name="p_content" placeholder="상품 판매 내용" required>
                    </div>
                    <div class="form-group">

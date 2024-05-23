@@ -136,6 +136,16 @@ class AdminMapperTest {
 
         ProductVO productVO = new ProductVO();
 
+        productVO.setP_name("테스트상품");
+        productVO.setP_price(String.valueOf(100000));
+        productVO.setP_title("테스트상품");
+        productVO.setP_content("테스트상품");
+        productVO.setP_quantity(100);
+        productVO.setCategory_code("1");
+        productVO.setP_discount(10.0);
+
+
+
 
 
 

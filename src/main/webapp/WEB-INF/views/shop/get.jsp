@@ -135,8 +135,8 @@
                 var str ="";
                 var obj = arr[0];
 
-                //var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
-                var fileCallPath = encodeURIComponent("//tmp//img//"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+                var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+                //var fileCallPath = encodeURIComponent("//tmp//img//"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
 		        str += "<img src='/shop/display?fileName=" + fileCallPath + "'class='img-fluid rounded' alt='Slide 2'>";
 		        str += "</div>";
 		        uploadResult.html(str);

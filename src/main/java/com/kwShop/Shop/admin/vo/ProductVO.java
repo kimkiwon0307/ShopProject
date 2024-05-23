@@ -17,6 +17,8 @@ public class ProductVO {
     private Date p_udate;         //  상품 수정 날짜
     private int p_quantity;        // 상품 갯수
 
+    private String p_categoryCode; // 상품 카테고리
+    private double p_discount; // 상품 할인 확률
 
     private String attachUuid;
     private String attachUploadPath;

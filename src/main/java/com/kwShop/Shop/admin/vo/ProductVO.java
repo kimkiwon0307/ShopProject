@@ -24,6 +24,7 @@ public class ProductVO {
     private String attachUploadPath;
     private String attachFilename;
 
+    private String p_categoryName; // 상품 분류
 
     private List<AttachImageVO> attachList; // 상품 이미지 리스트
 

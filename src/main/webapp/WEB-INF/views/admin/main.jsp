@@ -30,8 +30,10 @@
                       <thead>
                         <tr style="text-align:center">
                           <th scope="col">상품 번호</th>
+                          <th scope="col">상품 분류</th>
                           <th scope="col">상품 이름</th>
                           <th scope="col">가격</th>
+                          <th scope="col">할인율(%)</th>
                           <th scope="col">제목</th>
                           <th scope="col">내용</th>
                           <th scope="col">등록일</th>
@@ -45,14 +47,24 @@
                      <c:forEach items="${product}" var="product">
                         <tr style="text-align:center">
                           <td><c:out value="${product.p_id}"/></td>
+                           <td><c:out value="${product.p_categoryName}"/></td>
                           <td><c:out value="${product.p_name}"/></td>
                           <td><c:out value="${product.p_price}"/></td>
+                          <td><c:out value="${product.p_discount}"/></td>
                           <td><c:out value="${product.p_title}"/></td>
                           <td><c:out value="${product.p_content}"/></td>
                           <td><fmt:formatDate value="${product.p_date}" pattern="yyyy-MM-dd"/></td>
                           <td><fmt:formatDate value="${product.p_udate}" pattern="yyyy-MM-dd"/></td>
                           <td><c:out value="${product.p_quantity}"/></td>
-                          <td><button type="button" class="btn btn-info u_btn" data-p_id='<c:out value="${product.p_id}"/>'>수정</button></td>
+                          <td><button type="button" class="btn btn-info u_btn"
+                               data-p_id='<c:out value="${product.p_id}"/>'
+                               data-p_name='<c:out value="${product.p_name}"/>'
+                               data-p_price='<c:out value="${product.p_price}"/>'
+                               data-p_discount='<c:out value="${product.p_discount}"/>'
+                               data-p_title='<c:out value="${product.p_title}"/>'
+                               data-p_content='<c:out value="${product.p_content}"/>'
+                               data-p_quantity='<c:out value="${product.p_quantity}"/>'
+                          >수정</button></td>
                           <td><button type="button" class="btn btn-warning d_btn" data-p_id='<c:out value="${product.p_id}"/>'>삭제</button></td>
                         </tr>
                      </c:forEach>
@@ -185,34 +197,37 @@
                <div class="modal-body">
                  <!-- 상품 정보 입력 폼 -->
                  <form id="modal_form" action="/admin/productUpdate" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label for="product_name">상품 번호</label>
+                    <div class="form-group" style="margin-bottom:20px;">
+                      <label for="product_name"><span class="badge bg-primary">상품 번호</span></label>
                       <input type="text" class="form-control" name="p_id" required>
                     </div>
 
-
-                   <div class="form-group">
-                     <label for="product_name">상품 이름</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_name" ><span class="badge bg-primary">상품 이름</span></label>
                      <input type="text" class="form-control" name="p_name" placeholder="상품 이름을 입력하세요" required>
                    </div>
-                   <div class="form-group">
-                     <label for="product_price">상품 가격</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_price"><span class="badge bg-primary">상품 가격</span></label>
                      <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
                    </div>
-                   <div class="form-group">
-                     <label for="product_title">상품 등록 제목</label>
+                    <div class="form-group" style="margin-bottom:20px;">
+                      <label for="product_price"><span class="badge bg-primary">상품 할인율</span></label>
+                      <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율 입력하세요" required>
+                    </div>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_title"><span class="badge bg-primary">상품 등록 제목</span></label>
                      <input type="text" class="form-control" name="p_title" placeholder="상품 제목을 입력하세요" required>
                    </div>
-                   <div class="form-group">
-                     <label for="product_content">상품 등록 내용</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_content"><span class="badge bg-primary">상품 등록 내용</span></label>
                      <input type="text" class="form-control" name="p_content" placeholder="상품 판매 내용" required>
                    </div>
-                   <div class="form-group">
-                     <label for="product_code">재고 수량</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_code"><span class="badge bg-primary">재고 수량</span></label>
                      <input type="text" class="form-control" name="p_quantity" placeholder="상품 수량" required>
                    </div>
-                   <div class="form-group">
-                     <label for="product_image">상품 이미지</label>
+                   <div class="form-group" style="margin-bottom:20px;">
+                     <label for="product_image"><span class="badge bg-primary">상품 이미지</span></label>
                      <!-- <input type="file" class="form-control" id="product_image" name="uploadFile" style="height: 30px;" multiple> -->
                       <input type="file" id="product_image_update" name="uploadFile2" style="height: 30px;" multiple>
                    </div>
@@ -449,9 +464,21 @@
                $(document).on("click", ".u_btn", function() {
 
                     var p_id = $(this).data("p_id");
-
+                    var p_name = $(this).data("p_name");
+                    var p_price = $(this).data("p_price");
+                    var p_discount = $(this).data("p_discount");
+                    var p_title = $(this).data("p_title");
+                    var p_content = $(this).data("p_content");
+                    var p_quantity = $(this).data("p_quantity");
 
                     $("#productModal").find("[name=p_id]").val(p_id);
+                    $("#productModal").find("[name=p_name]").val(p_name);
+                    $("#productModal").find("[name=p_price]").val(p_price);
+                    $("#productModal").find("[name=p_discount]").val(p_discount);
+                    $("#productModal").find("[name=p_title]").val(p_title);
+                    $("#productModal").find("[name=p_content]").val(p_content);
+                    $("#productModal").find("[name=p_quantity]").val(p_quantity);
+
                     $("#productModal").modal("show");
 
 

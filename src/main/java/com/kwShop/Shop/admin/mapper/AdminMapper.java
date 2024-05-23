@@ -1,6 +1,7 @@
 package com.kwShop.Shop.admin.mapper;
 
 import com.kwShop.Shop.admin.vo.AttachImageVO;
+import com.kwShop.Shop.admin.vo.CategoryVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -31,5 +32,7 @@ public interface AdminMapper {
     
     public void deleteImage(int p_id); // 이미지 삭제
     public int deleteProduct(int p_id); // 상품 삭제
+
+    public List<CategoryVO> categoryList(); // 카테고리 리스트
 
 }

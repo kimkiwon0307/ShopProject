@@ -43,7 +43,6 @@ public class AdminController {
     // 관리자 메인 페이지
     @GetMapping("/main")
     public void adminMain(Criteria cri,Model model) throws Exception {
-        log.info("관리자 메인 페이지");
 
         int total = service.productTotal(cri);
 
@@ -60,18 +59,11 @@ public class AdminController {
     @PostMapping("/productRegister")
     public String productRegister(ProductVO product) throws Exception{
 
-        log.info("상품 등록");
-        log.info(product.toString());
-
         if(product.getAttachList() == null){
-            log.info("null");
-        }else {
-            log.info("NotNull");
 
+        }else {
             service.productRegister(product);
             service.ImageRegister(product, product.getP_id());
-
-            log.info(product.getAttachList().toString());
         }
         return "redirect:/admin/main";
     }
@@ -82,7 +74,7 @@ public class AdminController {
 
         log.info("상품 리스트");
         model.addAttribute("list", service.productList(cri));
-
+        log.info(service.productList(cri).toString());
     }
 
     // 상품 수정

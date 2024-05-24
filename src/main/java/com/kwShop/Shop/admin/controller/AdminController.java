@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,10 +115,12 @@ public class AdminController {
     @PostMapping("/uploadAjaxAction")
     @ResponseBody
     public List<AttachImageVO> uploadAjaxPost(@RequestParam("uploadFiles") MultipartFile[] uploadFiles){
+
         log.info("파일업로드");
 
         String uploadFolder = "C:\\upload2";
        // String uploadFolder = "//tmp//img";
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String str = sdf.format(date);
@@ -166,6 +169,17 @@ public class AdminController {
             list.add(vo);
         }
         return list;
+    }
+
+    @DeleteMapping("/deleteImage")
+    @ResponseBody
+    public void deleteImage(@RequestParam("imgpath") String imgpath){
+
+        File file = new File(URLDecoder.decode(imgpath));
+
+        file.delete();
+
+
     }
 
 }

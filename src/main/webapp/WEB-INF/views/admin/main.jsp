@@ -179,8 +179,10 @@
                 	<ul id="uUl">
                 	</ul>
                 </div>
+                <div>
                         <button type="submit" class="btn btn-primary" id="product_register_btn1">상품 등록</button>
                         <button type="button" class="btn btn-danger" id="cancle_btn">취소</button>
+                </div>
                 </form>
             </div>
         </div>
@@ -229,7 +231,7 @@
                    <div class="form-group" style="margin-bottom:20px;">
                      <label for="product_image"><span class="badge bg-primary">상품 이미지</span></label>
                      <!-- <input type="file" class="form-control" id="product_image" name="uploadFile" style="height: 30px;" multiple> -->
-                      <input type="file" id="product_image_update" name="uploadFile2" style="height: 30px;" multiple>
+                      <input type="file" id="product_image_update" name="uploadFile2" style="height: 30px;" >
                    </div>
                             <div id='uploadResult2'>
                                    	<ul id="uUl">
@@ -356,7 +358,6 @@
                         var fileList = fileInput[0].files;
                         var fileObj = fileList[0];
 
-                        alert(fileInput);
 
                     	if(!fileCheck(fileObj.name, fileObj.size)){
                     	    alert("잘못된 사진 또는 이름 입니다");
@@ -375,12 +376,24 @@
                         	dataType : 'json',
                         	success: function(result){
                               obj = result[0];
+                              console.log(obj);
+                              var uploadResult = $("#uploadResult");
+                              var uploadPath =obj.uploadPath;
+                              var uuid = obj.uuid;
+                              var filename = obj.fileName;
+                              var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename);
+                          // var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename);
+                           var imageTag = '<div style="position: relative; display: inline-block;"> <img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..." style="margin-bottom:20px;">' +
+                                          '<button class="deleteImgBtn" style="position: absolute; top: 0; right: 0;" id="deleteImgBtn" data-imgpath =' + fileCallPath + '>  <i class="bi bi-x-circle"></i></button></div>';
+
+                             uploadResult.append(imageTag);
+
+
                            },error: function(){
-                                alert("실패");
+                                alert("이미지 업로드가 실패했습니다.");
                            }
                         });
 
-                        alert("통과");
                 	});
 
 
@@ -481,6 +494,43 @@
 
                     $("#productModal").modal("show");
 
+
+
+               });
+
+               //업로드 이미지 삭제 버튼
+               $(document).on("click",".deleteImgBtn", function(e){
+
+                    e.preventDefault();
+
+                    var imgpath = $(this).data("imgpath");
+
+                     var formData = new FormData();
+                             formData.append('imgpath',  imgpath);
+
+                                if(confirm("정말 삭제하시겠습니까?")){
+                                   $.ajax({
+                                       url: '/admin/deleteImage',
+                                       type: 'DELETE',
+                                       data: formData,
+                                       processData: false,  // 데이터를 문자열로 변환하지 않음
+                                       contentType: false,  // 컨텐츠 타입을 설정하지 않음
+                                       success: function(response) {
+
+                                            $("#uploadResult").empty();
+
+                                            console.log("전송 성공!");
+                                            console.log("서버 응답:", response);
+
+                                         },
+                                       error: function(xhr, status, error) {
+                                             console.error("전송 실패:", error);
+                                       }
+                                   });
+
+                                  }else{
+                                   return;
+                                   }
 
 
                });

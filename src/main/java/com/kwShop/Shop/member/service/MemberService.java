@@ -11,5 +11,8 @@ public interface MemberService {
     int idCheck(String member_id) throws Exception; // 중복 아이디 체크
     public List<MemberVO> memberList() throws Exception;  // 멤버 목록
     public void deleteMember(String member_id) throws Exception; // 멤버 삭제하기
+    MemberVO profile(String member_id) throws Exception;
+
+    void memberUpdate(MemberVO member) throws Exception;   // 업데이트
 
 }

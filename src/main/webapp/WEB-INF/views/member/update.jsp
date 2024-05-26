@@ -14,13 +14,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link href="/member/join.css" rel="stylesheet">
 
-  <title>회원가입</title>
+  <title>회원수정</title>
 </head>
 
 <body>
   <div class="signup-container">
 
-    <form class="signup-form" action="/member/join" method="post" id="joinForm">
+    <form class="signup-form" action="/member/update" method="post" id="joinForm">
            <c:if test="${not empty errors}">
                  <div class="alert alert-danger" role="alert">
                      <strong>유효성 검사 에러:</strong>
@@ -32,18 +32,16 @@
                   </div>
               </c:if>
 
-      <h2>회원가입</h2>
+      <h2>내 정보 수정</h2>
 
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-            <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' >
-        	<span  class="input-group" id="s_nick_check_success">사용 가능한 닉네임 입니다.</span>
-	    	<span  class="input-group" id="s_nick_check_fail">존재하는 닉네임 입니다.</span>
+            <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' value="${Member.member_id}" readonly>
       </div>
 
       <div class="input-group" style="margin-bottom:20px;">
         <span class="input-group-text"><i class="bi bi-key"></i></span>
-        <input type="password" class="form-control" placeholder="비밀번호" id="member_password"  name= 'member_pw' >
+        <input type="password" class="form-control" placeholder="비밀번호" id="member_password"  name= 'member_pw' value="${Member.member_pw}">
         <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
         <input type="password"  class="form-control" id="pw_check" placeholder="비밀번호 확인" >
      	<span  class="input-group" id="s_pwd_check_success">비밀번호가 같습니다.</span>
@@ -53,13 +51,13 @@
 
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-vector-pen"></i></span>
-            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" >
+            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" value="${Member.member_name}">
 
       </div>
 
      <div class="input-group" style="margin-bottom:20px;">
            <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
-           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' >
+           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' value="${Member.member_mail}">
            <button class="btn btn-outline-secondary" type="button" id="email_chcK_btn"  >인증번호 전송</button>
       </div>
 
@@ -72,22 +70,22 @@
 
     <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-       <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1'  >
+       <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1' value="${Member.member_Addr1}"  >
        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="execution_daum_address()" >주소찾기</button>
      </div>
 
       <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-         <input type="text" class="form-control" placeholder="주소" id='address_input_2'name='member_Addr2' >
+         <input type="text" class="form-control" placeholder="주소" id='address_input_2'name='member_Addr2' value="${Member.member_Addr2}" >
       </div>
 
       <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-         <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3'  >
+         <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3' value="${Member.member_Addr3}" >
       </div>
 
-      <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">회원가입</button>
-      <button type="button" class="btn btn-danger" id="loginBtn">로그인</button>
+      <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">수정 완료</button>
+      <button type="button" class="btn btn-danger" id="loginBtn">취소</button>
     </form>
   </div>
 
@@ -119,27 +117,6 @@
              var addr = $("#address_input_3").val();
              var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
 
-            $.ajax({             // Ajax를 이용한 비동기 중복검사
-
-            				type: "post",
-            				url : "/member/m_id_check",
-            				data : data,
-            				success : function(result){
-            				console.log(result);
-            					if(result != 'fail'){ // 성공일때
-            						$("#s_nick_check_fail").css("display","none");
-            						$("#s_nick_check_success").css("display","inline-block");
-            						$("#signUp_btn").attr("type","submit");
-            						idckCheck = true;
-
-            					}else{
-            						$("#s_nick_check_fail").css("display","inline-block");
-            						$("#s_nick_check_success").css("display","none");
-            						$("#signUp_btn").attr("type","button");
-            					}
-            				}
-            }); // ajax
-
             if (pw == pw_check ) {
                 pwCheck = true;
               }else {
@@ -158,9 +135,9 @@
                 addressCheck = true;
             }
 
-              if(idckCheck && pwCheck && nameCheck && mailCheck && addressCheck) {
+              if(pwCheck && nameCheck && mailCheck && addressCheck) {
                      $("#joinForm").submit();
-                    alert(member_id + "님 환영합니다.")
+                    alert(member_id + "님 정보를 수정합니다.")
             }else {
                    alert("틀린부분을 수정해주세요.");
             }
@@ -168,39 +145,6 @@
 	    })
 
 
-		// 아이디 중복검사
-		$('#id_check').on("propertychange change keyup paste input", function(){  // 아이디를 입력할때마다 중복검사를 한다.
-
-			var member_id = $('#id_check').val();  // 입력 받은 ID
-
-
-			var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
-
-			if($(this).val() != 0){    // 아이디 체크할때 값이 있을때만 실행된다.
-
-			$.ajax({                   // Ajax를 이용한 비동기 중복검사
-
-				type: "post",
-				url : "/member/m_id_check",
-				data : data,
-				success : function(result){
-				console.log(result);
-					if(result != 'fail'){ // 성공일때
-						$("#s_nick_check_fail").css("display","none");
-						$("#s_nick_check_success").css("display","inline-block");
-						$("#signUp_btn").attr("type","submit");
-					}else{
-						$("#s_nick_check_fail").css("display","inline-block");
-						$("#s_nick_check_success").css("display","none");
-						$("#signUp_btn").attr("type","button");
-					}
-				}
-			}); // ajax
-		   }else {
-			   $("#s_nick_check_fail").css("display","none");
-			   $("#s_nick_check_success").css("display","none");
-		   }
-		}); // 아이디 중복검사
 
 
         // 비밀번호 체크
@@ -318,7 +262,7 @@
 
         $("#loginBtn").on("click",function(){
 
-            location.href="/member/login";
+            location.href="/shop/main";
 
         });
 

@@ -77,10 +77,10 @@
                                             </c:if>
                                             <li><hr class="dropdown-divider"></li>
                                             <c:if test="${member != null }" >
-                                            <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
-                                            <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
-                                             <li><a class="dropdown-item"><i class="bi bi-file-earmark-person"></i> 내정보</a></li>
-                                            <li><a class="dropdown-item" id="logout_btn"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
+                                              <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
+                                              <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
+                                             <li>  <a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person" ></i>내정보</a></li>
+                                             <li><a class="dropdown-item" id="logout_btn"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
                                             </c:if>
                                           </ul>
                                         </li>

@@ -6,6 +6,7 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,17 +21,17 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/member/*")
+@AllArgsConstructor
 @Slf4j
 public class MemberController {
 
     private final MemberService service;
     private JavaMailSender mailSender;
 
+    @GetMapping({"/profile","/update"})
+    public void profile(String member_id, Model model) throws Exception {
 
-
-    public MemberController(MemberService service, JavaMailSender mailSender) {
-        this.service = service;
-        this.mailSender = mailSender;
+        model.addAttribute("Member", service.profile(member_id));
     }
 
 
@@ -45,18 +46,35 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@Valid MemberVO member, BindingResult bindingResult,Model model)throws  Exception {
+    public String join(@Valid MemberVO member, BindingResult bindingResult,Model model) throws  Exception {
         
         if(bindingResult.hasErrors()){
-            log.info("유효성 검사 실패");
 
             model.addAttribute("errors", bindingResult.getAllErrors());
             model.addAttribute("member", member);
-            log.info("에러멤버" + member.toString());
+
             return "/member/join";
         }
 
         service.memberJoin(member);
+
+        return "redirect:/member/login";
+    }
+
+    @PostMapping("/update")
+    public String update(@Valid MemberVO member, BindingResult bindingResult,Model model) throws  Exception {
+        log.info("업데이트" + member.toString());
+        if(bindingResult.hasErrors()){
+
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("member", member);
+
+            return "/member/update";
+        }
+
+
+
+        service.memberUpdate(member);
 
         return "redirect:/member/login";
     }

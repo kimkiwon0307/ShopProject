@@ -41,5 +41,15 @@ public class MemberServiceImpl implements MemberService{
         mapper.memberDelete(member_id);
     }
 
+    @Override
+    public MemberVO profile(String member_id) throws Exception {
+        return mapper.profile(member_id);
+    }
+
+    @Override
+    public void memberUpdate(MemberVO member) throws Exception {
+        mapper.memberUpdate(member);
+    }
+
 
 }

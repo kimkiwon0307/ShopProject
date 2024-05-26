@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../common/header.jsp"%>
+    <div style="height:50px;">
+    </div>
     <div class="container">
-
         <ul class="list-group d-flex justify-content-center">
            <c:if test="${empty list}">
                 <h1 class="text-center"> 장바구니가 비었습니다. </h1> <br><br>
@@ -23,7 +24,7 @@
 
                         </div>
                         <div class="me-3 text-center" style="width: 150px;">
-                            <button type="button" class="btn btn-danger d_btn" data-b_id='<c:out value="${item.b_id}"/>' >삭제</button>
+                            <button type="button" class="btn btn-danger d_btn" data-b_id='<c:out value="${item.b_id}"/>'><i class="bi bi-trash"></i> </button>
                         </div>
                     </div>
                 </li>
@@ -52,8 +53,8 @@
                         var uuid = '<c:out value="${list.uuid}"/>';
                         var filename = '<c:out value="${list.fileName}"/>';
                         var uploadResult = $(".result-${list.b_id}");
-                        //var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename)
-                        var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename)
+                        var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename)
+                        //var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename)
                         var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..."  style="height:300px;">';
 
                         uploadResult.append(imageTag);

@@ -13,4 +13,7 @@ public interface MemberMapper {
     int idCheck(String member_id); // 회원 가입시 동일 아이디 체크
     public List<MemberVO> memberList(); // 멤버 목록
     public void memberDelete (@Param(("member_id")) String member_id); // 멤버 삭제
+    public MemberVO profile(@Param("member_id")String member_id); // 멤버 아이디로 프로필 조회
+    void memberUpdate(MemberVO memberVO); // 멤버 업데이트
+    
 }

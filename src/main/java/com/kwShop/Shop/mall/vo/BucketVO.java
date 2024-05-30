@@ -35,7 +35,7 @@ public class BucketVO {
     private Date p_date;
     private Date p_udate;
     private String p_cateCode;
-    private int p_count;
+    private double p_discount; // 상품 할인 확률
 
     // tbl_attach 테이블
     private String uploadPath;

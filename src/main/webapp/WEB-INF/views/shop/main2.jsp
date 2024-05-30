@@ -11,30 +11,69 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <title>Hello, world!</title>
+
   </head>
-  <body>
 
-    <nav class="navbar navbar-expand-sm bg-light navbar-light">
-      <div class="container-fluid">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:75px; ">
+
+  <div class="container-fluid" style="display:flex;">
+  <div style="margin-left:100px; flex:1" >
+    <a class="navbar-brand" href="#" >Kiwon's Shop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+
+    <div class="collapse navbar-collapse " id="navbarSupportedContent" style="flex:3; ">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+        <li class="nav-item" >
+          <a class="nav-link active" aria-current="page" href="#">Best 50</a>
+        </li>
+        <li class="nav-item" style="margin-left:20px;">
+          <a class="nav-link" href="#">Outer</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+          <a class="nav-link" href="#">Top</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+          <a class="nav-link" href="#">Shirts</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+          <a class="nav-link" href="#">Pants</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+          <a class="nav-link" href="#">Suit</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+          <a class="nav-link" href="#">Shoes</a>
+        </li>
+        <li class="nav-item"style="margin-left:20px;">
+             <a class="nav-link" href="#">Bag</a>
+         </li>
+
+      </ul>
+
+        <div style="margin-right:100px;">
+            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="bi bi-search"></i>
+            </button>
+
+            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="bi bi-person-fill"></i>
+            </button>
+
+            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+              <i class="bi bi-bag-plus-fill"></i>
+            </button>
+        </div>
+
       </div>
-    </nav>
-
+  </div>
+</nav>
 
 
 

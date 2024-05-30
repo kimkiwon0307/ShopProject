@@ -5,31 +5,53 @@
     <div style="height:50px;">
     </div>
     <div class="container">
-        <ul class="list-group d-flex justify-content-center">
-           <c:if test="${empty list}">
-                <h1 class="text-center"> 장바구니가 비었습니다. </h1> <br><br>
-           </c:if>
-            <c:forEach items="${list}" var="item">
-                 <li class="list-group-item">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="result-${item.b_id}" style="width:300px; height:300px;"></div>
-                        <div class="me-3 text-center" style="width: 200px;">
-                            <p><strong>${item.p_name}</strong></p>
-                        </div>
-                        <div class="me-3 text-center" style="width: 100px;">
-                            <p><strong>수량:</strong> ${item.quantity}</p>
-                        </div>
-                        <div class="me-3 text-center" style="width: 150px;">
-                            <p><strong>가격:</strong>  <fmt:formatNumber value="${item.price}" pattern="#,###"/></p>
+      <table class="table " style="margin: auto; text-align: center;">
+          <c:if test="${empty list}">
+              <tr>
+                  <td colspan="5">
+                      <h1 class="text-center">장바구니가 비었습니다.</h1>
+                      <br><br>
+                  </td>
+              </tr>
+          </c:if>
 
-                        </div>
-                        <div class="me-3 text-center" style="width: 150px;">
-                            <button type="button" class="btn btn-danger d_btn" data-b_id='<c:out value="${item.b_id}"/>'><i class="bi bi-trash"></i> </button>
-                        </div>
-                    </div>
-                </li>
-            </c:forEach>
-        </ul>
+          <tr>
+            <td>이미지</td>
+            <td>상품명</td>
+            <td>수량</td>
+            <td>가격</td>
+            <td>삭제</td>
+          </tr>
+          <c:forEach items="${list}" var="item">
+              <tr>
+                  <td style="width: 300px; height: 300px; text-align: center;  text-align: center;">
+                      <div class="result-${item.b_id}" style="width: 100%; height: 100%;"></div>
+                  </td>
+                  <td style="width: 180px;">
+                      <h5 class="fw-bold mb-3">${item.p_name}</h5>
+                  </td>
+                  <td style="width: 180px;">
+                      <h5 class="fw-bold mb-3"> ${item.quantity}</h5>
+                  </td>
+                  <td style="width: 200px;">
+                      <h5 class="fw-bold mb-3" style="text-decoration: line-through;">
+                          정가 : <fmt:formatNumber value="${item.p_price * item.quantity}" pattern="#,###"/>원
+                      </h5>
+                      <h5 class="fw-bold mb-3">
+                          할인율 : <fmt:formatNumber value="${item.p_discount}" pattern="#,###"/> %
+                      </h5>
+                      <c:set var="discountedPrice" value="${item.p_price - (item.p_price * (item.p_discount / 100.0))}" />
+                      <h5 class="fw-bold mb-3">
+                          판매가 : <fmt:formatNumber value="${discountedPrice * item.quantity}" type="number" maxFractionDigits="0" />원
+                      </h5>
+                  </td>
+                  <td style="width: 150px;">
+                      <button type="button" class="btn btn-danger d_btn" data-b_id='<c:out value="${item.b_id}"/>'><i class="bi bi-trash"></i></button>
+                  </td>
+              </tr>
+          </c:forEach>
+      </table>
+
         <div>
             <button type="button" class="btn btn-info buyBtn" style="float:right; margin-top:10px;"> 구매하기 </button>
         </div>

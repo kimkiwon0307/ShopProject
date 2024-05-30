@@ -1,5 +1,6 @@
 package com.kwShop.Shop.admin.vo;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ProductVO {
 
     private int p_id;              // 상품 아이디
+    @NotBlank(message = "상품명을 입력해주세요.")
     private String p_name;         // 상품명
     private String p_price;       //  상품 가격
     private String p_title;      //   상품 등록 제목

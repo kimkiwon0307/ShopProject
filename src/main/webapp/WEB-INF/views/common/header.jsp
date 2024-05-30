@@ -10,7 +10,7 @@
                 <meta charset="UTF-8">
                 <title>kiwon's shop mall</title>
 
-                <head>
+
                     <meta charset="utf-8">
                     <title>kiwon's shop mall'</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -41,7 +41,7 @@
                     <!-- Template Stylesheet -->
                     <link href="/shop/main/css/style.css" rel="stylesheet">
 
-                </head>
+
             </head>
 
             <body>

@@ -126,6 +126,18 @@
               <button  class="btn btn-success" id="product_register_btn"> 상품 추가 </button>
             </div>
             <div class="card-body" id="product_register_card">
+
+              <c:if test="${not empty errors}">
+                             <div class="alert alert-danger" role="alert">
+                                 <strong>유효성 검사 에러:</strong>
+                                    <ul>
+                                       <c:forEach items="${errors}" var="error">
+                                           <li>${error.defaultMessage}<br></li>
+                                        </c:forEach>
+                                    </ul>
+                              </div>
+                          </c:if>
+
                 <form role="form" method="post" action="/admin/productRegister" id="formObj" style="display:none">
 
                       <div class="form-group" style="margin-bottom:20px;">
@@ -142,7 +154,8 @@
 
                     <div class="form-group" style="margin-bottom:20px;">
                       <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
-                     <input type="text" class="form-control"name="p_name" placeholder="상품 이름을 입력하세요" required>
+                      <input type="text" class="form-control"name="p_name" placeholder="상품 이름을 입력하세요" required>
+
                    </div>
 
                    <div class="form-group" style="margin-bottom:20px;">

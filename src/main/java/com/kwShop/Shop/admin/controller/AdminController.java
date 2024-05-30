@@ -7,6 +7,7 @@ import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.PageDTO;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import com.kwShop.Shop.member.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,7 +60,14 @@ public class AdminController {
 
     // 상품 등록
     @PostMapping("/productRegister")
-    public String productRegister(ProductVO product) throws Exception{
+    public String productRegister(@Valid ProductVO product, BindingResult bindingResult, Model model) throws Exception{
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("product", product);
+
+            return "admin/main";
+        }
 
         if(product.getAttachList() == null){
 

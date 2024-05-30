@@ -16,11 +16,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <h4 class="fw-bold mb-3"><c:out value="${product.p_title}"/></h4>
+                                <h1 class="fw-bold mb-3"><c:out value="${product.p_title}"/></h1>
                                 <p class="mb-3">상품번호: <c:out value="${product.p_id}"/></p>
-                                <h5 class="fw-bold mb-3"><fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</h5>
+                                <h5 class="fw-bold mb-3" style="text-decoration: line-through;">정가 : <fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원</h5>
+                                <h5 class="fw-bold mb-3" >할인율 : <fmt:formatNumber value="${product.p_discount}" pattern="#,###"/> %</h5>
 
-                                <p class="mb-4"><c:out value="${product.p_content}"/></p>
+                              <c:set var="discountedPrice" value="${product.p_price - (product.p_price * (product.p_discount / 100.0))}" />
+                              <h5 class="fw-bold mb-3">
+                                  판매가 : <fmt:formatNumber value="${discountedPrice}" type="number" maxFractionDigits="0" />원
+                              </h5>
 
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -28,6 +32,7 @@
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
+
                                     <input type="text" class="form-control form-control-sm text-center border-0" value="1" id="quantityValue">
 
                                     <div class="input-group-btn">
@@ -107,7 +112,6 @@
     </footer>
 
 
-        <!-- Footer End -->
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

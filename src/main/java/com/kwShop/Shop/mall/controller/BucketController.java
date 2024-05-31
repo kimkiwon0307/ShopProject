@@ -32,7 +32,7 @@ public class BucketController {
         log.info(member_id);
 
         List<BucketVO> buckets = service.list(member_id);
-
+        log.info(buckets+"GDGDGD");
 
         List<BucketVO> bucketss = new ArrayList<>();
 
@@ -48,9 +48,7 @@ public class BucketController {
     @ResponseBody
     public void insert(@RequestBody BucketVO bucketVO){
 
-        log.info("버켓 인설트" + bucketVO.toString());
-
-        service.insert(bucketVO);
+       service.insert(bucketVO);
     }
 
     @DeleteMapping("/delete")

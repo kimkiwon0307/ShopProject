@@ -51,7 +51,7 @@ public class AdminController {
 
         PageDTO pageMaker = new PageDTO(cri, total);
 
-        model.addAttribute("product", service.productList(cri));
+        model.addAttribute("products", service.productList(cri));
         model.addAttribute("pageMaker", pageMaker);
         model.addAttribute("members", memberService.memberList());
     }
@@ -60,12 +60,12 @@ public class AdminController {
 
     // 상품 등록
     @PostMapping("/productRegister")
-    public String productRegister(@Valid ProductVO product, BindingResult bindingResult, Model model) throws Exception{
+    public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{
+
+        log.info(product.toString());
 
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
-            model.addAttribute("product", product);
-
             return "admin/main";
         }
 

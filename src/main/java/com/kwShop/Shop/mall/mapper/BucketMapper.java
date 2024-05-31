@@ -16,4 +16,7 @@ public interface BucketMapper {
 
     public void delete(@Param("b_id")int b_id);
 
+    public int findProduct(@Param("p_id") int p_id, @Param("member_id") String member_id);
+
+    public void plusProduct(@Param("p_id") int p_id, @Param("quantity") int quantity);
 }

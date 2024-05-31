@@ -20,7 +20,11 @@ public class BucketServiceImpl implements BucketService{
     @Override
     public void insert(BucketVO bucket) {
 
-        mapper.insert(bucket);
+        if(mapper.findProduct(bucket.getP_id(),bucket.getMember_id()) == 1){
+            mapper.plusProduct(bucket.getP_id(), bucket.getQuantity());
+        }else{
+            mapper.insert(bucket);
+        }
 
     }
 
@@ -33,4 +37,6 @@ public class BucketServiceImpl implements BucketService{
     public void delete(int b_id) {
         mapper.delete(b_id);
     }
+
+
 }

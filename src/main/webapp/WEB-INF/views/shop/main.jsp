@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -322,7 +323,9 @@
                          console.log("전송 성공!");
                          console.log("서버 응답:", response);
                          alert("장바구니에 담겼습니다.");
-                         location.reload();
+                         if(confirm("장바구니로 이동하시겠습니까?")){
+                            location.href = "/bucket/main?member_id=" + member_id;
+                         }
                     },
                     error: function(xhr, status, error) {
                          console.error("전송 실패:", error);
@@ -334,7 +337,7 @@
               $(".bucket_noLoginBtn").on("click",function(){
 
                                       alert("로그인후 이용가능합니다.");
-
+                                      location.href="/member/login";
                               });
 
 

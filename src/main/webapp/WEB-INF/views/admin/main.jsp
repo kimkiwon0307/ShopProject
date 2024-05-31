@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@include file="../common/adminHeader.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,7 @@
                         </tr>
                       </thead>
                      <tbody id="productList">
-                     <c:forEach items="${product}" var="product">
+                     <c:forEach items="${products}" var="product">
                         <tr style="text-align:center">
                           <td><c:out value="${product.p_id}"/></td>
                            <td><c:out value="${product.p_categoryName}"/></td>
@@ -138,7 +139,7 @@
                               </div>
                           </c:if>
 
-                <form role="form" method="post" action="/admin/productRegister" id="formObj" style="display:none">
+               <form role="form" method="post" action="/admin/productRegister" id="formObj" >
 
                       <div class="form-group" style="margin-bottom:20px;">
                             <label for="product_name"><span class="badge bg-primary">분류</span></label>
@@ -152,35 +153,34 @@
                       </div>
 
 
-                    <div class="form-group" style="margin-bottom:20px;">
-                      <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
-                      <input type="text" class="form-control"name="p_name" placeholder="상품 이름을 입력하세요" required>
-
-                   </div>
+                     <div class="form-group" style="margin-bottom:20px;">
+                           <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
+                           <input type="text" class="form-control" path="p_name" placeholder="상품 이름을 입력하세요"/>
+                       </div>
 
                    <div class="form-group" style="margin-bottom:20px;">
                      <label for="product_price"><span class="badge bg-primary">상품 가격</span></label>
-                     <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
+                     <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" >
                    </div>
 
                     <div class="form-group" style="margin-bottom:20px;">
                       <label for="product_price"><span class="badge bg-primary">상품 할인율</span></label>
-                      <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율을 입력하세요. (1.00 ~ 99.00)" required>
+                      <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율을 입력하세요. (1.00 ~ 99.00)" >
                     </div>
 
 
                     <div class="form-group" style="margin-bottom:20px;">
                       <label for="product_price"><span class="badge bg-primary">등록 제목</span></label>
-                      <input type="text" class="form-control" name="p_title"  placeholder="상품 등록 제목을 입력하세요" required>
+                      <input type="text" class="form-control" name="p_title"  placeholder="상품 등록 제목을 입력하세요" >
                     </div>
 
                     <div class="form-group" style="margin-bottom:20px;">
                        <label for="product_price"><span class="badge bg-primary">등록 내용</span></label>
-                       <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용을 입력하세요." required>
+                       <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용을 입력하세요." >
                     </div>
                     <div class="form-group" style="margin-bottom:20px;">
                         <label for="product_price"><span class="badge bg-primary">상품 수량</span></label>
-                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량을 입력하세요." required>
+                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량을 입력하세요." >
                     </div>
                 <br>
                 <div class="form-group" style="margin-bottom:20px;">
@@ -312,14 +312,13 @@
                 formObj.show();
             }); //$("#product_register_btn").on("click",function()
 
-
             $("#cancle_btn").on("click",function(){
                 formObj.hide();
             }); //  $("#cancle_btn").on("click",function()
 
 
            $("#product_list_btn").on("click",function(){
-                    alert("hi");
+
 
            }); //     $("#product_list_btn").on("click",function(){
 

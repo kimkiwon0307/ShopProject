@@ -1,6 +1,6 @@
 package com.kwShop.Shop.admin.vo;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,17 +10,28 @@ import java.util.List;
 public class ProductVO {
 
     private int p_id;              // 상품 아이디
-    @NotBlank(message = "상품명을 입력해주세요.")
+
+    @NotEmpty(message = "상품명을 입력하세요.")
     private String p_name;         // 상품명
+    @NotEmpty(message = "상품가격을 입력하세요.")
     private String p_price;       //  상품 가격
+    @NotEmpty(message = "상품 등록 제목을 입력하세요.")
     private String p_title;      //   상품 등록 제목
+    @NotEmpty(message = "상품 내용을 입력하세요.")
     private String p_content;    //   상품 등록 내용
+
+    @NotNull(message = "상품 갯수를 입력하세요.")
+    @PositiveOrZero(message = "수량은 0 이상이어야 합니다.")
+    private Integer  p_quantity;        // 상품 갯수
+
+    @NotNull(message = "상품 할인율을 입력하세요.")
+    @Min(value = 0, message = "할인은 0% 이상이어야 합니다.")
+    @Max(value = 99, message = "할인은 99% 이하이어야 합니다.")
+    private Double  p_discount; // 상품 할인 확률
+
     private Date p_date;         //   상품 등록날짜
     private Date p_udate;         //  상품 수정 날짜
-    private int p_quantity;        // 상품 갯수
-
     private String p_categoryCode; // 상품 카테고리
-    private double p_discount; // 상품 할인 확률
 
     private String attachUuid;
     private String attachUploadPath;

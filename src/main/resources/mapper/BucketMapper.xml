@@ -25,5 +25,19 @@
     <delete id="delete">
         delete from tbl_bucket where b_id = #{b_id}
     </delete>
+
+    <select id="findProduct" resultType="int">
+
+        SELECT COALESCE(COUNT(*), 0) AS count
+        from tbl_bucket
+        where p_id = #{p_id} AND member_id = #{member_id};
+
+    </select>
+
+    <update id="plusProduct" >
+        update tbl_bucket
+        set quantity = quantity + #{quantity}
+        where p_id = #{p_id}
+    </update>
     
 </mapper>

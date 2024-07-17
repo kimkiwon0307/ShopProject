@@ -37,6 +37,8 @@
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
             <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' >
+
+        	<!-- 아이디 중복검사 -->
         	<span  class="input-group" id="s_nick_check_success">사용 가능한 닉네임 입니다.</span>
 	    	<span  class="input-group" id="s_nick_check_fail">존재하는 닉네임 입니다.</span>
       </div>
@@ -172,7 +174,6 @@
 		$('#id_check').on("propertychange change keyup paste input", function(){  // 아이디를 입력할때마다 중복검사를 한다.
 
 			var member_id = $('#id_check').val();  // 입력 받은 ID
-
 
 			var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
 

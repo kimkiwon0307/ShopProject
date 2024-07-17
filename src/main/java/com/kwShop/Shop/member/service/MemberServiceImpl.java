@@ -26,9 +26,16 @@ public class MemberServiceImpl implements MemberService{
     }
 
 
-    @Override
-    public int idCheck(String member_id) throws Exception {
-        return mapper.idCheck(member_id);
+    @Override //아이디 중복검사
+    public String idCheck(String member_id) throws Exception {
+
+        int result = mapper.idCheck(member_id);
+
+        if(result !=0 ) {
+            return "fail";
+        }else {
+            return "success";
+        }
     }
 
     @Override

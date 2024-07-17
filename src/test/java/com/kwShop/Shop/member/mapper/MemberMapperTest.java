@@ -24,7 +24,7 @@ class MemberMapperTest {
 
         MemberVO memberVO = new MemberVO();        //멤버 객체 생성
 
-        memberVO.setMember_id("testId2");         // 멤버 객체 필드 주입
+        memberVO.setMember_id("membertest0717");         // 멤버 객체 필드 주입
         memberVO.setMember_pw("1234");
         memberVO.setMember_name("test");
         memberVO.setMember_mail("test@test.com");

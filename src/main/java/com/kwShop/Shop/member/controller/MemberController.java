@@ -73,8 +73,6 @@ public class MemberController {
             return "/member/update";
         }
 
-
-
         service.memberUpdate(member);
 
         return "redirect:/member/login";
@@ -126,6 +124,8 @@ public class MemberController {
         // 인증번호 생성
         Random random = new Random();
         int checkNum = random.nextInt(888888) + 111111; // 111111 ~ 999999 까지 난수 생성
+
+        log.info(String.valueOf(checkNum));
 
         // 이메일 보내기
         //String setForm = "kkwkkj12@gmail.com";

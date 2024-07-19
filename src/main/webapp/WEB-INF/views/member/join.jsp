@@ -59,6 +59,7 @@
 
       </div>
 
+    <!-- 이메일 -->
      <div class="input-group" style="margin-bottom:20px;">
            <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
            <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' >
@@ -72,6 +73,7 @@
               <span  class="input-group" id="s_mail_check_fail">인증번호가 다릅니다. </span>
      </div>
 
+        <!-- 주소 -->
     <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
        <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1'  >
@@ -114,11 +116,11 @@
 	         e.preventDefault();
 
 	         var member_id = $('#id_check').val();  // 입력 받은 ID
-	         var pw = $("#member_password").val();
-             var pw_check = $("#pw_check").val();
-             var name = $("#nameCk").val();
-             var mail_check = $("#check_mailNum").val();
-             var addr = $("#address_input_3").val();
+	         var pw = $("#member_password").val(); // 비밀번호
+             var pw_check = $("#pw_check").val(); // 비밀번호 확인
+             var name = $("#nameCk").val();       // 이름
+             var mail_check = $("#check_mailNum").val();  // 이메일
+             var addr = $("#address_input_3").val();     // 상세주소
              var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
 
             $.ajax({             // Ajax를 이용한 비동기 중복검사
@@ -164,7 +166,7 @@
                      $("#joinForm").submit();
                     alert(member_id + "님 환영합니다.")
             }else {
-                   alert("틀린부분을 수정해주세요.");
+                   alert("빈값을 입력해주세요.");
             }
 
 	    })
@@ -228,6 +230,11 @@
     $("#email_chcK_btn").on("click",function(){
 
         var email = $("#mail_chk").val();
+
+        if(!email){
+            alert("이메일 주소를 입력해주세요.");
+            return;
+        }
 
         $.ajax({
             type:"GET",

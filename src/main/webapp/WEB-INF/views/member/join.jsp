@@ -103,7 +103,7 @@
 
 	$(document).ready(function(){
 
-         var idckCheck = false;            // 아이디 중복 확인
+         var idCheck = false;            // 아이디 중복 확인
          var pwCheck = false;            // 비번 일치 확인
          var nameCheck = false;            // 이름 빈값 확인
          var mailCheck = false;            // 이메일 인증번호 확인
@@ -134,9 +134,10 @@
             						$("#s_nick_check_fail").css("display","none");
             						$("#s_nick_check_success").css("display","inline-block");
             						$("#signUp_btn").attr("type","submit");
-            						idckCheck = true;
+            						idCheck = true;
 
             					}else{
+            					    alert("아이디를 수정해주세요");
             						$("#s_nick_check_fail").css("display","inline-block");
             						$("#s_nick_check_success").css("display","none");
             						$("#signUp_btn").attr("type","button");
@@ -147,26 +148,37 @@
             if (pw == pw_check ) {
                 pwCheck = true;
               }else {
-                pwCheck = false;
+                 alert("패스워드를 확인해주세요.");
+                 pwCheck = false;
                  $("#s_pwd_check_fail").css("display","inline-block");
                  $("#s_pwd_check_success").css("display","none");
 
               }
+
             if (name !=''){
                 nameCheck = true;
-            }
-            if(mail_check == num){
-                mailCheck = true;
-            }
-            if(addr != ''){
-                addressCheck = true;
+            }else{
+                alert("이름을 확인해주세요.");
             }
 
-              if(idckCheck && pwCheck && nameCheck && mailCheck && addressCheck) {
-                     $("#joinForm").submit();
+            if(mail_check == num){
+                mailCheck = true;
+            }else{
+                alert("인증번호를 입력해주세요.");
+            }
+
+
+            if(addr != ''){
+                addressCheck = true;
+            }else{
+                alert("주소를 확인해주세요.");
+            }
+
+              if(idCheck && pwCheck && nameCheck && mailCheck && addressCheck) {
+                    $("#joinForm").submit();
                     alert(member_id + "님 환영합니다.")
             }else {
-                   alert("빈값을 입력해주세요.");
+                   alert("틀린부분 및 빈값을 입력해주세요.");
             }
 
 	    })
@@ -240,6 +252,7 @@
             type:"GET",
             url:"/member/mailCheck?email=" + email,
             success:function(data){
+                alert("메일이 전송되었습니다. 인증번호를 입력해주세요.");
                 console.log("data:" + data);
                 num = data;
             }

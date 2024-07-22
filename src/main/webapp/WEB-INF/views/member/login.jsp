@@ -11,22 +11,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-
- <style>
-   html, body, .container{
-  height: 100%;
-}
-
-.login-form {
-  width: 400px;
-  padding: 2rem 1rem 1rem;
-}
-
-form {
-  padding: 1rem;
-}
-   </style>
+    <link href="/member/login.css" rel="stylesheet">
 
 </head>
 
@@ -37,7 +22,8 @@ form {
                 <div class="card-body">
                     <h5 class="card-title text-center"><a href="/shop/main"> <i class="bi bi-house-door-fill"></i> </a></h5>
                      <a href="/member/join" style="float:right">회원가입</a>
-                    <form action="/member/login" method="post" id="formObj">
+
+                     <form action="/member/login" method="post" id="formObj">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">아이디</label>
                             <input type="text" class="form-control" name="member_id" id="checkId" aria-describedby="emailHelp" required>
@@ -75,10 +61,10 @@ form {
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-	 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 	<script>
 

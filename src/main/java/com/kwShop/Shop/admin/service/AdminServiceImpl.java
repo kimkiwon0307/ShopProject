@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
 
     public AdminServiceImpl(AdminMapper mapper, ReplyMapper replyMapper){
         this.mapper = mapper;
-        this.replyMapper =replyMapper;
+        this.replyMapper = replyMapper;
     }
     
     // 상품등록

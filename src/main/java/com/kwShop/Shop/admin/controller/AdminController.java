@@ -57,7 +57,6 @@ public class AdminController {
     }
 
 
-
     // 상품 등록
     @PostMapping("/productRegister")
     public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{

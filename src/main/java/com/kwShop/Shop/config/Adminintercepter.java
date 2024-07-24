@@ -24,13 +24,9 @@ public class Adminintercepter implements HandlerInterceptor {
         MemberVO admin = (MemberVO) session.getAttribute("member");
 
         if(admin == null || admin.getAdminCk() == 0) {    // 관리자 계정 아닌 경우
-
             response.sendRedirect("/shop/main");    // 메인페이지로 리다이렉트
-
             return false;
-
         }
-
         return true;
     }
 

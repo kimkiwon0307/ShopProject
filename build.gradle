@@ -47,6 +47,7 @@ dependencies {
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5' // 이메일 인증
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'// 유효성검사 (@Notblank)
+	//implementation 'org.springframework.boot:spring-boot-starter-security' //  BCryptPasswordEncoder 사용을 위해 추가
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'

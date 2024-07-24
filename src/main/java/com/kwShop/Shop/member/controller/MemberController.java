@@ -28,6 +28,10 @@ public class MemberController {
     private final MemberService service;
     private JavaMailSender mailSender;
 
+
+
+
+
     @GetMapping({"/profile","/update"})
     public void profile(String member_id, Model model) throws Exception {
 
@@ -48,6 +52,7 @@ public class MemberController {
     @PostMapping("/join")
     public String join(@Valid MemberVO member, BindingResult bindingResult,Model model) throws  Exception {
         log.info("회원 가입");
+
 
         if(bindingResult.hasErrors()){
 

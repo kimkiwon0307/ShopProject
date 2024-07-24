@@ -43,8 +43,8 @@
 
         <!-- Navbar start -->
         <div class="container-fluid fixed-top">
-            <div class="container px-0">
 
+            <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
                     <a href="/shop/main" class="navbar-brand"><h1 class="text-primary display-6">kiwon's mall</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -53,7 +53,10 @@
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="/shop/main" class="nav-item nav-link active">홈</a>
+                             <a href="/shop/main" class="nav-item nav-link active">고객센터</a>
                         </div>
+
+
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                             <c:if test="${member != null }" >
@@ -80,7 +83,7 @@
                                             <c:if test="${member != null }" >
                                               <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
                                               <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
-                                             <li>  <a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person" ></i>내정보</a></li>
+                                             <li>  <a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person" ></i> 내정보</a></li>
                                              <li><a class="dropdown-item" id="logout_btn"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
                                             </c:if>
                                           </ul>
@@ -196,11 +199,11 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                                    <form id="moveForm" action="/shop/main" method="get">
-                                                     				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-                                                     				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                                                     				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-                                                    </form>
+                                          <form id="moveForm" action="/shop/main" method="get">
+                                               <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+                                               <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+                                               <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+                                           </form>
                                     </div>
                                 </div>
                             </div>

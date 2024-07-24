@@ -144,11 +144,6 @@ class AdminMapperTest {
        // productVO.setCategory_code("1");
         productVO.setP_discount(10.0);
 
-
-
-
-
-
     }
 
 

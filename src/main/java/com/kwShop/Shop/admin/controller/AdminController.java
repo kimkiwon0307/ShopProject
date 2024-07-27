@@ -61,7 +61,7 @@ public class AdminController {
     @PostMapping("/productRegister")
     public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{
 
-        log.info(product.toString());
+        log.info("ㅎㅇ"+ product.toString());
 
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());

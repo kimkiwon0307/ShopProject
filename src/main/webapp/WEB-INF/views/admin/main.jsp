@@ -128,7 +128,7 @@
             </div>
             <div class="card-body" id="product_register_card">
 
-              <c:if test="${not empty errors}">
+                          <c:if test="${not empty errors}">
                              <div class="alert alert-danger" role="alert">
                                  <strong>유효성 검사 에러:</strong>
                                     <ul>
@@ -155,7 +155,7 @@
 
                      <div class="form-group" style="margin-bottom:20px;">
                            <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
-                           <input type="text" class="form-control" path="p_name" placeholder="상품 이름을 입력하세요"/>
+                           <input type="text" class="form-control" name="p_name" placeholder="상품 이름을 입력하세요"/>
                        </div>
 
                    <div class="form-group" style="margin-bottom:20px;">
@@ -362,6 +362,7 @@
 
                   var obj;
 
+                // 이미지 등록
                 // $("input[type='file']").on("change", function(e){
                  $("#product_image").on("change",function(e){
 

@@ -1,6 +1,6 @@
-package com.kwShop.Shop.admin.service;
+package com.kwShop.Shop.admin.controller;
 
-import com.kwShop.Shop.admin.mapper.AdminMapper;
+import com.kwShop.Shop.admin.service.AdminService;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -9,19 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Slf4j
-class AdminServiceImplTest {
+class AdminControllerTest {
 
     @Autowired
-    private AdminMapper mapper;
-
-
+    private AdminService service;
 
     @Test
-    @DisplayName("서비스 등록 테스트")
-    public void testInsert(){
-
+    @DisplayName("상품 등록 Controller 테스트")
+    public void testRegister() throws Exception {
         ProductVO productVO = new ProductVO();
 
         productVO.setP_name("테스트상품");
@@ -32,9 +30,7 @@ class AdminServiceImplTest {
         productVO.setP_categoryCode("1");
         productVO.setP_discount(10.0);
 
-        mapper.productRegister(productVO);
-
+        service.productRegister(productVO);
     }
-
 
 }

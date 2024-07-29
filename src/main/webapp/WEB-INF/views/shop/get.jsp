@@ -26,6 +26,7 @@
                                   판매가 : <fmt:formatNumber value="${discountedPrice}" type="number" maxFractionDigits="0" />원
                               </h5>
 
+
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
@@ -41,6 +42,7 @@
                                         </button>
                                     </div>
                                 </div>
+
                                  <c:if test="${member != null}">
                                      <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="bucketBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                                  </c:if>

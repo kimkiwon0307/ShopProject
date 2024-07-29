@@ -13,10 +13,14 @@ public class ProductVO {
 
     @NotEmpty(message = "상품명을 입력하세요.")
     private String p_name;         // 상품명
-    @NotEmpty(message = "상품가격을 입력하세요.")
-    private String p_price;       //  상품 가격
+
+    @NotNull(message = "상품 가격을 입력하세요.")
+    @PositiveOrZero(message = "가격은 0 이상이어야 합니다.")
+    private Integer p_price;       //  상품 가격
+
     @NotEmpty(message = "상품 등록 제목을 입력하세요.")
     private String p_title;      //   상품 등록 제목
+
     @NotEmpty(message = "상품 내용을 입력하세요.")
     private String p_content;    //   상품 등록 내용
 

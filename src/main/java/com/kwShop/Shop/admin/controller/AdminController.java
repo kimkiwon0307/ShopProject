@@ -48,20 +48,21 @@ public class AdminController {
     public void adminMain(Criteria cri,Model model) throws Exception {
 
         int total = service.productTotal(cri);
-
+        log.info("1");
         PageDTO pageMaker = new PageDTO(cri, total);
 
         model.addAttribute("products", service.productList(cri));
+        log.info("2");
         model.addAttribute("pageMaker", pageMaker);
+        log.info("3");
         model.addAttribute("members", memberService.memberList());
+        log.info("4");
     }
 
 
     // 상품 등록
     @PostMapping("/productRegister")
     public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{
-
-        log.info("ㅎㅇ"+ product.toString());
 
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
@@ -76,6 +77,7 @@ public class AdminController {
         }
         return "redirect:/admin/main";
     }
+
 
     //상품 리스트
     @GetMapping("/productList")

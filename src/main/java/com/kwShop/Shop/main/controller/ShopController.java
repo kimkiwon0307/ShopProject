@@ -1,11 +1,11 @@
-package com.kwShop.Shop.mall;
+package com.kwShop.Shop.main.controller;
 
 import com.kwShop.Shop.admin.service.AdminService;
 import com.kwShop.Shop.admin.vo.AttachImageVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.PageDTO;
 import com.kwShop.Shop.admin.vo.ProductVO;
-import com.kwShop.Shop.mall.service.BucketService;
+import com.kwShop.Shop.main.service.BucketService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -22,9 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller

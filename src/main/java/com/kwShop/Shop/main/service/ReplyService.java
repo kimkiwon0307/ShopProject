@@ -1,6 +1,6 @@
-package com.kwShop.Shop.mall.service;
+package com.kwShop.Shop.main.service;
 
-import com.kwShop.Shop.mall.vo.ReplyVO;
+import com.kwShop.Shop.main.vo.ReplyVO;
 
 import java.util.List;
 

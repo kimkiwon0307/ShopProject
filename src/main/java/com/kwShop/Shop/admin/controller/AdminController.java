@@ -48,17 +48,21 @@ public class AdminController {
     public void adminMain(Criteria cri,Model model) throws Exception {
 
         int total = service.productTotal(cri);
-        log.info("1");
+
         PageDTO pageMaker = new PageDTO(cri, total);
 
         model.addAttribute("products", service.productList(cri));
-        log.info("2");
+
         model.addAttribute("pageMaker", pageMaker);
-        log.info("3");
+
         model.addAttribute("members", memberService.memberList());
-        log.info("4");
+
     }
 
+    @GetMapping("productRegister")
+    public void productRegister(){
+        log.info("상품 등록 페이지 접속");
+    }
 
     // 상품 등록
     @PostMapping("/productRegister")
@@ -108,6 +112,13 @@ public class AdminController {
         log.info("상품 삭제" + p_id);
 
         service.productDelete(p_id);
+    }
+
+    //회원관리
+    @GetMapping("/memberManage")
+    public void memberManage(Model model) throws Exception {
+
+        model.addAttribute("members", memberService.memberList());
     }
 
     @DeleteMapping("/MemberDelete")

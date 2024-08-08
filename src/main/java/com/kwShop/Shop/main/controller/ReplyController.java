@@ -1,12 +1,10 @@
-package com.kwShop.Shop.mall.controller;
+package com.kwShop.Shop.main.controller;
 
-import com.kwShop.Shop.mall.service.ReplyService;
-import com.kwShop.Shop.mall.vo.ReplyVO;
+import com.kwShop.Shop.main.service.ReplyService;
+import com.kwShop.Shop.main.vo.ReplyVO;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.tags.shaded.org.apache.regexp.RE;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

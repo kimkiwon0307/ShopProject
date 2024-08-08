@@ -1,9 +1,6 @@
-package com.kwShop.Shop.mall.mapper;
+package com.kwShop.Shop.main.mapper;
 
-import com.kwShop.Shop.admin.vo.AttachImageVO;
-import com.kwShop.Shop.admin.vo.Criteria;
-import com.kwShop.Shop.admin.vo.ProductVO;
-import com.kwShop.Shop.mall.vo.ReplyVO;
+import com.kwShop.Shop.main.vo.ReplyVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

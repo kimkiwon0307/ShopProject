@@ -1,10 +1,8 @@
-package com.kwShop.Shop.mall.vo;
+package com.kwShop.Shop.main.vo;
 
-import com.kwShop.Shop.admin.vo.ProductVO;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 public class BucketVO {

@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-    #productManage{
+    #memberManage{
          display: inline-block;
          background-color: darkgray;
     }
@@ -28,7 +28,9 @@
 
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">상품 관리</h1>
+        <h1 class="mb-4">회원 관리</h1>
+
+
 
       <div class="container mt-3">
          <ul class="list-group list-group-horizontal">
@@ -39,164 +41,38 @@
        </div>
 
 
-
-        <!-- 상품 목록 -->
-         <div class="card mt-5">
-            <div class="card-header">
-              <button  class="btn btn-success" id="product_list_btn"> 상품 목록 </button>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped" >
-                      <thead>
-                        <tr style="text-align:center">
-                          <th scope="col">상품 번호</th>
-                          <th scope="col">상품 분류</th>
-                          <th scope="col">상품 이름</th>
-                          <th scope="col">가격</th>
-                          <th scope="col">할인율(%)</th>
-                          <th scope="col">제목</th>
-                          <th scope="col">내용</th>
-                          <th scope="col">등록일</th>
-                          <th scope="col">수정일</th>
-                          <th scope="col">재고 수량</th>
-                          <th scope="col">수정</th>
-                          <th scope="col">삭제</th>
-                        </tr>
-                      </thead>
-                     <tbody id="productList">
-                     <c:forEach items="${products}" var="product">
-                        <tr style="text-align:center">
-                          <td><c:out value="${product.p_id}"/></td>
-                           <td><c:out value="${product.p_categoryName}"/></td>
-                          <td><c:out value="${product.p_name}"/></td>
-                          <td><c:out value="${product.p_price}"/></td>
-                          <td><c:out value="${product.p_discount}"/></td>
-                          <td><c:out value="${product.p_title}"/></td>
-                          <td><c:out value="${product.p_content}"/></td>
-                          <td><fmt:formatDate value="${product.p_date}" pattern="yyyy-MM-dd"/></td>
-                          <td><fmt:formatDate value="${product.p_udate}" pattern="yyyy-MM-dd"/></td>
-                          <td><c:out value="${product.p_quantity}"/></td>
-                          <td><button type="button" class="btn btn-info u_btn"
-                               data-p_id='<c:out value="${product.p_id}"/>'
-                               data-p_name='<c:out value="${product.p_name}"/>'
-                               data-p_price='<c:out value="${product.p_price}"/>'
-                               data-p_discount='<c:out value="${product.p_discount}"/>'
-                               data-p_title='<c:out value="${product.p_title}"/>'
-                               data-p_content='<c:out value="${product.p_content}"/>'
-                               data-p_quantity='<c:out value="${product.p_quantity}"/>'>수정</button></td>
-                          <td><button type="button" class="btn btn-warning d_btn" data-p_id='<c:out value="${product.p_id}"/>'>삭제</button></td>
-                        </tr>
-                     </c:forEach>
-                      </tbody>
-                   </table>
-            </div>
-
-
-                <!-- 수정 모달 -->
-                     <!-- 팝업 모달 -->
-                     <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
-                       <div class="modal-dialog modal-dialog-centered">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="productModalLabel">상품 정보 입력</h5>
-                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
-                           <div class="modal-body">
-                             <!-- 상품 정보 입력 폼 -->
-                             <form id="modal_form" action="/admin/productUpdate" method="post" enctype="multipart/form-data">
-                                <div class="form-group" style="margin-bottom:20px;">
-                                  <label for="product_name"><span class="badge bg-primary">상품 번호</span></label>
-                                  <input type="text" class="form-control" name="p_id" required>
-                                </div>
-
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_name" ><span class="badge bg-primary">상품 이름</span></label>
-                                 <input type="text" class="form-control" name="p_name" placeholder="상품 이름을 입력하세요" required>
-                               </div>
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_price"><span class="badge bg-primary">상품 가격</span></label>
-                                 <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" required>
-                               </div>
-                                <div class="form-group" style="margin-bottom:20px;">
-                                  <label for="product_price"><span class="badge bg-primary">상품 할인율</span></label>
-                                  <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율 입력하세요" required>
-                                </div>
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_title"><span class="badge bg-primary">상품 등록 제목</span></label>
-                                 <input type="text" class="form-control" name="p_title" placeholder="상품 제목을 입력하세요" required>
-                               </div>
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_content"><span class="badge bg-primary">상품 등록 내용</span></label>
-                                 <input type="text" class="form-control" name="p_content" placeholder="상품 판매 내용" required>
-                               </div>
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_code"><span class="badge bg-primary">재고 수량</span></label>
-                                 <input type="text" class="form-control" name="p_quantity" placeholder="상품 수량" required>
-                               </div>
-                               <div class="form-group" style="margin-bottom:20px;">
-                                 <label for="product_image"><span class="badge bg-primary">상품 이미지</span></label>
-                                 <!-- <input type="file" class="form-control" id="product_image" name="uploadFile" style="height: 30px;" multiple> -->
-                                  <input type="file" id="product_image_update" name="uploadFile2" style="height: 30px;" >
-                               </div>
-                                        <div id='uploadResult2'>
-                                               	<ul id="uUl">
-                                               	</ul>
-                                               </div>
-                               <button type="submit" class="btn btn-primary" id="update_btn">수정</button>
-                             </form>
-                           </div>
+        <!-- 회원 목록 -->
+      <div class="card mt-5">
+             <div class="card-header">
+                <button  class="btn btn-success"> 회원 목록 </button>
+             </div>
+                 <div class="card-body">
+                             <table class="table table-striped" >
+                                   <thead>
+                                     <tr style="text-align:center">
+                                       <th scope="col">회원 아이디</th>
+                                       <th scope="col">회원 이름</th>
+                                       <th scope="col">이메일</th>
+                                        <th scope="col">관리자 여부</th>
+                                       <th scope="col">회원 가입일</th>
+                                       <th scope="col">삭제</th>
+                                     </tr>
+                                   </thead>
+                                  <tbody id="productList">
+                                  <c:forEach items="${members}" var="member">
+                                     <tr style="text-align:center">
+                                       <td><c:out value="${member.member_id}"/></td>
+                                       <td><c:out value="${member.member_name}"/></td>
+                                       <td><c:out value="${member.member_mail}"/></td>
+                                       <td><c:out value="${member.adminCk}"/></td>
+                                       <td><fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/></td>
+                                       <td><button type="button" class="btn btn-warning d_Mbtn" data-member_id='<c:out value="${member.member_id}"/>'>삭제</button></td>
+                                     </tr>
+                                  </c:forEach>
+                                   </tbody>
+                                </table>
                          </div>
-                       </div>
-                     </div>
-                </div>
-            <br>
-             <!-- 검색 영역 -->
-         <div class="d-flex justify-content-center">
-             <form id="searchForm" action="/admin/main" method="get">
-                 <div class="input-group">
-                     <input type="text" name="keyword" class="form-control" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
-                     <input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
-                     <input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-                     <div class="mt-2 ms-2">
-                         <button class="btn btn-primary" type="submit">검 색</button>
-                         <button class="btn btn-primary" id="resetBtn" type="button">초기화</button>
-                     </div>
-                 </div>
-             </form>
          </div>
-            <br>
-        		<!--  Pagination -->
-            	<nav aria-label="..."  class="custom-nav">
-            		<ul class="pagination pagination-sm justify-content-center">
-            				<c:if test="${pageMaker.prev}">
-            					<li class="page-item">
-            						<a class="page-link" href="${pageMaker.pageStart -1}">이전</a>
-            					</li>
-
-            				</c:if>
-
-            				<c:forEach var="num" begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd }">
-            				  <li class="page-item ${pageMaker.cri.pageNum == num ? "active":""}">
-            				  	<a class="page-link" href="${num}">${num}</a>
-            				  </li>
-            				</c:forEach>
-
-            				<c:if test="${pageMaker.next}">
-            					<li class="page-item">
-            						<a class="page-link" href="${pageMaker.pageEnd + 1}">다음</a>
-            					</li>
-            				</c:if>
-            			</ul>
-                  </nav>    <!-- 페이징 -->
-
-         	        <form id="moveForm" action="/admin/main" method="get">
-         				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-         				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-         				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-         			</form>
-
-
-        </div>
     </div>
       <!-- Footer-->
             <footer class="py-5 bg-dark" style="margin-top : 20px;">
@@ -393,6 +269,7 @@
 
                 // 수정버튼
                $(document).on("click", ".u_btn", function() {
+
                     var p_id = $(this).data("p_id");
                     var p_name = $(this).data("p_name");
                     var p_price = $(this).data("p_price");

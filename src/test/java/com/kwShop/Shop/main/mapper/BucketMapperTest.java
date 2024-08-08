@@ -1,15 +1,12 @@
-package com.kwShop.Shop.mall.mapper;
+package com.kwShop.Shop.main.mapper;
 
-import com.kwShop.Shop.mall.vo.BucketVO;
+import com.kwShop.Shop.main.vo.BucketVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @Slf4j

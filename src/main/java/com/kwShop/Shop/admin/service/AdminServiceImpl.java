@@ -4,9 +4,8 @@ import com.kwShop.Shop.admin.mapper.AdminMapper;
 import com.kwShop.Shop.admin.vo.AttachImageVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
-import com.kwShop.Shop.mall.mapper.ReplyMapper;
+import com.kwShop.Shop.main.mapper.ReplyMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

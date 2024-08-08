@@ -32,7 +32,7 @@ public class MemberVO {
     @NotBlank(message = "주소를 입력해주세요.")
     private String member_Addr3;                //  주소3 : 상세주소
 
-    private int adminCk;                        //  관리자여부 => 0=일반사용자 1=관리자
+    private int adminCk;                        //  관리자여부 =>  0=일반사용자 1=관리자
     private Date regDate;                       //  가입 날짜
     private int money;                          //  돈
     private int point;                          //  포인트

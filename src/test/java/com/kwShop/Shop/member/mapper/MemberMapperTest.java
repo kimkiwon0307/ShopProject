@@ -24,7 +24,7 @@ class MemberMapperTest {
 
         MemberVO memberVO = new MemberVO();        //멤버 객체 생성
 
-        memberVO.setMember_id("membertest0717");         // 멤버 객체 필드 주입
+        memberVO.setMember_id("test아이디");         // 멤버 객체 필드 주입
         memberVO.setMember_pw("1234");
         memberVO.setMember_name("test");
         memberVO.setMember_mail("test@test.com");
@@ -34,10 +34,31 @@ class MemberMapperTest {
         memberVO.setAdminCk(0);
         memberVO.setMoney(1000);
         memberVO.setPoint(100);
-
         mapper.memberJoin(memberVO);            // 매퍼에 회원가입 테스트
+        log.info(memberVO.toString());
     }
+    
+    @Test
+    @DisplayName("아이디 중복체크")
+    public void idCheckTest(){
 
+        MemberVO memberVO = new MemberVO();
+        
+       // memberVO.setMember_id("admin"); // 중복아이디
+        memberVO.setMember_id("adminXID"); // 새로운아이디
+
+        int result = mapper.idCheck(memberVO.getMember_id());
+        
+        if(result == 0) {
+            log.info("생성 가능한 아이디");
+            log.info(String.valueOf(result));
+        }else {
+            log.info("아이디 존재");
+            log.info(String.valueOf(result));
+        }
+        
+    }
+    
     @Test
     @DisplayName("회원 로그인 테스트")
     public void memberLogin() throws  Exception{
@@ -61,7 +82,8 @@ class MemberMapperTest {
 
        List<MemberVO> Members = mapper.memberList();
        Members.forEach(list -> log.info(list.toString()));
-
     }
+
+
 
 }

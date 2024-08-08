@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
-    private Adminintercepter adminintercepter;
+    private AdminIntercepter adminintercepter;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

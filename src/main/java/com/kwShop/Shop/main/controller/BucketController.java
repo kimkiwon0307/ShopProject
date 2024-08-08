@@ -1,11 +1,7 @@
-package com.kwShop.Shop.mall.controller;
+package com.kwShop.Shop.main.controller;
 
-import com.kwShop.Shop.admin.vo.ProductVO;
-import com.kwShop.Shop.mall.service.BucketService;
-import com.kwShop.Shop.mall.vo.BucketVO;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
+import com.kwShop.Shop.main.service.BucketService;
+import com.kwShop.Shop.main.vo.BucketVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +24,7 @@ public class BucketController {
     @GetMapping("/main")
     public void list(@RequestParam("member_id")String member_id, Model model){
 
-
-        log.info(member_id);
-
         List<BucketVO> buckets = service.list(member_id);
-        log.info(buckets+"GDGDGD");
-
         List<BucketVO> bucketss = new ArrayList<>();
 
         for(BucketVO bucket : buckets){

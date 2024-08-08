@@ -1,7 +1,7 @@
-package com.kwShop.Shop.mall.service;
+package com.kwShop.Shop.main.service;
 
 
-import com.kwShop.Shop.mall.vo.BucketVO;
+import com.kwShop.Shop.main.vo.BucketVO;
 
 import java.util.List;
 

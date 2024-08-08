@@ -29,9 +29,6 @@ public class MemberController {
     private JavaMailSender mailSender;
 
 
-
-
-
     @GetMapping({"/profile","/update"})
     public void profile(String member_id, Model model) throws Exception {
 
@@ -41,7 +38,7 @@ public class MemberController {
 
     @GetMapping("/login")
     public void login(){
-
+        log.info("로그인 페이지");
     }
 
     @GetMapping("/join")
@@ -52,7 +49,6 @@ public class MemberController {
     @PostMapping("/join")
     public String join(@Valid MemberVO member, BindingResult bindingResult,Model model) throws  Exception {
         log.info("회원 가입");
-
 
         if(bindingResult.hasErrors()){
 
@@ -113,10 +109,6 @@ public class MemberController {
     @PostMapping("/m_id_check")
     @ResponseBody
     public String m_id_check(@RequestParam("member_id") String member_id) throws Exception {
-
-        log.info("아이디 중복검사");
-        log.info(member_id);
-
         return service.idCheck(member_id);
     }
 
@@ -135,7 +127,7 @@ public class MemberController {
         // 이메일 보내기
         //String setForm = "kkwkkj12@gmail.com";
         String toMail = email;
-        String title = "회원 가입 인증 메일입니다.";
+        String title = "회원가입 인증 메일입니다.";
         String content =  "안녕하세요 기원 shop 입니다." + "<br><br> 인증 번호는 " + checkNum + "입니다." + "<br><br> 감사합니다. ";
 
         MimeMessage message = mailSender.createMimeMessage();

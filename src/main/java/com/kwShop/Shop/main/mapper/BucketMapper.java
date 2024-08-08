@@ -1,7 +1,6 @@
-package com.kwShop.Shop.mall.mapper;
+package com.kwShop.Shop.main.mapper;
 
-import com.kwShop.Shop.mall.vo.BucketVO;
-import com.kwShop.Shop.mall.vo.ReplyVO;
+import com.kwShop.Shop.main.vo.BucketVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

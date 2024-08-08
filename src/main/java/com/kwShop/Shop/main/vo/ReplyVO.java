@@ -1,4 +1,4 @@
-package com.kwShop.Shop.mall.vo;
+package com.kwShop.Shop.main.vo;
 
 import lombok.Data;
 

@@ -68,7 +68,11 @@
                         <tr style="text-align:center">
                           <td><c:out value="${product.p_id}"/></td>
                            <td><c:out value="${product.p_categoryName}"/></td>
-                          <td><c:out value="${product.p_name}"/></td>
+                          <td>
+                             <a class="move"  href='<c:out value="${product.p_id}"/>'>
+                                 <c:out value="${product.p_name}"/>
+                             </a>
+                          </td>
                           <td><c:out value="${product.p_price}"/></td>
                           <td><c:out value="${product.p_discount}"/></td>
                           <td><c:out value="${product.p_title}"/></td>
@@ -106,7 +110,7 @@
                              <form id="modal_form" action="/admin/productUpdate" method="post" enctype="multipart/form-data">
                                 <div class="form-group" style="margin-bottom:20px;">
                                   <label for="product_name"><span class="badge bg-primary">상품 번호</span></label>
-                                  <input type="text" class="form-control" name="p_id" required>
+                                  <input type="text" class="form-control" name="p_id" readonly = "readonly">
                                 </div>
 
                                <div class="form-group" style="margin-bottom:20px;">
@@ -262,7 +266,7 @@
                 	$("#resetBtn").on("click",function(){
 
                 	   searchForm.find("input[name='keyword']").val('');
-                        searchForm.submit();
+                       searchForm.submit();
                 	})
 
                   var obj;
@@ -313,6 +317,14 @@
                         });
 
                 	});
+
+                    $(".move").on("click", function(e) {
+                       e.preventDefault();
+                       moveForm.append("<input type='hidden' name='p_id' value='"+$(this).attr("href") + "'>");
+                       moveForm.attr("action", "/admin/productGet");
+                       moveForm.submit();
+
+                   });
 
 
                     $("#product_image_update").on("change", function(e) {
@@ -453,10 +465,10 @@
                });
 
 
-               // 삭제버튼
+               // 상품 삭제버튼
                $(document).on("click", ".d_btn", function() {
                    var p_id = $(this).data("p_id");
-                   if(confirm("정말 삭1제하시겠습니까?")){
+                   if(confirm(p_id + "번 상품을 삭제하시겠습니까?")){
                    $.ajax({
                        url: '/admin/ProductDelete',
                        type: 'POST',
@@ -470,6 +482,7 @@
                    }
                });
 
+                // 상품 수정 버튼
                 $("#update_btn").on("click",function(e){
 
                          e.preventDefault();
@@ -485,35 +498,9 @@
                           uploadResult2.append(str);
 
                           formObj.submit();
+
+                          alert("수정되었습니다.");
                  })
-
-                           // 멤버 삭제 버튼
-                        $(document).on("click", ".d_Mbtn", function() {
-                               var formData = new FormData();
-                               formData.append('member_id',  $(this).data("member_id"));
-
-                               if(confirm("정말 삭제하시겠습니까?")){
-                               $.ajax({
-                                   url: '/admin/MemberDelete',
-                                   type: 'DELETE',
-                                   data: formData,
-                                   processData: false,  // 데이터를 문자열로 변환하지 않음
-                                   contentType: false,  // 컨텐츠 타입을 설정하지 않음
-                                   success: function(response) {
-                                        console.log("전송 성공!");
-                                        console.log("서버 응답:", response);
-                                        alert("회원이 삭제되었습니다.");
-                                        location.reload();
-                                     },
-                                   error: function(xhr, status, error) {
-                                         console.error("전송 실패:", error);
-                                   }
-                               });
-
-                              }else{
-                               return;
-                               }
-                           });
 
           });
 

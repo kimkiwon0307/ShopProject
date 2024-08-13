@@ -20,7 +20,7 @@ public interface AdminMapper {
 
     public int productTotal(Criteria cri); // 상품 총 갯수
 
-    public ProductVO productGet(int p_id);
+    public ProductVO productGet(int p_id); // 상품 상세 페이지
 
     public void insert(AttachImageVO vo); // 이미지 저장
     public void update(AttachImageVO vo); // 이미지 저장

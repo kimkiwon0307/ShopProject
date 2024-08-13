@@ -29,15 +29,14 @@ public class AdminServiceImpl implements AdminService {
         mapper.productRegister(product);
 
     }
-
+    
+    //상품 목록
     @Override
     public List<ProductVO> productList(Criteria cri) {
 
         int offset = (cri.getPageNum() - 1) * cri.getAmount();
         int amount = cri.getAmount();
         String keyword = cri.getKeyword();
-        log.info(String.valueOf(offset));
-
         return mapper.productList(offset, amount, keyword);
     }
     @Transactional

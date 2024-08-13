@@ -131,61 +131,92 @@
           $(document).ready(function(){
 
              var formObj = $("#formObj");
+             var obj;
 
+             // 유효성 검사 변수
+             var product_name = false;
+             var product_price = false;
+             var product_discount = false;
+             var product_title = false;
+             var product_content = false;
+             var product_quantity = false;
+             var product_image = false;
 
-            $("#product_register_btn").on("click",function(){
-                formObj.show();
-            }); //$("#product_register_btn").on("click",function()
+              // 상품등록 버튼 눌렀을때
+                $("#product_register_btn1").on("click",function(e){
 
-            $("#cancle_btn").on("click",function(){
-                formObj.hide();
-            }); //  $("#cancle_btn").on("click",function()
+                       e.preventDefault();
 
+                       var p_name = $("input[name='p_name']").val();
+                       var p_price = $("input[name='p_price']").val();
+                       var p_discount = $("input[name='p_discount']").val();
+                       var p_title = $("input[name='p_title']").val();
+                       var p_content = $("input[name='p_content']").val();
+                       var p_quantity = $("input[name='p_quantity']").val();
+                       var p_image = $("input[name='uploadFile']").val();
 
-           $("#product_list_btn").on("click",function(){
+                      if (!p_name || p_name === "undefined") {
+                            alert("상품 이름을 등록하세요.");
+                       }else{
+                            product_name = true;
+                       }
 
+                        if (!p_price || p_price === "undefined") {
+                            alert("상품 가격을 등록하세요.");
+                       }else{
+                            product_price = true;
+                       }
 
-           }); //     $("#product_list_btn").on("click",function(){
+                      if (!p_discount || p_discount === "undefined") {
+                            alert("할인율을 등록하세요. (1% ~ 99%)");
+                       }else{
+                            p_discount = true;
+                       }
 
+                      if (!p_title || p_title === "undefined") {
+                            alert("상품 설명 제목을 입력하세요.");
+                       }else{
+                            product_title = true;
+                       }
 
+                      if (!p_content || p_content === "undefined") {
+                            alert("상품 설명 내용을 등록하세요.");
+                       }else{
+                            product_content = true;
+                       }
 
-                let moveForm = $('#moveForm');
+                      if (!p_quantity || p_quantity === "undefined") {
+                            alert("상품 수량을 등록하세요.");
+                       }else{
+                            product_quantity = true;
+                       }
 
-                /* 페이지 이동 버튼 */
-                $(".page-item a").on("click", function(e){
+                       if(!p_image || p_image === "undefined"){
+                            alert("이미지를 등록하세요.")
+                       }else{
+                            product_image = true;
+                       }
 
-                    e.preventDefault();
+                    if(product_name && product_price && product_discount && product_title && product_content && product_quantity && product_image ){
 
-                    moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+                       var formObj = $("form[role='form']");
+                       var str = "";
+                       var uploadResult = $("#uploadResult");
 
-                    moveForm.submit();
+                        str += "<input type='hidden' name='attachList[0].fileName' value='"+ obj.fileName +"'>";
+                        str += "<input type='hidden' name='attachList[0].uuid' value='"+ obj.uuid +"'>";
+                        str += "<input type='hidden' name='attachList[0].uploadPath' value='"+ obj.uploadPath +"'>";
 
+                        uploadResult.append(str);
+
+                        formObj.submit();
+
+                    }
                 });
 
-                	let searchForm = $('#searchForm');
 
 
-                	$("#searchForm button").on("click", function(e){
 
-                		e.preventDefault();
-
-                		/* 검색 키워드 유효성 검사 */
-                		if(!searchForm.find("input[name='keyword']").val()){
-                			alert("키워드를 입력하십시오");
-                			return false;
-                		}
-                		searchForm.find("input[name='pageNum']").val("1");
-
-                		searchForm.submit();
-                	});
-
-                	$("#resetBtn").on("click",function(){
-
-                	   searchForm.find("input[name='keyword']").val('');
-                        searchForm.submit();
-                	})
-
-                  var obj;
 
                 // 이미지 등록
                 // $("input[type='file']").on("change", function(e){
@@ -235,41 +266,6 @@
                 	});
 
 
-                    $("#product_image_update").on("change", function(e) {
-                        e.preventDefault();
-
-                        let formData = new FormData();
-                        let fileInput = $('input[name="uploadFile2"]');
-                        let fileList = fileInput[0].files;
-                        let fileObj = fileList[0];
-
-
-
-                        for (let i = 0; i < fileList.length; i++) {
-                            formData.append("uploadFiles", fileList[i]);
-                        }
-
-                        $.ajax({
-                            url: '/admin/uploadAjaxAction',
-                            processData: false,
-                            contentType: false,
-                            data: formData,
-                            type: 'POST',
-                            processData: false,  // 데이터를 문자열로 변환하지 않음
-                            contentType: false,  // 컨텐츠 타입을 설정하지 않음
-                           // dataType: 'json',
-                            success: function(result) {
-                                obj = result[0];
-                            },
-                            error: function() {
-                                alert("실패");
-                            }
-                        });
-
-                        alert("통과");
-                    });
-
-
 
                 /* var, method related with attachFile */
                 	let regex = new RegExp("(.*?)\.(jpg|png)$");
@@ -292,23 +288,6 @@
 
 
 
-                // 상품등록 버튼 눌렀을때
-                $("#product_register_btn1").on("click",function(e){
-
-                       e.preventDefault();
-
-                       var formObj = $("form[role='form']");
-                       var str = "";
-                       var uploadResult = $("#uploadResult");
-
-                        str += "<input type='hidden' name='attachList[0].fileName' value='"+ obj.fileName +"'>";
-                        str += "<input type='hidden' name='attachList[0].uuid' value='"+ obj.uuid +"'>";
-                        str += "<input type='hidden' name='attachList[0].uploadPath' value='"+ obj.uploadPath +"'>";
-
-                        uploadResult.append(str);
-
-                        formObj.submit();
-                });
 
 
                 // 수정버튼
@@ -407,34 +386,6 @@
 
                           formObj.submit();
                  })
-
-                           // 멤버 삭제 버튼
-                        $(document).on("click", ".d_Mbtn", function() {
-                               var formData = new FormData();
-                               formData.append('member_id',  $(this).data("member_id"));
-
-                               if(confirm("정말 삭제하시겠습니까?")){
-                               $.ajax({
-                                   url: '/admin/MemberDelete',
-                                   type: 'DELETE',
-                                   data: formData,
-                                   processData: false,  // 데이터를 문자열로 변환하지 않음
-                                   contentType: false,  // 컨텐츠 타입을 설정하지 않음
-                                   success: function(response) {
-                                        console.log("전송 성공!");
-                                        console.log("서버 응답:", response);
-                                        alert("회원이 삭제되었습니다.");
-                                        location.reload();
-                                     },
-                                   error: function(xhr, status, error) {
-                                         console.error("전송 실패:", error);
-                                   }
-                               });
-
-                              }else{
-                               return;
-                               }
-                           });
 
           });
 

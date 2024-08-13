@@ -46,11 +46,9 @@
     </select>
 
     <select id="productGet" resultType="com.kwShop.Shop.admin.vo.ProductVO">
-
         select *
         from tbl_product
         where p_id = #{p_id}
-
     </select>
 
     <select id="findByPid" resultType="com.kwShop.Shop.admin.vo.AttachImageVO">

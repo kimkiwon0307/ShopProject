@@ -9,6 +9,7 @@ import com.kwShop.Shop.admin.vo.ProductVO;
 import com.kwShop.Shop.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,8 @@ public class AdminController {
 
         int total = service.productTotal(cri);
 
+        log.info(cri.toString());
+
         PageDTO pageMaker = new PageDTO(cri, total);
 
         model.addAttribute("products", service.productList(cri));
@@ -86,15 +89,21 @@ public class AdminController {
     //상품 리스트
     @GetMapping("/productList")
     public void productList(Model model, Criteria cri) throws Exception{
-
         log.info("상품 리스트");
         model.addAttribute("list", service.productList(cri));
-        log.info(service.productList(cri).toString());
+    }
+
+    // 상품 상세 페이지ㅣ
+    @GetMapping("/productGet")
+    public void productGet(int p_id, Criteria cri, Model model) throws Exception {
+
+        model.addAttribute("cri", cri);
+        model.addAttribute("product", service.productGet(p_id));
     }
 
     // 상품 수정
     @PostMapping("/productUpdate")
-    public String productUpdate(ProductVO product) throws Exception{
+    public String productUpdate(ProductVO product) throws Exception {
 
         log.info("상품 수정");
         log.info(product.toString());

@@ -21,11 +21,11 @@ class AdminMapperTest {
     private AdminMapper mapper;
 
     @Test
+    @DisplayName("상품 리스트")
     public void testList(){
 
-      //List<ProductVO> list = mapper.productList(new Criteria() cri);
-
-      //list.forEach(product -> log.info(product.toString()));
+      List<ProductVO> list = mapper.productList(1,12,"");
+      list.forEach(product -> log.info(product.toString()));
 
     }
 
@@ -40,6 +40,7 @@ class AdminMapperTest {
 
        int a = mapper.productTotal(cri);
 
+       log.info(String.valueOf(a));
     }
 
     @Test
@@ -53,11 +54,8 @@ class AdminMapperTest {
     @Test
     @DisplayName("상품 조회 테스트")
     void testGet(){
-
-       ProductVO findProduct= mapper.productGet(113);
-
+       ProductVO findProduct= mapper.productGet(151);
        log.info(findProduct.toString());
-
     }
 
 

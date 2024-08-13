@@ -54,8 +54,9 @@
                     </button>
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
-                            <a href="/shop/main" class="nav-item nav-link active">홈</a>
-                             <a href="/shop/main" class="nav-item nav-link active">고객센터</a>
+                            <a href="/shop/main" class="nav-item nav-link active">SHOP</a>
+                            <a href="/qna/main" class="nav-item nav-link active">Q & A</a>
+                            <a href="/qna/main" class="nav-item nav-link active">CHAT</a>
                         </div>
 
 

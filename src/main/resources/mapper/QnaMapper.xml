@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kwShop.Shop.qna.mapper.QnaMapper">
+
+    <select id="getList" resultType="com.kwShop.Shop.qna.vo.QnaVO">
+        select * from tbl_qna
+    </select>
+
+    <insert id="insert" parameterType="com.kwShop.Shop.qna.vo.QnaVO">
+
+        insert into tbl_qna(q_no, q_title, q_content, q_writer) values (#{q_no}, #{q_title}, #{q_content}, #{q_writer})
+
+    </insert>
+
+    <select id="get" resultType="com.kwShop.Shop.qna.vo.QnaVO">
+        select * from tbl_qna where q_no = #{q_no}
+    </select>
+
+    <update id="update" >
+
+        update tbl_qna
+        set
+        q_title = #{q_title},
+        q_content = #{q_content},
+        q_writer = #{q_writer}
+        where q_no = #{q_no}
+
+    </update>
+
+    <delete id="delete">
+        delete from tbl_qna where q_no = #{q_no}
+    </delete>
+
+</mapper>

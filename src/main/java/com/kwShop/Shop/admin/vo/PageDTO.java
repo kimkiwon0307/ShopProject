@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class PageDTO {
 
-    private int pageStart;
-    private int pageEnd;
-    private boolean next, prev;
-    private int total;
+    private int pageStart; //페이지 시작 번호
+    private int pageEnd;  // 페이지 끝 번호
+    private boolean next, prev; // 버튼 존재 유무
+    private int total; // 전체 갯수
     private Criteria cri;
 
     public PageDTO(Criteria cri, int total) {

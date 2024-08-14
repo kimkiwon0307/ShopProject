@@ -12,5 +12,6 @@ public interface QnaMapper {
     public QnaVO get(int q_no);
     public int update(QnaVO qnaVO);
     public int delete(int q_no);
+    public void count(int q_no);
 
 }

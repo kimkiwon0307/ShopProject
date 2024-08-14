@@ -36,16 +36,9 @@
     </head>
 
 
-<body id="page-top">
+<body>
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
 
   <!-- Navbar start -->
         <div class="container-fluid fixed-top">
@@ -65,7 +58,6 @@
 
 
                         <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
                             <c:if test="${member != null }" >
                             <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto">
 
@@ -103,8 +95,8 @@
         </div>
         <!-- Navbar End -->
 
-
     <div class="container mt-5">
+
         <h1 class="mb-4">상품 관리</h1>
 
                 <!-- Begin Page Content -->
@@ -116,7 +108,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">질의응답(Q&A)</h6>
-                            <button class="btn btn-success" style="float:right;">작성하기</button>
+                           <c:if test="${member != null }" >
+                            <button class="btn btn-success" style="float:right;" id="registerBtn">글 작성</button>
+                            </c:if>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -136,11 +130,22 @@
                                       <c:forEach items="${list}" var="list">
                                         <tr>
                                             <td><c:out value="${list.q_no}"/></td>
-                                            <td><c:out value="${list.q_title}"/></td>
-                                            <td>답변대기</td>
+                                            <td>
+                                                <a href="/qna/get?q_no=${list.q_no}">
+                                                <c:out value="${list.q_title}"/></a></td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${list.q_status == false}">
+                                                        답변대기
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        답변완료
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                             <td><c:out value="${list.q_writer}"/></td>
                                             <td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.q_date}"/></td>
-                                            <td>0</td>
+                                            <td><c:out value="${list.q_count}"/></td>
                                         </tr>
                                        </c:forEach>
                                     </tbody>
@@ -155,8 +160,8 @@
             </div>
             <!-- End of Main Content -->
         </div>
-          <!-- Footer Start -->
 
+       <!-- Footer Start -->
         <div class="container">
           <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -171,11 +176,6 @@
         </div>
           <!-- Footer End -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -202,22 +202,20 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/qna/vendor/jquery/jquery.min.js"></script>
-    <script src="/qna/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Bootstrap JS 및 필요한 기타 스크립트 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/qna/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script>
+        $(document).ready(function(){
 
-    <!-- Custom scripts for all pages-->
-    <script src="/qna/js/sb-admin-2.min.js"></script>
+            $("#registerBtn").on("click",function(){
 
-    <!-- Page level plugins -->
-    <script src="/qna/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/qna/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+                    location.href="/qna/register";
+            });
 
-    <!-- Page level custom scripts -->
-    <script src="/qna/js/demo/datatables-demo.js"></script>
+        })
+    </script>
 
 </body>
 

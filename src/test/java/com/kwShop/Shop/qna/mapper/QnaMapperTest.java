@@ -63,8 +63,20 @@ class QnaMapperTest {
     public void deleteTest(){
 
         log.info(mapper.getList().toString());
-        int result = mapper.delete(2);
+        int result = mapper.delete(5);
         log.info(String.valueOf(result));
         log.info(mapper.getList().toString());
+    }
+
+    @Test
+    @DisplayName("조회수 테스트")
+    public void countTest(){
+
+        log.info(String.valueOf(mapper.get(10).getQ_count()));
+
+        mapper.count(10);
+
+        log.info(String.valueOf(mapper.get(10).getQ_count()));
+
     }
 }

@@ -13,5 +13,7 @@ public class QnaVO {
     private String q_writer;
     private Date q_date;
     private Date q_udate;
+    private boolean q_status;
+    private int q_count;
 
 }

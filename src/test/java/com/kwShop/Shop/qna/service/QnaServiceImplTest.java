@@ -67,4 +67,5 @@ class QnaServiceImplTest {
         log.info(service.getList().toString());
     }
 
+
 }

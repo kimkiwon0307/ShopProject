@@ -28,6 +28,7 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public QnaVO get(int q_no) throws Exception {
+        mapper.count(q_no);
         return mapper.get(q_no);
     }
 
@@ -57,4 +58,6 @@ public class QnaServiceImpl implements QnaService{
         }
         return result;
     }
+
+
 }

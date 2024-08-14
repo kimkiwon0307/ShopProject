@@ -33,4 +33,12 @@
         delete from tbl_qna where q_no = #{q_no}
     </delete>
 
+    <update id="count">
+        update tbl_qna
+        set
+        q_count = q_count + 1
+        where q_no = #{q_no}
+
+    </update>
+
 </mapper>

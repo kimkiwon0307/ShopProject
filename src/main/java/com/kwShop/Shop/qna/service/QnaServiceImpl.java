@@ -2,6 +2,7 @@ package com.kwShop.Shop.qna.service;
 
 
 import com.kwShop.Shop.qna.mapper.QnaMapper;
+import com.kwShop.Shop.qna.vo.Criteria;
 import com.kwShop.Shop.qna.vo.QnaVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +58,16 @@ public class QnaServiceImpl implements QnaService{
             log.info("Delete Fail");
         }
         return result;
+    }
+
+    @Override
+    public List<QnaVO> getList(Criteria cri) {
+        return mapper.getListWithPaging(cri);
+    }
+
+    @Override
+    public int getTotal(Criteria cri) {
+        return 100;
     }
 
 

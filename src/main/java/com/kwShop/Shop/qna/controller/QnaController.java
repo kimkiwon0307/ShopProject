@@ -1,6 +1,8 @@
 package com.kwShop.Shop.qna.controller;
 
 import com.kwShop.Shop.qna.service.QnaService;
+import com.kwShop.Shop.qna.vo.Criteria;
+import com.kwShop.Shop.qna.vo.PageDTO;
 import com.kwShop.Shop.qna.vo.QnaVO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -21,10 +23,11 @@ public class QnaController {
 
 
     @GetMapping("/main")
-    public void getList(Model model) throws Exception {
+    public void getList(Criteria cri, Model model) throws Exception {
         log.info("목록");
 
-        model.addAttribute("list", service.getList());
+        model.addAttribute("list", service.getList(cri));
+        model.addAttribute("pageMaker", new PageDTO(cri, 123));
     }
 
     @GetMapping("/register")

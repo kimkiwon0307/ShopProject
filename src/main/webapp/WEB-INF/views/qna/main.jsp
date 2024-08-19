@@ -32,6 +32,9 @@
         <!-- Template Stylesheet -->
         <link href="/shop/main/css/style.css" rel="stylesheet">
 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
          <link href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css" rel="stylesheet">
     </head>
 
@@ -150,6 +153,41 @@
                                        </c:forEach>
                                     </tbody>
                                 </table>
+
+                 <!-- pagination -->
+	<!--  Pagination -->
+            	<nav aria-label="..."  class="custom-nav">
+            		<ul class="pagination pagination-sm justify-content-center">
+            				<c:if test="${pageMaker.prev}">
+            					<li class="page-item">
+            						<a class="page-link" href="${pageMaker.startPage -1}">이전</a>
+            					</li>
+
+            				</c:if>
+
+            				<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage }">
+            				  <li class="page-item ${pageMaker.cri.pageNum == num ? "active":""}">
+            				  	<a class="page-link" href="${num}">${num}</a>
+            				  </li>
+            				</c:forEach>
+
+            				<c:if test="${pageMaker.next}">
+            					<li class="page-item">
+            						<a class="page-link" href="${pageMaker.endPage + 1}">다음</a>
+            					</li>
+            				</c:if>
+            			</ul>
+                  </nav>    <!-- 페이징 -->
+
+
+                 <form id ='actionForm' action="/board/list" method='get'>
+                     <input type='hidden' name='pageNum' value = '${pageMaker.cri.pageNum}'>
+                     <input type='hidden' name='amount'  value = '${pageMaker.cri.amount} '>
+                      <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+                                 <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+                 </form>
+                 <!-- pagination end -->
+
                             </div>
                         </div>
                     </div>
@@ -157,9 +195,12 @@
                 </div>
                 <!-- /.container-fluid -->
 
+
             </div>
             <!-- End of Main Content -->
         </div>
+
+
 
        <!-- Footer Start -->
         <div class="container">

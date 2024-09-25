@@ -16,4 +16,5 @@ public interface QnaMapper {
     public void count(int q_no);
     public List<QnaVO> getListWithPaging(Criteria cri);
 
+    public int getTotalCount(Criteria cri);
 }

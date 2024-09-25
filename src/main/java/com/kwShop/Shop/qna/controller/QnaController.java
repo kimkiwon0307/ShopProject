@@ -9,9 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -27,7 +26,7 @@ public class QnaController {
         log.info("목록");
 
         model.addAttribute("list", service.getList(cri));
-        model.addAttribute("pageMaker", new PageDTO(cri, 123));
+        model.addAttribute("pageMaker", new PageDTO(cri, service.getTotal(cri)));
     }
 
     @GetMapping("/register")
@@ -44,15 +43,19 @@ public class QnaController {
     }
 
     @GetMapping({"/get","/update"})
-    public void get(int q_no, Model model) throws Exception {
+    public void get(@RequestParam("q_no") int q_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 
+        log.info("get" + String.valueOf(q_no));
         model.addAttribute("qna", service.get(q_no));
 
     }
 
     @PostMapping("/update")
-    public String update(QnaVO qnaVO) throws Exception {
+    public String update(QnaVO qnaVO, @ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) throws Exception {
         service.update(qnaVO);
+
+        rttr.addAttribute("pageNum", cri.getPageNum());
+        rttr.addAttribute("amount", cri.getAmount());
 
         return "redirect:/qna/main";
     }

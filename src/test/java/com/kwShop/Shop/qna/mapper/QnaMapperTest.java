@@ -1,11 +1,14 @@
 package com.kwShop.Shop.qna.mapper;
 
+import com.kwShop.Shop.qna.vo.Criteria;
 import com.kwShop.Shop.qna.vo.QnaVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,4 +82,19 @@ class QnaMapperTest {
         log.info(String.valueOf(mapper.get(10).getQ_count()));
 
     }
+
+    @Test
+    @DisplayName(" 검색 테스트")
+    public void testSearch() {
+
+        Criteria cri = new Criteria();
+        cri.setKeyword("gd");
+        cri.setType("q_title");
+
+        List<QnaVO> list = mapper.getListWithPaging(cri);
+
+        list.forEach(qna -> log.info(String.valueOf(qna)));
+    }
+
+
 }

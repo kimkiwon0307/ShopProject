@@ -62,12 +62,15 @@ public class QnaServiceImpl implements QnaService{
 
     @Override
     public List<QnaVO> getList(Criteria cri) {
+
+        int offset = (cri.getPageNum() - 1) * cri.getAmount();
+        cri.setOffset(offset);
         return mapper.getListWithPaging(cri);
     }
 
     @Override
     public int getTotal(Criteria cri) {
-        return 100;
+        return mapper.getTotalCount(cri);
     }
 
 

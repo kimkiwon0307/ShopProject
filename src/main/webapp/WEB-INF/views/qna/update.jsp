@@ -127,6 +127,9 @@
 
                <form role="form" method="post" action="/qna/update" id="formObj" >
 
+                     <input type='hidden' id='pageNum' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+                     <input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount}"/>'>
+
                       <div class="form-group" style="margin-bottom:20px;">
                            <label for="product_name"><span class="badge bg-primary">번호</span></label>
                            <input type="text" class="form-control" name="q_no" value="${qna.q_no}" readonly = "readonly"/>
@@ -165,7 +168,7 @@
                 <div>
                         <button type="submit" class="btn btn-primary" id="update_btn">수정</button>
                         <button type="button" class="btn btn-info" id="delete_btn">삭제</button>
-                        <button type="button" class="btn btn-danger" id="cancel_btn">취소</button>
+                        <button type="button" class="btn btn-danger" id="list_btn">목록</button>
                 </div>
                 </form>
             </div>
@@ -262,7 +265,7 @@
                    }
             });
 
-            $("#cancel_btn").on("click",function(){
+            $("#list_btn").on("click",function(){
                     window.location = "/qna/main";
             });
 

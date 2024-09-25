@@ -22,10 +22,5 @@ public class Criteria {
         this.amount = amount;
     }
 
-    // 검색 타입 배열 변환
-    public String[] getTypeArr() {
-        return type == null? new String[]{} : type.split("");
-    }
-
 
 }

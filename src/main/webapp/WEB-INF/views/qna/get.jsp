@@ -104,9 +104,6 @@
 
     <div class="container mt-5">
 
-
-
-
         <!-- 글작성 폼 -->
         <div class="card mt-5">
             <div class="card-header">
@@ -163,13 +160,22 @@
    -->
                 <div>
                      <c:if test="${member.member_id == qna.q_writer}">
-                         <button type="button" class="btn btn-primary" id="update_btn">수정</button>
+
                      </c:if>
-                        <button type="button" class="btn btn-danger" id="cancel_btn">목록</button>
+                         <button type="button" class="btn btn-primary" id="update_btn">수정</button>
+                         <button type="button" class="btn btn-danger" id="list_btn">목록</button>
                 </div>
 
             </div>
         </div>
+
+        <form id='operForm' action="/qna/update" method="get">
+            <input type='hidden' id='q_no' name='q_no' value='<c:out value="${qna.q_no}"/>'>
+            <input type='hidden' id='pageNum' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+            <input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount}"/>'>
+
+        </form>
+
     </div>
 
             <!-- Footer Start -->
@@ -244,14 +250,21 @@
 
              var q_no = "${qna.q_no}";
 
-            $("#update_btn").on("click",function(){
+            $("#update_btn").on("click",function(e){
 
-                    window.location = "/qna/update?q_no=" + encodeURIComponent(q_no);
+                    e.preventDefault();
+                    operForm.submit();
 
             });
 
-            $("#cancel_btn").on("click",function(){
-                    window.location = "/qna/main";
+            var operForm = $("#operForm");
+
+            $("#list_btn").on("click",function(e){
+
+                    e.preventDefault();
+                    operForm.attr("action","/qna/main");
+
+                    operForm.submit();
             });
 
 

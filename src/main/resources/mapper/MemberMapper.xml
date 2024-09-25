@@ -4,6 +4,7 @@
 
 <mapper namespace="com.kwShop.Shop.member.mapper.MemberMapper">
 
+    <!-- 회원가입 -->
     <insert id="memberJoin" parameterType="com.kwShop.Shop.member.vo.MemberVO">
         insert into tbl_member values (#{member_id}, #{member_pw}, #{member_name}, #{member_mail}, #{member_Addr1},#{member_Addr2},#{member_Addr3},0, sysdate(), 10000, 5000)
     </insert>

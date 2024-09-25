@@ -11,7 +11,7 @@ public class Criteria {
     // 검색을 위해 추가
     private String type;
     private String keyword;
-    private int offset;  // 가져올 갯수 시작 번호
+    private int offset;
 
     public Criteria(){
         this(1,10);

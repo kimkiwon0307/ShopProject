@@ -31,9 +31,27 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <!-- Template Stylesheet -->
         <link href="/shop/main/css/style.css" rel="stylesheet">
+        <style>
+              /* 페이지네이션을 수평으로 표시 */
+               .pagination {
+                display: flex;         /* Flexbox를 사용하여 수평으로 나열 */
+                   list-style: none;      /* 리스트 스타일 제거 */
+                 padding-left: 0;      /* 기본 패딩 제거 */
+                  margin: 0;            /* 기본 마진 제거 */
+             }
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+                  .pagination .page-item {
+               margin: 0;            /* 페이지 항목 간의 마진 제거 */
+              }
+
+                      .pagination .page-link {
+                  display: block;       /* 링크를 블록 요소로 설정하여 클릭 영역을 확장 */
+                  padding: 0.5rem 0.75rem; /* 기본 패딩 */
+               margin: 0;            /* 링크 간의 마진 제거 */
+                 }
+
+        </style>
+
 
          <link href="https://cdn.datatables.net/2.1.3/css/dataTables.bootstrap5.css" rel="stylesheet">
     </head>
@@ -134,7 +152,7 @@
                                         <tr>
                                             <td><c:out value="${list.q_no}"/></td>
                                             <td>
-                                                <a href="/qna/get?q_no=${list.q_no}">
+                                                <a class='move' href='<c:out value="${list.q_no}"/>'>
                                                 <c:out value="${list.q_title}"/></a></td>
                                             <td>
                                                 <c:choose>
@@ -154,9 +172,28 @@
                                     </tbody>
                                 </table>
 
-                 <!-- pagination -->
+                     <div class="d-flex justify-content-center align-items-center">
+                           <div class="col-auto">
+
+                              <form id="searchForm" action="/qna/main" method="get" class="d-flex">
+
+                                    <select class="form-select" aria-label="Default select example" name="type" style="width: 100px;">
+                                      <option value=""\>--</option>
+                                      <option value="q_title">제목</option>
+                                      <option value="q_content">내용</option>
+                                      <option value="q_writer">작성자</option>
+                                    </select>
+                                    <input type='text' name='keyword'/>
+                                    <input type='hidden' name='pageNum' value="${pageMaker.cri.pageNum}">
+                                    <input type='hidden' name='amount' value="${pageMaker.cri.amount}">
+                                    <button class='btn btn-secondary'>검색</button>
+
+                            </form>
+                            </div>
+                      </div>
+                    <br>
 	<!--  Pagination -->
-            	<nav aria-label="..."  class="custom-nav">
+            	<nav aria-label="Page navigation example">
             		<ul class="pagination pagination-sm justify-content-center">
             				<c:if test="${pageMaker.prev}">
             					<li class="page-item">
@@ -180,11 +217,11 @@
                   </nav>    <!-- 페이징 -->
 
 
-                 <form id ='actionForm' action="/board/list" method='get'>
+                 <form id ='actionForm' action="/qna/main" method='get'>
                      <input type='hidden' name='pageNum' value = '${pageMaker.cri.pageNum}'>
                      <input type='hidden' name='amount'  value = '${pageMaker.cri.amount} '>
-                      <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
-                                 <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+                     <input type='hidden' name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
+                     <input type='hidden' name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
                  </form>
                  <!-- pagination end -->
 
@@ -246,7 +283,6 @@
    <!-- Bootstrap JS 및 필요한 기타 스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
     <script>
         $(document).ready(function(){
 
@@ -255,7 +291,32 @@
                     location.href="/qna/register";
             });
 
+
+            //페이징
+            var actionForm = $("#actionForm");
+
+            $(".page-item a").on("click", function(e){
+
+                e.preventDefault();
+
+                console.log('click');
+
+                actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+                actionForm.submit();
+            });
+
+            $(".move").on("click", function(e){
+
+                e.preventDefault();
+                actionForm.append("<input type='hidden' name='q_no' value='"+$(this).attr("href")+"'>");
+                actionForm.attr("action","/qna/get");
+                actionForm.submit();
+            });
+
+
         })
+
+
     </script>
 
 </body>

@@ -30,12 +30,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <!-- Template Stylesheet -->
         <link href="/shop/main/css/style.css" rel="stylesheet">
-
-
     </head>
 
     <body>
-
         <!-- Spinner Start -->
         <div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
@@ -45,19 +42,19 @@
 
         <!-- Navbar start -->
         <div class="container-fluid fixed-top">
-
             <div class="container px-0">
                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
                     <a href="/shop/main" class="navbar-brand"><h1 class="text-primary display-6">kiwon's mall</h1></a>
                     <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="fa fa-bars text-primary"></span>
                     </button>
+
                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                         <div class="navbar-nav mx-auto">
                             <a href="/shop/main" class="nav-item nav-link active">SHOP</a>
                             <a href="/qna/main" class="nav-item nav-link active">Q & A</a>
                             <a href="/qna/main" class="nav-item nav-link active">CHAT</a>
-                        </div>
+                     </div>
 
 
                         <div class="d-flex m-3 me-0">
@@ -117,8 +114,6 @@
                                                     <span id="search-icon-1" class="input-group-text p-3"><button type="button" class="btn btn info" id="searchBtn">검색</button></span>
                                                 </div>
                                             </form>
-
-
                     </div>
                 </div>
             </div>
@@ -126,7 +121,7 @@
         <!-- Modal Search End -->
 
 
-        <!-- Hero Start -->
+        <!-- slide start -->
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container">
                 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
@@ -157,7 +152,7 @@
                 </div>
             </div>
         </div>
-        <!-- Hero End -->
+        <!-- - slide End -->
 
 
         <!-- Fruits Shop Start-->

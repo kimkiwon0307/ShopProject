@@ -1,22 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../common/loginHeader.jsp"%>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="/member/login.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <div class="container">
         <div class="wrapper d-flex align-items-center justify-content-center h-100">
             <div class="card login-form">
                 <div class="card-body">
@@ -28,6 +13,7 @@
                             <label for="exampleInputEmail1" class="form-label">아이디</label>
                             <input type="text" class="form-control" name="member_id" id="checkId" aria-describedby="emailHelp" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">비밀번호</label>
                             <input type="password" class="form-control" name="member_pwd" id="checkPwd"  required>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@include file="../common/loginHeader.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +12,12 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="/member/join.css" rel="stylesheet">
+     <!-- Template Stylesheet -->
 
-  <title>회원가입</title>
+   <link href="/member/join.css" rel="stylesheet">
+    <link href="/shop/main/css/style.css" rel="stylesheet">
+
+ <title>회원가입</title>
 </head>
 
 <body>

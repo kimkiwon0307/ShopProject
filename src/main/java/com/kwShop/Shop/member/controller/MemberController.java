@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 @Controller
@@ -27,6 +28,7 @@ public class MemberController {
 
     private final MemberService service;
     private JavaMailSender mailSender;
+    private HttpSession session;
 
 
     @GetMapping({"/profile","/update"})
@@ -119,28 +121,34 @@ public class MemberController {
         log.info("email :" + email);
 
         // 인증번호 생성
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int checkNum = random.nextInt(888888) + 111111; // 111111 ~ 999999 까지 난수 생성
 
         log.info(String.valueOf(checkNum));
 
         // 이메일 보내기
-        //String setForm = "kkwkkj12@gmail.com";
-        String toMail = email;
-        String title = "회원가입 인증 메일입니다.";
-        String content =  "안녕하세요 기원 shop 입니다." + "<br><br> 인증 번호는 " + checkNum + "입니다." + "<br><br> 감사합니다. ";
+        String setForm = "kkwkkj@gmail.com";  // 보내는 사람 이메일
+        String toMail = email;                  // 받는 사람 이메일
+        String title = "회원가입 인증 메일입니다.";  // 메일 제목
+        String content =  "안녕하세요 기원 shop 입니다." + "<br><br> 인증 번호는 " + checkNum + "입니다." + "<br><br> 감사합니다. "; // 메일 내용
 
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-        //helper.setFrom(setForm);
-        helper.setTo(toMail);
-        helper.setSubject(title);
-        helper.setText(content, true);
-        mailSender.send(message);
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setForm);   // 보내는 사람 설정
+            helper.setTo(toMail);      // 받는 사람 설정
+            helper.setSubject(title);  // 제목 설정
+            helper.setText(content, true);   // 본문 설정 (HTML 형식)
+            mailSender.send(message);
 
-        String num = Integer.toString(checkNum);
+            //인증번호를 세션에 저장하고 유효 시간을 설정한다
+            session.setAttribute(email, checkNum);
+            session.setMaxInactiveInterval(3 * 60); // 5분 설정
+            return "인증번호가 이메일로 전송되었습니다.";
+        }catch(Exception e){
+            return "메일 전송에 실패했습니다. 다시 시도해주세요.";
+        }
 
-        return num;
     }
 
 

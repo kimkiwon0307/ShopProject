@@ -66,7 +66,7 @@
      <div class="input-group" style="margin-bottom:20px;">
            <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
            <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' >
-           <button class="btn btn-outline-secondary" type="button" id="email_chcK_btn"  >인증번호 전송</button>
+           <button class="btn btn-outline-secondary" type="button" id="email_chk_btn"  >인증번호 전송</button>
       </div>
 
      <div class="input-group" style="margin-bottom:20px;">
@@ -242,7 +242,7 @@
      var num;
 
     // 이메일 인증번호
-    $("#email_chcK_btn").on("click",function(){
+    $("#email_chk_btn").on("click",function(){
 
         var email = $("#mail_chk").val();
 
@@ -255,9 +255,10 @@
             type:"GET",
             url:"/member/mailCheck?email=" + email,
             success:function(data){
-                alert("메일이 전송되었습니다. 인증번호를 입력해주세요.");
-                console.log("data:" + data);
-                num = data;
+                alert(data);
+            },
+            error: function(data){
+                alert(data);
             }
         });
 

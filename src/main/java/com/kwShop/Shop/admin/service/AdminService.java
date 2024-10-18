@@ -2,6 +2,7 @@ package com.kwShop.Shop.admin.service;
 
 
 import com.kwShop.Shop.admin.vo.AttachImageVO;
+import com.kwShop.Shop.admin.vo.CategoryVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
 
@@ -25,6 +26,10 @@ public interface AdminService {
     public List<AttachImageVO> AllImages();
 
     public void ImageRegister(ProductVO product, int p_id); // 이미지 저장
+
+    public List<CategoryVO> categoryList(); // 카테고리 리스트
+
+    public List<CategoryVO> subCategory(int cateCode) throws Exception; // 서브 카테고리
 
 
 

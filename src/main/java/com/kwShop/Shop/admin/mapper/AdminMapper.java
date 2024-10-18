@@ -35,4 +35,6 @@ public interface AdminMapper {
 
     public List<CategoryVO> categoryList(); // 카테고리 리스트
 
+    public List<CategoryVO> subCategory(@Param("cateCode") int cateCode); // 서브카테고리 리스트
+
 }

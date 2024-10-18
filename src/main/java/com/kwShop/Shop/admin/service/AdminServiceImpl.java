@@ -2,6 +2,7 @@ package com.kwShop.Shop.admin.service;
 
 import com.kwShop.Shop.admin.mapper.AdminMapper;
 import com.kwShop.Shop.admin.vo.AttachImageVO;
+import com.kwShop.Shop.admin.vo.CategoryVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import com.kwShop.Shop.main.mapper.ReplyMapper;
@@ -100,5 +101,15 @@ public class AdminServiceImpl implements AdminService {
 
         mapper.insert(product.getAttachList().get(0));
 
+    }
+
+    @Override
+    public List<CategoryVO> categoryList() {
+        return mapper.categoryList();
+    }
+
+    @Override
+    public List<CategoryVO> subCategory(int cateCode) throws Exception {
+        return mapper.subCategory(cateCode);
     }
 }

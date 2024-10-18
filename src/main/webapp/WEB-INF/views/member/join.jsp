@@ -76,7 +76,7 @@
               <span  class="input-group" id="s_mail_check_fail">인증번호가 다릅니다. </span>
      </div>
 
-        <!-- 주소 -->
+    <!-- 주소 -->
     <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
        <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1'  >
@@ -92,6 +92,8 @@
        <span class="input-group-text"><i class="bi bi-building"></i></span>
          <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3'  >
       </div>
+     <!-- 주소 END -->
+
 
       <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">회원가입</button>
       <button type="button" class="btn btn-danger" id="loginBtn">로그인</button>

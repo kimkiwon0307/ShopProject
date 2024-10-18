@@ -1,6 +1,7 @@
 package com.kwShop.Shop.admin.mapper;
 
 import com.kwShop.Shop.admin.vo.AttachImageVO;
+import com.kwShop.Shop.admin.vo.CategoryVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,24 @@ class AdminMapperTest {
 
       List<ProductVO> list = mapper.productList(1,12,"");
       list.forEach(product -> log.info(product.toString()));
+
+    }
+
+    @Test
+    @DisplayName("카테고리 리스트 테스트")
+    public void cateList(){
+
+        List<CategoryVO> list = mapper.categoryList();
+        list.forEach(category -> log.info(category.toString()));
+
+    }
+
+    @Test
+    @DisplayName("서브카테고리 리스트 테스트")
+    public void subCateList(){
+
+        List<CategoryVO> list = mapper.subCategory(1000);
+        list.forEach(category -> log.info(category.toString()));
 
     }
 

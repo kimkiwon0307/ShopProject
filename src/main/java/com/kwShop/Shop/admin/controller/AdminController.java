@@ -2,10 +2,7 @@ package com.kwShop.Shop.admin.controller;
 
 import com.kwShop.Shop.admin.mapper.AdminMapper;
 import com.kwShop.Shop.admin.service.AdminService;
-import com.kwShop.Shop.admin.vo.AttachImageVO;
-import com.kwShop.Shop.admin.vo.Criteria;
-import com.kwShop.Shop.admin.vo.PageDTO;
-import com.kwShop.Shop.admin.vo.ProductVO;
+import com.kwShop.Shop.admin.vo.*;
 import com.kwShop.Shop.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -63,14 +60,17 @@ public class AdminController {
     }
 
     @GetMapping("productRegister")
-    public void productRegister(){
+    public void productRegister(Model model){
         log.info("상품 등록 페이지 접속");
+        model.addAttribute("categoryList", service.categoryList());
     }
 
     // 상품 등록
     @PostMapping("/productRegister")
     public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{
 
+        System.out.println("반갑고");
+        
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
             return "admin/main";
@@ -79,6 +79,7 @@ public class AdminController {
         if(product.getAttachList() == null){
 
         }else {
+            System.out.println("ㅎㅇㅎㅇ");
             service.productRegister(product);
             service.ImageRegister(product, product.getP_id());
         }
@@ -198,6 +199,17 @@ public class AdminController {
             }
             list.add(vo);
         }
+        return list;
+    }
+
+    @GetMapping("/getSubCategories")
+    @ResponseBody
+    public List<CategoryVO> getSubCategories(@RequestParam("cateCode") int cateCode) throws Exception{
+
+        log.info("카테고리코드" + cateCode);
+
+        List<CategoryVO>list = service.subCategory(cateCode);
+
         return list;
     }
 

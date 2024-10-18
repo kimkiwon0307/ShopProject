@@ -36,12 +36,13 @@ public class ProductVO {
     private Date p_date;         //   상품 등록날짜
     private Date p_udate;         //  상품 수정 날짜
     private String p_categoryCode; // 상품 카테고리
+    private String p_categoryName; // 상품 분류
 
     private String attachUuid;
     private String attachUploadPath;
     private String attachFilename;
 
-    private String p_categoryName; // 상품 분류
+
 
     private List<AttachImageVO> attachList; // 상품 이미지 리스트
 

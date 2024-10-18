@@ -1,6 +1,7 @@
 package com.kwShop.Shop.admin.service;
 
 import com.kwShop.Shop.admin.mapper.AdminMapper;
+import com.kwShop.Shop.admin.vo.CategoryVO;
 import com.kwShop.Shop.admin.vo.Criteria;
 import com.kwShop.Shop.admin.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,16 @@ class AdminServiceImplTest {
         productVO.setP_discount(10.0);
 
         service.productRegister(productVO);
+
+    }
+
+    @Test
+    @DisplayName("카테고리 리스트 테스트")
+    public void testCategoryList(){
+
+        List<CategoryVO> list = service.categoryList();
+
+        list.forEach(category -> log.info(category.toString()));
 
     }
 

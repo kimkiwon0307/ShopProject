@@ -22,7 +22,7 @@
         limit #{offset}, #{amount}
 
     </select>-->
-    <select id="productList" resultType="com.kwShop.Shop.admin.vo.ProductVO">
+<!--    <select id="productList" resultType="com.kwShop.Shop.admin.vo.ProductVO">
         SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity, p.p_categoryCode, p.p_discount,
         a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename,
         c.name AS p_categoryName
@@ -34,7 +34,21 @@
         </if>
         ORDER BY p.p_id DESC
         LIMIT #{offset}, #{amount}
+    </select>-->
+
+    <select id="productList" resultType="com.kwShop.Shop.admin.vo.ProductVO">
+        SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity, p.p_categoryCode, p.p_discount,
+        a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename
+
+        FROM tbl_product p
+        LEFT JOIN tbl_attach a ON p.p_id = a.p_id
+        <if test="keyword != null">
+            WHERE p.p_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY p.p_id DESC
+        LIMIT #{offset}, #{amount}
     </select>
+
 
 
 
@@ -98,7 +112,15 @@
 
         select *
         from tbl_category
-        order by id
+        order by cateCode
+
+    </select>
+
+    <select id="subCategory" resultType="com.kwShop.Shop.admin.vo.CategoryVO">
+
+        select *
+        from tbl_category
+        where cateParent = #{cateCode}
 
     </select>
 

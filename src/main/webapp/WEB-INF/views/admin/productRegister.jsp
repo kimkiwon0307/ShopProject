@@ -59,15 +59,24 @@
                <form role="form" method="post" action="/admin/productRegister" id="formObj" >
 
                       <div class="form-group" style="margin-bottom:20px;">
-                            <label for="product_name"><span class="badge bg-primary">분류</span></label>
-                            <select class="form-select" name="p_categoryCode">
-                              <option value="1" class="bg-secondary text-light">1.상의</option>
-                              <option value="2" class="bg-secondary text-light">2.하의</option>
-                              <option value="3" class="bg-secondary text-light">3.아우터</option>
-                              <option value="4" class="bg-secondary text-light">4.원피스</option>
-                              <option value="5" class="bg-secondary text-light">5.속옷</option>
+                            <label for="product_name"><span class="badge bg-primary">대분류</span></label>
+                            <select class="form-select" name="p_categoryCode" id="categorySelect">
+                             <option selected value="none" class="bg-secondary text-light">대분류를 선택하세요</option>
+                               <c:forEach items="${categoryList}" var="category">
+                                <c:if test="${category.tier == 1}">
+                                 <option value=${category.cateCode} class="bg-secondary text-light">${category.cateName}</option>
+                                </c:if>
+                               </c:forEach>
                             </select>
                       </div>
+                     <div class="form-group" style="margin-bottom:20px;">
+                             <label for="product_name"><span class="badge bg-primary">중분류</span></label>
+                             <select class="form-select" name="p_categoryCode" id="subCategorySelect" >
+                                 <option selected value="none" class="bg-secondary text-light">중분류를 선택하세요</option>
+                             </select>
+                       </div>
+
+
 
 
                      <div class="form-group" style="margin-bottom:20px;">
@@ -130,90 +139,126 @@
    <script>
           $(document).ready(function(){
 
-             var formObj = $("#formObj");
-             var obj;
+            //카테고리 중분류
 
-             // 유효성 검사 변수
-             var product_name = false;
-             var product_price = false;
-             var product_discount = false;
-             var product_title = false;
-             var product_content = false;
-             var product_quantity = false;
-             var product_image = false;
+               $('#categorySelect').on('change', function() {
+                   var selectedCategory = $(this).val(); // 선택된 대분류 값
+                   alert(selectedCategory);
 
-              // 상품등록 버튼 눌렀을때
-                $("#product_register_btn1").on("click",function(e){
+                   if (selectedCategory === "none") {
+                       return; // 대분류를 선택하지 않았을 경우 아무 동작도 하지 않음
+                   }
 
-                       e.preventDefault();
+                   // Ajax 요청을 보낼 URL
+                   var url = 'getSubCategories?cateCode=' + selectedCategory;
 
-                       var p_name = $("input[name='p_name']").val();
-                       var p_price = $("input[name='p_price']").val();
-                       var p_discount = $("input[name='p_discount']").val();
-                       var p_title = $("input[name='p_title']").val();
-                       var p_content = $("input[name='p_content']").val();
-                       var p_quantity = $("input[name='p_quantity']").val();
-                       var p_image = $("input[name='uploadFile']").val();
+                   // Ajax 요청
+                   $.ajax({
+                       url: url,
+                       type: 'GET',
+                       dataType: 'json', // 서버에서 JSON 응답을 받을 예정
+                       success: function(subCategoryList) {
+                        console.log(subCategoryList);
+                        var $subCategorySelect = $('#subCategorySelect');
 
-                      if (!p_name || p_name === "undefined") {
-                            alert("상품 이름을 등록하세요.");
-                       }else{
-                            product_name = true;
-                       }
+                        $subCategorySelect.html('<option selected value="none">중분류를 선택하세요</option>');
 
-                        if (!p_price || p_price === "undefined") {
-                            alert("상품 가격을 등록하세요.");
-                       }else{
-                            product_price = true;
-                       }
+           // 새로운 중분류 옵션 추가
+            $.each(subCategoryList, function(index, subCategory) {
+                // 서버에서 받은 각각의 중분류 데이터를 option 태그로 추가
+                var option = $('<option></option>').val(subCategory.cateCode).text(subCategory.cateName);
+                $subCategorySelect.append(option);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error: ", error);
+            console.log("Response Text: ", xhr.responseText); // 오류가 발생하면 서버 응답을 확인
+        }
+                   });
+               });
 
-                      if (!p_discount || p_discount === "undefined") {
-                            alert("할인율을 등록하세요. (1% ~ 99%)");
-                       }else{
-                            p_discount = true;
-                       }
+var formObj = $("#formObj");
+var obj; // obj가 어떻게 초기화되는지 확인 필요
 
-                      if (!p_title || p_title === "undefined") {
-                            alert("상품 설명 제목을 입력하세요.");
-                       }else{
-                            product_title = true;
-                       }
+// 유효성 검사 변수
+var product_name = false;
+var product_price = false;
+var product_discount = false;
+var product_title = false;
+var product_content = false;
+var product_quantity = false;
+var product_image = false;
 
-                      if (!p_content || p_content === "undefined") {
-                            alert("상품 설명 내용을 등록하세요.");
-                       }else{
-                            product_content = true;
-                       }
+// 상품등록 버튼 눌렀을때
+$("#product_register_btn1").on("click", function(e) {
+    e.preventDefault();
 
-                      if (!p_quantity || p_quantity === "undefined") {
-                            alert("상품 수량을 등록하세요.");
-                       }else{
-                            product_quantity = true;
-                       }
+    var p_name = $("input[name='p_name']").val();
+    var p_price = $("input[name='p_price']").val();
+    var p_discount = $("input[name='p_discount']").val();
+    var p_title = $("input[name='p_title']").val();
+    var p_content = $("input[name='p_content']").val();
+    var p_quantity = $("input[name='p_quantity']").val();
+    var p_image = $("input[name='uploadFile']").val();
 
-                       if(!p_image || p_image === "undefined"){
-                            alert("이미지를 등록하세요.")
-                       }else{
-                            product_image = true;
-                       }
+    if (!p_name) {
+        alert("상품 이름을 등록하세요.");
+    } else {
+        product_name = true;
+    }
 
-                    if(product_name && product_price && product_discount && product_title && product_content && product_quantity && product_image ){
+    if (!p_price) {
+        alert("상품 가격을 등록하세요.");
+    } else {
+        product_price = true;
+    }
 
-                       var formObj = $("form[role='form']");
-                       var str = "";
-                       var uploadResult = $("#uploadResult");
+    if (!p_discount) {
+        alert("할인율을 등록하세요. (1% ~ 99%)");
+    } else {
+        product_discount = true; // 수정
+    }
 
-                        str += "<input type='hidden' name='attachList[0].fileName' value='"+ obj.fileName +"'>";
-                        str += "<input type='hidden' name='attachList[0].uuid' value='"+ obj.uuid +"'>";
-                        str += "<input type='hidden' name='attachList[0].uploadPath' value='"+ obj.uploadPath +"'>";
+    if (!p_title) {
+        alert("상품 설명 제목을 입력하세요.");
+    } else {
+        product_title = true;
+    }
 
-                        uploadResult.append(str);
+    if (!p_content) {
+        alert("상품 설명 내용을 등록하세요.");
+    } else {
+        product_content = true;
+    }
 
-                        formObj.submit();
+    if (!p_quantity) {
+        alert("상품 수량을 등록하세요.");
+    } else {
+        product_quantity = true;
+    }
 
-                    }
-                });
+    if (!p_image) {
+        alert("이미지를 등록하세요.");
+    } else {
+        product_image = true;
+    }
 
+    if (product_name && product_price && product_discount && product_title && product_content && product_quantity && product_image) {
+        var str = "";
+        var uploadResult = $("#uploadResult");
+
+        str += "<input type='hidden' name='attachList[0].fileName' value='" + obj.fileName + "'>";
+        str += "<input type='hidden' name='attachList[0].uuid' value='" + obj.uuid + "'>";
+        str += "<input type='hidden' name='attachList[0].uploadPath' value='" + obj.uploadPath + "'>";
+
+        uploadResult.append(str);
+
+        alert("오우");
+
+        // 폼을 한 번만 제출
+        formObj.submit();
+    }
+});
 
 
 

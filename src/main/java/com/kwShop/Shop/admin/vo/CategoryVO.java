@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class CategoryVO {
 
-    private int id; // 카테고리 아이디 1.상의 2.하의 3.아우터 4.원피스 5.속옷
-    private String name;  // 카테고리 이름(분류)
-    private int parent_id; // 부모 카테고리 아이디
-
+    private int tier; // 카테고리 등급
+    private String cateName;  // 카테고리 이름
+    private String cateCode; // 카테고리코드
+    private String cateParent; // 상위 카테고리
 }

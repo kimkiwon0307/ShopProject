@@ -22,10 +22,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -115,13 +112,26 @@ public class AdminController {
         return "redirect:/admin/main";
     }
 
+    // 상품 삭제
     @PostMapping("/ProductDelete")
     @ResponseBody
-    public void productDelete(@RequestParam("p_id") int p_id) throws Exception{
+    public Map<String, Object> productDelete(@RequestParam("p_id") int p_id) throws Exception{
 
         log.info("상품 삭제" + p_id);
 
-        service.productDelete(p_id);
+        Map<String, Object> response = new HashMap<>();
+
+        try{
+            service.productDelete(p_id);
+            response.put("success", true);
+
+        }catch (Exception e){
+
+            response.put("success", false);
+        }
+
+        return response;
+
     }
 
     //회원관리
@@ -202,7 +212,7 @@ public class AdminController {
         return list;
     }
 
-    @GetMapping("/getSubCategories")
+    @GetMapping("/getSubCategories") // 중분류 배열 리스트
     @ResponseBody
     public List<CategoryVO> getSubCategories(@RequestParam("cateCode") int cateCode) throws Exception{
 

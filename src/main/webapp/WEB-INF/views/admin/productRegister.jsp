@@ -71,13 +71,10 @@
                       </div>
                      <div class="form-group" style="margin-bottom:20px;">
                              <label for="product_name"><span class="badge bg-primary">중분류</span></label>
-                             <select class="form-select" name="p_categoryCode" id="subCategorySelect" >
+                             <select class="form-select" name="p_categoryName" id="subCategorySelect" >
                                  <option selected value="none" class="bg-secondary text-light">중분류를 선택하세요</option>
                              </select>
                        </div>
-
-
-
 
                      <div class="form-group" style="margin-bottom:20px;">
                            <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
@@ -140,16 +137,15 @@
           $(document).ready(function(){
 
             //카테고리 중분류
-
                $('#categorySelect').on('change', function() {
-                   var selectedCategory = $(this).val(); // 선택된 대분류 값
-                   alert(selectedCategory);
+                   var selectedCategory = $(this).val();
+
 
                    if (selectedCategory === "none") {
-                       return; // 대분류를 선택하지 않았을 경우 아무 동작도 하지 않음
+                       return;
                    }
 
-                   // Ajax 요청을 보낼 URL
+
                    var url = 'getSubCategories?cateCode=' + selectedCategory;
 
                    // Ajax 요청
@@ -158,15 +154,13 @@
                        type: 'GET',
                        dataType: 'json', // 서버에서 JSON 응답을 받을 예정
                        success: function(subCategoryList) {
-                        console.log(subCategoryList);
                         var $subCategorySelect = $('#subCategorySelect');
-
                         $subCategorySelect.html('<option selected value="none">중분류를 선택하세요</option>');
 
-           // 새로운 중분류 옵션 추가
-            $.each(subCategoryList, function(index, subCategory) {
+               // 새로운 중분류 옵션 추가
+                $.each(subCategoryList, function(index, subCategory) {
                 // 서버에서 받은 각각의 중분류 데이터를 option 태그로 추가
-                var option = $('<option></option>').val(subCategory.cateCode).text(subCategory.cateName);
+                var option = $('<option></option>').val(subCategory.cateName).text(subCategory.cateName);
                 $subCategorySelect.append(option);
             });
         },
@@ -176,6 +170,8 @@
         }
                    });
                });
+
+
 
 var formObj = $("#formObj");
 var obj; // obj가 어떻게 초기화되는지 확인 필요
@@ -253,9 +249,8 @@ $("#product_register_btn1").on("click", function(e) {
 
         uploadResult.append(str);
 
-        alert("오우");
+        alert("상품이 등록되었습니다.");
 
-        // 폼을 한 번만 제출
         formObj.submit();
     }
 });

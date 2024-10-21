@@ -40,6 +40,8 @@ public class AdminServiceImpl implements AdminService {
         String keyword = cri.getKeyword();
         return mapper.productList(offset, amount, keyword);
     }
+
+    // 상품 수정
     @Transactional
     @Override
     public int productUpdate(ProductVO product) {
@@ -53,8 +55,6 @@ public class AdminServiceImpl implements AdminService {
         attachImage.setUploadPath(product.getAttachList().get(0).getUploadPath());
         attachImage.setP_id(product.getP_id());
 
-        log.info("이거" + product.toString());
-     
         log.info(attachImage.toString());
 
         mapper.update(attachImage);

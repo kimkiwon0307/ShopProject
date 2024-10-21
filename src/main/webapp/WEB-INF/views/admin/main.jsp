@@ -68,7 +68,7 @@
                         <tr style="text-align:center">
                           <td><c:out value="${product.p_id}"/></td>
                            <td><c:out value="${product.p_categoryName}"/></td>
-                          <td>
+                           <td>
                              <a class="move"  href='<c:out value="${product.p_id}"/>'>
                                  <c:out value="${product.p_name}"/>
                              </a>
@@ -154,6 +154,7 @@
                      </div>
                 </div>
             <br>
+
              <!-- 검색 영역 -->
          <div class="d-flex justify-content-center">
              <form id="searchForm" action="/admin/main" method="get">
@@ -473,10 +474,20 @@
                        url: '/admin/ProductDelete',
                        type: 'POST',
                        data: { p_id: p_id }, // p_id를 데이터 객체에 속성으로 전달
-                       dataType: 'json'
-
+                       dataType: 'json',
+                       success: function(response){
+                          if(response.success){
+                            alert("상품이 삭제되었습니다.");
+                            location.reload();
+                          } else {
+                            alert("삭제에 실패했습니다.");
+                          }
+                      },
+                                   error: function() {
+                                       alert("에러가 발생했습니다. 다시 시도해 주세요.");
+                                   }
                    });
-                     location.reload();
+
                   }else{
                    return;
                    }

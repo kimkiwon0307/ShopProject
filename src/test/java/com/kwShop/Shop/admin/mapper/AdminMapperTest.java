@@ -25,7 +25,7 @@ class AdminMapperTest {
     @DisplayName("상품 리스트")
     public void testList(){
 
-      List<ProductVO> list = mapper.productList(1,12,"");
+      List<ProductVO> list = mapper.productList(1,200,"");
       list.forEach(product -> log.info(product.toString()));
 
     }
@@ -73,7 +73,7 @@ class AdminMapperTest {
     @Test
     @DisplayName("상품 조회 테스트")
     void testGet(){
-       ProductVO findProduct= mapper.productGet(151);
+       ProductVO findProduct= mapper.productGet(158);
        log.info(findProduct.toString());
     }
 
@@ -100,9 +100,6 @@ class AdminMapperTest {
         List<AttachImageVO> attachImageVOS = mapper.findByPid(130);
 
         attachImageVOS.forEach(list -> log.info(list.toString()));
-
-
-
 
     }
 
@@ -159,6 +156,7 @@ class AdminMapperTest {
         productVO.setP_content("테스트상품");
         productVO.setP_quantity(100);
         productVO.setP_categoryCode("1");
+        productVO.setP_categoryName("티셔츠");
         productVO.setP_discount(10.0);
     }
 

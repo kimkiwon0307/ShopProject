@@ -25,7 +25,7 @@ public interface AdminMapper {
     public void insert(AttachImageVO vo); // 이미지 저장
     public void update(AttachImageVO vo); // 이미지 저장
 
-    public ProductVO ImageByProduct(int p_id); // p_id를 통해 left 조인해서 product가져오기 가져오기
+    public ProductVO ImageByProduct(int p_id); // p_id를 통해 left 조인해서 product 가져오기
     public List<AttachImageVO> findByPid(int p_id); // 이미지 데이터 가져오기
     
     public List<AttachImageVO> findByAll(); // 메인화면 이미지 가져오기

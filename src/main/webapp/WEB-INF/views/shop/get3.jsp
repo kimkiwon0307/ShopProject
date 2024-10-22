@@ -22,13 +22,12 @@
                                 <h5 class="fw-bold mb-3" >할인율 : <fmt:formatNumber value="${product.p_discount}" pattern="#,###"/> %</h5>
 
                               <c:set var="discountedPrice" value="${product.p_price - (product.p_price * (product.p_discount / 100.0))}" />
-
                               <h5 class="fw-bold mb-3">
-                                  판매가 : <fmt:formatNumber value="${discountedPrice}" type="number" maxFractionDigits="0"/>원
+                                  판매가 : <fmt:formatNumber value="${discountedPrice}" type="number" maxFractionDigits="0" />원
                               </h5>
 
-                              <!-- 갯수변경 -->
-                                <div class="input-group quantity mb-5" style="margin-top:50px; width: 200px;">
+
+                                <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
                                             <i class="fa fa-minus"></i>
@@ -44,12 +43,8 @@
                                     </div>
                                 </div>
 
-                     <h5 class="fw-bold mb-3">
-                         최종가 : <span id="finalPrice"><fmt:formatNumber value="${discountedPrice}" type="number" maxFractionDigits="0"/></span> 원
-                     </h5>
-
                                  <c:if test="${member != null}">
-                                     <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="bucketBtn" style="margin-top:20px;"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
+                                     <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary" id="bucketBtn"><i class="fa fa-shopping-bag me-2 text-primary"></i> 장바구니</a>
                                  </c:if>
                             </div>
 
@@ -192,9 +187,9 @@
             for (var i = 0; i < data.length; i++) {
 
 
-            str += "<div class='d-flex'>";
+            str += "<div class='d-flex'>"; // 닫는 div 태그가 누락되어 있었습니다.
             str += "<img src='/shop/main/img/avatar.jpg' class='img-fluid rounded-circle p-3' style='width: 100px; height: 100px;' alt=''>";
-            str += "<div>";
+            str += "<div>"; // p 태그 앞에 div 태그가 열려야 합니다.
             str += "<h5>" + data[i].r_replyer + "</h5>";
             str += "<p>" + data[i].r_reply + "</p>";
             if(member_id === data[i].r_replyer || member_id === 'admin'){
@@ -210,29 +205,6 @@
                }
             review_body.append(str);
         });
-
-        // 최종가
-
-        $('.btn-plus').on("click",function(e){
-
-
-            var finalPrice = $('#quantityValue').val() * ${discountedPrice}  ;
-
-            $('#finalPrice').text(finalPrice.toLocaleString());
-
-        });
-
-        $('.btn-minus').on("click",function(e){
-
-
-            var finalPrice = $('#quantityValue').val() * ${discountedPrice}  ;
-
-            $('#finalPrice').text(finalPrice.toLocaleString());
-
-        });
-
-        // 최종가
-
 
         // 수정 버튼 누르면 발동
         $(document).on("click",".uRplyBtn", function(){
@@ -295,6 +267,20 @@
                 });// 수정 버튼
 
 
+        // 옵션 선택이 변경될 때마다 선택된 값을 가져와서 표시
+            $("#quantitySelect").change(function() {
+
+                var price = <c:out value="${product.p_price}"/>;
+
+                var selectedValue = $(this).val();
+                $("#selectedValue").text("총 금액 : " +addCommas(selectedValue * price) + "원");
+                // 선택된 값을 다른 작업에 활용할 수도 있습니다.
+            });
+
+            // ex) 1000 -> 1,000
+            function addCommas(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
 
          // 장바구니 버튼 눌렀을때.
          $("#bucketBtn").on("click",function(){

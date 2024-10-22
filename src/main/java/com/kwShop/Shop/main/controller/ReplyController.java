@@ -55,10 +55,5 @@ public class ReplyController {
 
         log.info("리뷰 삭제");
         service.delete(r_no);
-
     }
-
-
-
-
 }

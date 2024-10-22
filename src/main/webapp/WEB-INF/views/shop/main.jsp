@@ -106,14 +106,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-flex align-items-center">
-                                            <form id="searchForm" action="/shop/main" method="get" style="width:100%;">
-                                                   <div class="input-group w-75 mx-auto d-flex">
-                                                    <input type="text" name="keyword" class="form-control p-3"  aria-describedby="search-icon-1" placeholder="키워드" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
-                                                    <input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
-                                                    <input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-                                                    <span id="search-icon-1" class="input-group-text p-3"><button type="button" class="btn btn info" id="searchBtn">검색</button></span>
-                                                </div>
-                                            </form>
+                        <form id="searchForm" action="/shop/main" method="get" style="width:100%;">
+                             <div class="input-group w-75 mx-auto d-flex">
+                                  <input type="text" name="keyword" class="form-control p-3"  aria-describedby="search-icon-1" placeholder="키워드" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
+                                  <input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
+                                  <input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+                                  <span id="search-icon-1" class="input-group-text p-3"><button type="button" class="btn btn info" id="searchBtn">검색</button></span>
+                            </div>
+                       </form>
                     </div>
                 </div>
             </div>

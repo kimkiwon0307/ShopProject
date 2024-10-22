@@ -23,7 +23,4 @@ public class PageDTO {
         this.prev = this.pageStart > 1;
         this.next = this.pageEnd < realEnd;
     }
-
-
-
 }

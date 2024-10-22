@@ -199,8 +199,6 @@
          				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
          				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
          			</form>
-
-
         </div>
     </div>
       <!-- Footer-->
@@ -234,9 +232,9 @@
 
 
 
-                let moveForm = $('#moveForm');
+                var moveForm = $('#moveForm');
 
-                /* 페이지 이동 버튼 */
+                //페이지 이동
                 $(".page-item a").on("click", function(e){
 
                     e.preventDefault();
@@ -247,14 +245,14 @@
 
                 });
 
-                	let searchForm = $('#searchForm');
-
+                    // 검색
+                	var searchForm = $('#searchForm');
 
                 	$("#searchForm button").on("click", function(e){
 
                 		e.preventDefault();
 
-                		/* 검색 키워드 유효성 검사 */
+                	// 검색 키워드 유효성 검사
                 		if(!searchForm.find("input[name='keyword']").val()){
                 			alert("키워드를 입력하십시오");
                 			return false;

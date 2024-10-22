@@ -54,11 +54,10 @@ public class ShopController {
 
 
         for(ProductVO products : productss){
+
             log.info("C:\\upload2\\"+products.getAttachUploadPath()+"/"+products.getAttachUuid()+"_"+products.getAttachFilename());
 
             products.setAttachUploadPath(products.getAttachUploadPath().replaceAll("\\\\","\\\\\\\\"));
-
-            log.info("여기야" + products.getAttachUploadPath());
 
             product.add(products);
         }
@@ -69,8 +68,6 @@ public class ShopController {
 
 
     }
-
-
 
 
     @GetMapping({"/get","/get2"})

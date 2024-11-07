@@ -25,10 +25,11 @@ public class BucketController {
     public void list(@RequestParam("member_id")String member_id, Model model){
 
         List<BucketVO> buckets = service.list(member_id);
-        List<BucketVO> bucketss = new ArrayList<>();
+     //   List<BucketVO> bucketss = new ArrayList<>();
 
         for(BucketVO bucket : buckets){
-            bucket.setUploadPath(bucket.getUploadPath().replaceAll("\\\\","\\\\\\\\"));
+
+           bucket.setUploadPath(bucket.getUploadPath().replaceAll("\\\\","\\\\\\\\"));
             log.info(bucket.toString());
         }
 

@@ -373,12 +373,10 @@
 
 
                     str += "<i class='fa fa-shopping-bag fa-2x'></i>";
+
                     str += "<span class='position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1' style='top: -5px; left: 15px; height: 20px; min-width: 20px;'>" + size + "</span>";
 
                     $(".my-auto").append(str);
-
-
-
 
                     });
 

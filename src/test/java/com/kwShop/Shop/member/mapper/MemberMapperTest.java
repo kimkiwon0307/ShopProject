@@ -44,8 +44,8 @@ class MemberMapperTest {
 
         MemberVO memberVO = new MemberVO();
         
-       // memberVO.setMember_id("admin"); // 중복아이디
-        memberVO.setMember_id("adminXID"); // 새로운아이디
+        memberVO.setMember_id("admin"); // 중복아이디
+       // memberVO.setMember_id("adminXID"); // 새로운아이디
 
         int result = mapper.idCheck(memberVO.getMember_id());
         
@@ -83,7 +83,4 @@ class MemberMapperTest {
        List<MemberVO> Members = mapper.memberList();
        Members.forEach(list -> log.info(list.toString()));
     }
-
-
-
 }

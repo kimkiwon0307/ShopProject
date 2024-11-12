@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="../common/loginHeader.jsp"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +15,13 @@
      <!-- Template Stylesheet -->
 
    <link href="/member/join.css" rel="stylesheet">
-    <link href="/shop/main/css/style.css" rel="stylesheet">
+   <link href="/shop/main/css/style.css" rel="stylesheet">
 
  <title>회원가입</title>
 </head>
 
 <body>
   <div class="signup-container">
-
     <form class="signup-form" action="/member/join" method="post" id="joinForm">
            <c:if test="${not empty errors}">
                  <div class="alert alert-danger" role="alert">
@@ -52,13 +51,15 @@
         <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
         <input type="password"  class="form-control" id="pw_check" placeholder="비밀번호 확인" >
      	<span  class="input-group" id="s_pwd_check_success">비밀번호가 같습니다.</span>
-	 	<span  class="input-group" id="s_pwd_check_fail">비밀번호가 다릅니다.</span>
+	 	<span  class="input-group" id="s_pwd_check_fail">비밀번호는 최소 8자 이상, 하나 이상의 문자, 숫자, 특수문자를 포함해야 합니다.</span>
       </div>
 
 
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-vector-pen"></i></span>
-            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" >
+            <input type="text" class="form-control" id="name_check" name="member_name" placeholder="이름" >
+            <span  class="input-group" id="s_name_check_success">유효한 이름입니다.</span>
+            <span  class="input-group" id="s_name_check_fail"> 이름은 한글 또는 영문 2자 이상 10자 이하로 입력해주세요. </span>
 
       </div>
 
@@ -66,14 +67,17 @@
      <div class="input-group" style="margin-bottom:20px;">
            <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
            <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' >
-           <button class="btn btn-outline-secondary" type="button" id="email_chk_btn"  >인증번호 전송</button>
+            <button class="btn btn-outline-secondary" type="button" id="email_chk_btn" >인증번호 전송</button>
+           <span  class="input-group" id="s_mail_check_success">유효한 메일입니다.</span>
+            <span  class="input-group" id="s_mail_check_fail"> 이메일 형식에 맞지 않습니다. </span>
+
       </div>
 
      <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-mailbox2"></i></span>
               <input type="text" class="form-control" id="check_mailNum" placeholder="인증번호" name=''   >
-              <span  class="input-group" id="s_mail_check_success">인증번호가 같습니다.</span>
-              <span  class="input-group" id="s_mail_check_fail">인증번호가 다릅니다. </span>
+              <span  class="input-group" id="s_mailNum_check_success">인증되었습니다.</span>
+              <span  class="input-group" id="s_mailNum_check_fail">인증번호가 다릅니다. </span>
      </div>
 
     <!-- 주소 -->
@@ -108,85 +112,30 @@
 
 	$(document).ready(function(){
 
-         var idCheck = false;            // 아이디 중복 확인
-         var pwCheck = false;            // 비번 일치 확인
-         var nameCheck = false;            // 이름 빈값 확인
-         var mailCheck = false;            // 이메일 인증번호 확인
-         var addressCheck = false         // 상세 주소 빈값확인
+        var id_chk = false;
+        var pw_chk = false;
+        var name_chk = false;
+        var email_chk = false;
+        var address_chk = true;
 
 
 	    // 유효성 검사
-	    $('#joinBtn').on("click",function(e){
+        $('#joinBtn').on("click", function (e) {
+            e.preventDefault();
 
-	         e.preventDefault();
 
-	         var member_id = $('#id_check').val();  // 입력 받은 ID
-	         var pw = $("#member_password").val(); // 비밀번호
-             var pw_check = $("#pw_check").val(); // 비밀번호 확인
-             var name = $("#nameCk").val();       // 이름
-             var mail_check = $("#check_mailNum").val();  // 이메일
-             var addr = $("#address_input_3").val();     // 상세주소
-             var data = {member_id : member_id};    // member_id 이름으로 받아온 member_id를 담는다.
+            // 모든 조건 만족 시 폼 제출
+            if (id_chk && pw_chk && name_chk && email_chk && address_chk) {
 
-            $.ajax({             // Ajax를 이용한 비동기 중복검사
+                var member_id = $("input[name=member_id]").val();
 
-            				type: "post",
-            				url : "/member/m_id_check",
-            				data : data,
-            				success : function(result){
-            				console.log(result);
-            					if(result != 'fail'){ // 성공일때
-            						$("#s_nick_check_fail").css("display","none");
-            						$("#s_nick_check_success").css("display","inline-block");
-            						$("#signUp_btn").attr("type","submit");
-            						idCheck = true;
+                alert(member_id + "님 환영합니다.");
+                $("#joinForm").submit();
 
-            					}else{
-            					    alert("아이디를 수정해주세요");
-            						$("#s_nick_check_fail").css("display","inline-block");
-            						$("#s_nick_check_success").css("display","none");
-            						$("#signUp_btn").attr("type","button");
-            					}
-            				}
-            }); // ajax
-
-            if (pw == pw_check ) {
-                pwCheck = true;
-              }else {
-                 alert("패스워드를 확인해주세요.");
-                 pwCheck = false;
-                 $("#s_pwd_check_fail").css("display","inline-block");
-                 $("#s_pwd_check_success").css("display","none");
-
-              }
-
-            if (name !=''){
-                nameCheck = true;
-            }else{
-                alert("이름을 확인해주세요.");
+            } else {
+                alert("틀린 부분 및 빈 값을 입력해주세요.");
             }
-
-            if(mail_check == num){
-                mailCheck = true;
-            }else{
-                alert("인증번호를 입력해주세요.");
-            }
-
-
-            if(addr != ''){
-                addressCheck = true;
-            }else{
-                alert("주소를 확인해주세요.");
-            }
-
-              if(idCheck && pwCheck && nameCheck && mailCheck && addressCheck) {
-                    $("#joinForm").submit();
-                    alert(member_id + "님 환영합니다.")
-            }else {
-                   alert("틀린부분 및 빈값을 입력해주세요.");
-            }
-
-	    })
+        });
 
 
 		// 아이디 중복검사
@@ -209,6 +158,7 @@
 						$("#s_nick_check_fail").css("display","none");
 						$("#s_nick_check_success").css("display","inline-block");
 						$("#signUp_btn").attr("type","submit");
+						id_chk = true;
 					}else{
 						$("#s_nick_check_fail").css("display","inline-block");
 						$("#s_nick_check_success").css("display","none");
@@ -223,23 +173,91 @@
 		}); // 아이디 중복검사
 
 
-        // 비밀번호 체크
-        $('#pw_check').on("propertychange change keyup paste input", function(){
+         // 비밀번호 입력 필드 이벤트
+         $('#member_password').on("propertychange change keyup paste input", function () {
+             var pw = $(this).val();
+             var pw_check = $('#pw_check').val();
 
-            var pw = $("#member_password").val();
-            var pw_check = $(this).val();
+             var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
 
-            if (pw == pw_check) {
-            	$("#s_pwd_check_fail").css("display","none");
-            	$("#s_pwd_check_success").css("display","inline-block");
+          if( pw != 0 ){
+             if (pw && pw === pw_check && passwordPattern.test(pw)) {
+                 $("#s_pwd_check_fail").css("display", "none");
+                 $("#s_pwd_check_success").css("display", "inline-block");
+                 pw_chk = true;
+             } else {
+                 $("#s_pwd_check_fail").css("display", "inline-block");
+                 $("#s_pwd_check_success").css("display", "none");
+             }
+           }else {
+                 $("#s_pwd_check_fail").css("display", "none");
+                 $("#s_pwd_check_success").css("display", "none");
+           }
+         });
 
+         // 비밀번호 확인 필드 이벤트
+         $('#pw_check').on("propertychange change keyup paste input", function () {
+             var pw = $("#member_password").val();
+             var pw_check = $(this).val();
+             var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
 
+         if( pw_check != 0 ){
+             if (pw && pw === pw_check && passwordPattern.test(pw_check)) {
+                 $("#s_pwd_check_fail").css("display", "none");
+                 $("#s_pwd_check_success").css("display", "inline-block");
+                  pw_chk = true;
+             } else {
+                 $("#s_pwd_check_fail").css("display", "inline-block");
+                 $("#s_pwd_check_success").css("display", "none");
+             }
+         } else {
+                 $("#s_pwd_check_fail").css("display", "none");
+                 $("#s_pwd_check_success").css("display", "none");
+         }
+         });
+
+         // 이름 형식 유효검사
+         $('#name_check').on("propertychange change keyup paste input", function () {
+
+                var name = $(this).val();
+                var namePattern = /^[a-zA-Z\uac00-\ud7af]{2,10}$/;
+
+                if(name != 0 ){
+
+                    if(name && namePattern.test(name)){
+                        $("#s_name_check_fail").css("display", "none");
+                        $("#s_name_check_success").css("display", "inline-block");
+                        name_chk = true;
+                    }else {
+                          $("#s_name_check_fail").css("display", "inline-block");
+                          $("#s_name_check_success").css("display", "none");
+                    }
+                } else {
+                         $("#s_name_check_fail").css("display", "none");
+                         $("#s_name_check_success").css("display", "none");
+                }
+         });
+
+        // 이메일 형식 유효검사
+         $('#mail_chk').on("propertychange change keyup paste input", function () {
+
+               var email  = $(this).val();
+               var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if(email != 0 ){
+               if(email && emailPattern.test(email)){
+                  $("#s_mail_check_fail").css("display", "none");
+                  $("#s_mail_check_success").css("display", "inline-block");
+                  email_chk = true;
+               }else{
+                    $("#s_mail_check_fail").css("display", "inline-block");
+                    $("#s_mail_check_success").css("display", "none");
+               }
             }else {
-                $("#s_pwd_check_fail").css("display","inline-block");
-                $("#s_pwd_check_success").css("display","none");
+                  $("#s_mail_check_fail").css("display", "none");
+                  $("#s_mail_check_success").css("display", "none");
             }
-        }); // 비밀번호 체크
-
+            });
 
      var num;
 
@@ -257,10 +275,11 @@
             type:"GET",
             url:"/member/mailCheck?email=" + email,
             success:function(data){
-                alert(data);
+                alert("인증번호를 전송하였습니다.");
+                num = data;
             },
             error: function(data){
-                alert(data);
+                alert("인증번호 전송에 실패하였습니다.");
             }
         });
 
@@ -271,16 +290,24 @@
 
                 var check_mailNum = $('#check_mailNum').val();
 
-                if(check_mailNum == num){
-                    	$("#s_mail_check_fail").css("display","none");
-                    	$("#s_mail_check_success").css("display","inline-block");
-                    	$("#check_mailNum").prop("disabled",true);
 
+                if(check_mailNum == num ){
+                    	$("#s_mailNum_check_fail").css("display","none");
+                    	$("#s_mailNum_check_success").css("display","inline-block");
+                    	$("#check_mailNum").prop("disabled",true);
+                    	$("#email_chk_btn").prop("disabled", true);
+
+                }else if(check_mailNum === ""){
+                   	$("#s_mailNum_check_fail").css("display","none");
+                   	$("#s_mailNum_check_success").css("display","none");
                 }else{
-                   	$("#s_mail_check_fail").css("display","inline-block");
-                   	$("#s_mail_check_success").css("display","none");
+                    $("#s_mailNum_check_fail").css("display","inline-block");
                 }
-        });    // 인증번호 일치 불일치
+         });    // 인증번호 일치 불일치
+
+
+
+
     }); //$(document).ready(function(){
 
 

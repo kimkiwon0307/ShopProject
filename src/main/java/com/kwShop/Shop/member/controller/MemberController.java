@@ -37,7 +37,6 @@ public class MemberController {
         model.addAttribute("Member", service.profile(member_id));
     }
 
-
     @GetMapping("/login")
     public void login(){
         log.info("로그인 페이지");
@@ -111,13 +110,14 @@ public class MemberController {
     @PostMapping("/m_id_check")
     @ResponseBody
     public String m_id_check(@RequestParam("member_id") String member_id) throws Exception {
+        log.info(service.idCheck(member_id));
         return service.idCheck(member_id);
     }
 
     // 이메일 인증
     @GetMapping("/mailCheck")
     @ResponseBody
-    public String mailCheckGET(@RequestParam("email") String email) throws Exception{
+    public int mailCheckGET(@RequestParam("email") String email) throws Exception{
         log.info("email :" + email);
 
         // 인증번호 생성
@@ -144,9 +144,9 @@ public class MemberController {
             //인증번호를 세션에 저장하고 유효 시간을 설정한다
             session.setAttribute(email, checkNum);
             session.setMaxInactiveInterval(3 * 60); // 5분 설정
-            return "인증번호가 이메일로 전송되었습니다.";
+            return checkNum;
         }catch(Exception e){
-            return "메일 전송에 실패했습니다. 다시 시도해주세요.";
+            return 0;
         }
 
     }

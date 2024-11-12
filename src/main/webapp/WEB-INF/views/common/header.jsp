@@ -46,64 +46,60 @@
 
             <body>
 
-                <!-- Navbar start -->
-                <div class="container-fluid fixed-top">
+        <!-- Navbar start -->
+              <div class="container-fluid fixed-top">
+                  <div class="container px-0">
+                      <nav class="navbar navbar-light bg-white navbar-expand-xl">
+                          <a href="/shop/main" class="navbar-brand"><h1 class="text-primary display-6">kiwon's mall</h1></a>
+                          <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                              <span class="fa fa-bars text-primary"></span>
+                          </button>
 
-                    <div class="container px-0">
-                        <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                            <a href="/shop/main" class="navbar-brand">
-                                <h1 class="text-primary display-6">kiwon's mall</h1>
-                            </a>
-                            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarCollapse">
-                                <span class="fa fa-bars text-primary"></span>
-                            </button>
-                            <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                                <div class="navbar-nav mx-auto">
-                                    <a href="/shop/main" class="nav-item nav-link active">홈</a>
-
-                                </div>
-                                <div class="d-flex m-3 me-0">
-                                    <c:if test="${member != null }">
-                                        <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto">
-
-                                        </a>
-                                    </c:if>
-                                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-user fa-2x"></i>
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <c:if test="${member == null }">
-                                                    <li><a class="dropdown-item" href="/member/login"> 로그인</a></li>
-                                                    <li><a class="dropdown-item" href="/member/join"> 회원가입</a></li>
-                                                </c:if>
-                                                <c:if test="${member.adminCk == 1 }">
-                                                    <li><a class="dropdown-item" href="/admin/main"> 관리자 페이지 </a></li>
-                                                </c:if>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <c:if test="${member != null }">
-                                                    <li><a class="dropdown-item" id="logout_btn"><i
-                                                                class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
-                                                </c:if>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-                <!-- Navbar End -->
+                          <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                              <div class="navbar-nav mx-auto">
+                                  <a href="/shop/main" class="nav-item nav-link active">SHOP</a>
+                                  <a href="/qna/main" class="nav-item nav-link active">Q & A</a>
+                           </div>
 
 
+                              <div class="d-flex m-3 me-0">
+                                  <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                                  <c:if test="${member != null }" >
+                                  <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto">
 
-                <!-- Single Page Header start -->
-                <div class="container-fluid page-header py-5">
-                    <h1 class="text-center text-white display-6">장바구니</h1>
-                </div>
-                <!-- Single Page Header End -->
+                                  </a>
+                                  </c:if>
+                                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                                              <li class="nav-item dropdown">
+
+                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  <i class="fas fa-user fa-2x"></i>
+                                                </a>
+
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <c:if test="${member == null }" >
+                                                  <li><a class="dropdown-item" href="/member/login"> 로그인</a></li>
+                                                  <li><a class="dropdown-item" href="/member/join"> 회원가입</a></li>
+                                                 </c:if>
+                                                   <c:if test = "${member.adminCk == 1 }">
+                                                         <li><a class="dropdown-item" href="/admin/main"> 관리자 페이지 </a></li>
+                                                  </c:if>
+                                                  <li><hr class="dropdown-divider"></li>
+                                                  <c:if test="${member != null }" >
+                                                    <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
+                                                    <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
+                                                   <li>  <a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person" ></i> 내정보</a></li>
+                                                   <li><a class="dropdown-item" id="logout_btn"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
+                                                  </c:if>
+                                                </ul>
+                                              </li>
+                                           </ul>
+                              </div>
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+              <!-- Navbar End -->
+
+
+

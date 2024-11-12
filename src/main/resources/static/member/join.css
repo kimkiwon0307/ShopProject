@@ -58,11 +58,11 @@
 .signup-form button:hover {
     background-color: #0056b3;
 }
-#s_nick_check_success,#s_pwd_check_success,#s_mail_check_success{
+#s_nick_check_success,#s_pwd_check_success,#s_mail_check_success,#s_name_check_success,#s_mailNum_check_success{
 	color:green;
 	display:none;
 }
-#s_nick_check_fail,#s_pwd_check_fail, #s_mail_check_fail{
+#s_nick_check_fail,#s_pwd_check_fail, #s_mail_check_fail, #s_name_check_fail,#s_mailNum_check_fail{
 	color:red;
 	display:none;
 }

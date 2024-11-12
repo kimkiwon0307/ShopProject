@@ -14,9 +14,14 @@ public class MemberVO {
     private String member_id;                    //아이디
 
     @NotBlank(message = "패스워드 입력해주세요.")
+    @Pattern(
+            regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "비밀번호는 최소 8자 이상, 하나 이상의 문자, 숫자, 특수문자를 포함해야 합니다."
+    )
     private String member_pw;                    //비밀번호
 
     @NotBlank(message = "이름을 입력해주세요.")
+    @Pattern(regexp = "^[가-힣a-zA-Z\\s]{2,10}$", message = "이름은 한글 또는 영문 2자 이상 10자 이하로 입력해주세요.")
     private String member_name;                  //이름
 
     @NotBlank(message = "메일을 입력해주세요.")

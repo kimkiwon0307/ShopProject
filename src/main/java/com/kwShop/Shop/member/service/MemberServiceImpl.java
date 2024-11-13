@@ -2,18 +2,16 @@ package com.kwShop.Shop.member.service;
 
 import com.kwShop.Shop.member.mapper.MemberMapper;
 import com.kwShop.Shop.member.vo.MemberVO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper mapper;
-
-    public MemberServiceImpl(MemberMapper mapper){
-        this.mapper = mapper;
-    }
 
     @Override
     public void memberJoin(MemberVO member) throws Exception {
@@ -57,6 +55,4 @@ public class MemberServiceImpl implements MemberService{
     public void memberUpdate(MemberVO member) throws Exception {
         mapper.memberUpdate(member);
     }
-
-
 }

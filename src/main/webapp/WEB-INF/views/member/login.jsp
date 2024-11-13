@@ -67,11 +67,11 @@
 					url : "/member/login",
 					data : {member_id: member_id, member_pw: member_pw},
 					success : function(result){
-						alert("로그인되었습니다.");
+						alert(result);
 						self.location = "/shop/main";
 					},
 				    error: function(xhr, status, error) {
-				        alert("사용자 ID 또는 비밀번호를 잘못 입력하셨습니다.");
+				        alert(xhr.responseText);
 				    }
 				}); // ajax
 

@@ -83,7 +83,7 @@
                                               <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
                                               <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
                                              <li>  <a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person" ></i> 내정보</a></li>
-                                             <li><a class="dropdown-item" id="logout_btn"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
+                                             <li><a class="dropdown-item" id="logout_btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
                                             </c:if>
                                           </ul>
                                         </li>
@@ -182,6 +182,7 @@
                                                     <h4><c:out value="${product.p_name}"/></h4>
                                                     <p><c:out value="${product.p_content}"/></p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
+
                                                         <p class="text-dark fs-5 fw-bold mb-0"> <fmt:formatNumber value="${product.p_price}" pattern="#,###"/> 원</p>
                                                         <c:if test="${member != null }" >
                                                           <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary bucket_btn" id="${product.p_id}">
@@ -292,8 +293,6 @@
                    });
 
                     <c:forEach items="${product}" var="product">
-
-
                       var uploadPath ='<c:out value="${product.attachUploadPath}"/>';
                       var uuid = '<c:out value="${product.attachUuid}"/>';
 

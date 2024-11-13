@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -37,10 +39,7 @@ public class MemberController {
         model.addAttribute("Member", service.profile(member_id));
     }
 
-    @GetMapping("/login")
-    public void login(){
-        log.info("로그인 페이지");
-    }
+
 
     @GetMapping("/join")
     public void join(){
@@ -79,23 +78,31 @@ public class MemberController {
 
         return "redirect:/member/login";
     }
-    
 
-    //로그인 처리
+
+
+    //로그인 처리 start
+    @GetMapping("/login")
+    public void login(){
+        log.info("로그인 페이지");
+    }
+
     @PostMapping("/login")
     @ResponseBody
-    public void member_login(@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw, HttpServletRequest request) throws Exception {
+    public ResponseEntity<String> member_login(@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw, HttpServletRequest request) throws Exception {
 
         log.info(member_id + ":" + member_pw);
 
-        HttpSession session = request.getSession(); // 세션 획득
-
         MemberVO member = service.memberLogin(member_id, member_pw); // 로그인한 멤버 객체
 
-        session.setAttribute("member", member); // 세션에 로그인한 멤버 객체 저장
+        if(member != null) {
+            HttpSession session = request.getSession(); // 세션 획득
+            session.setAttribute("member", member); // 세션에 로그인한 멤버 객체 저장
+            return ResponseEntity.ok("로그인 성공");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패: 아이디 또는 비밀번호가 올바르지 않습니다.");
 
-        log.info(member.toString());
-    } // 로그인
+    } // 로그인 end
 
     //로그아웃 처리
     @PostMapping("/logout")
@@ -148,10 +155,5 @@ public class MemberController {
         }catch(Exception e){
             return 0;
         }
-
-    }
-
-
-
-
+    }// 이메일 인증 end
 }

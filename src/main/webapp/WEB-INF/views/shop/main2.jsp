@@ -21,6 +21,7 @@
         <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
         <!-- Libraries Stylesheet -->
         <link href="/test/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
@@ -32,6 +33,7 @@
 
         <!-- Template Stylesheet -->
         <link href="/test/css/style.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -43,46 +45,91 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar start -->
-        <div class="container-fluid fixed-top">
-            <div class="container topbar bg-primary d-none d-lg-block">
-                <div class="d-flex justify-content-between">
-                    <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">김기원 공부용 사이트</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">kkw0307@naver.com</a></small>
-                    </div>
-                </div>
-            </div>
-            <div class="container px-0">
-                <nav class="navbar navbar-light bg-white navbar-expand-xl">
+       <!-- Navbar start -->
+       <div class="container-fluid fixed-top">
+           <div class="container topbar bg-primary d-none d-lg-block">
+               <div class="d-flex justify-content-between">
+                   <div class="top-info ps-2">
+                       <small class="me-3">
+                           <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
+                           <a href="#" class="text-white">김기원 공부용 사이트</a>
+                       </small>
+                       <small class="me-3">
+                           <i class="fas fa-envelope me-2 text-secondary"></i>
+                           <a href="#" class="text-white">kkw0307@naver.com</a>
+                       </small>
+                   </div>
+               </div>
+           </div>
+           <div class="container px-0">
+               <nav class="navbar navbar-light bg-white navbar-expand-xl">
 
-                    <a href="/shop/main2" class="navbar-brand"><h1 class="text-primary display-6">Shop</h1></a>
+                   <!-- 로고 -->
+                   <a href="/shop/main2" class="navbar-brand">
+                       <h1 class="text-primary display-6">Shoe Heaven</h1>
+                   </a>
 
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
+                   <!-- 가운데 home, Q&A -->
+                   <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                       <div class="navbar-nav mx-auto">
+                           <a href="/shop/main2" class="nav-item nav-link active">Home</a>
+                           <a href="/shop/Qna" class="nav-item nav-link">Q & A</a>
+                       </div>
 
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto">
-                            <a href="/shop/main2" class="nav-item nav-link active">Home</a>
-                            <a href="/shop/Qna" class="nav-item nav-link">Q & A</a>
+                       <!-- 오른쪽 검색, 장바구니, 프로필 -->
+                       <div class="d-flex m-3 me-0 align-items-center">
 
-                        </div>
-                        <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="#" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                            </a>
-                            <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!-- Navbar End -->
+                           <!-- 검색 버튼 -->
+                           <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+                               <i class="fas fa-search text-primary"></i>
+                           </button>
+
+                           <!-- 장바구니 로그인한 후 표시 -->
+                           <c:if test="${member != null }">
+                               <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto"></a>
+                           </c:if>
+
+                           <!-- 프로필 메뉴 -->
+                           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                               <li class="nav-item dropdown">
+                                   <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                       <i class="fas fa-user fa-2x"></i>
+                                   </a>
+
+                                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                       <!-- 회원이 없을 경우 로그인/회원가입 링크 -->
+                                       <c:if test="${member == null }">
+                                           <li><a class="dropdown-item" href="/member/login"> 로그인</a></li>
+                                           <li><a class="dropdown-item" href="/member/join"> 회원가입</a></li>
+                                       </c:if>
+
+                                       <!-- 관리자인 경우 관리자 페이지 링크 -->
+                                       <c:if test="${member.adminCk == 1}">
+                                           <li><a class="dropdown-item" href="/admin/main"> 관리자 페이지 </a></li>
+                                       </c:if>
+
+                                       <li><hr class="dropdown-divider"></li>
+
+                                       <!-- 회원이 있을 경우 충전 금액, 포인트 및 내 정보, 로그아웃 링크 -->
+                                       <c:if test="${member != null }">
+                                           <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
+                                           <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
+                                           <li><a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person"></i> 내정보</a></li>
+                                           <li><a class="dropdown-item" id="logout_btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
+                                       </c:if>
+
+                                   </ul>
+                               </li>
+                           </ul>
+
+                       </div> <!-- d-flex end -->
+                   </div> <!-- navbar-collapse end -->
+               </nav>
+           </div> <!-- container px-0 end -->
+       </div> <!-- container-fluid end -->
+       <!-- Navbar End -->
+
 
 
         <!-- Modal Search Start -->
@@ -187,175 +234,60 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="tab-content">
-                        <div id="tab-1" class="tab-pane fade show p-0 active">
+
+                        <div id="tab-2" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
                                 <div class="col-lg-12">
                                     <div class="row g-4">
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+
+                                        <c:forEach items="${product}" var="product">
+                                            <div class="col-md-6 col-lg-4 col-xl-3">
+                                                <div class="rounded position-relative fruite-item">
+
+                                                    <div class="result-${product.p_id}"></div>
+
+                                                    <!-- 상품 태그 -->
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Man</div>
+
+                                                    <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <!-- 상품 이름 -->
+                                                        <h4><c:out value="${product.p_name}"/></h4>
+
+                                                        <!-- 상품 내용 -->
+                                                        <p><c:out value="${product.p_content}"/></p>
+
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                            <!-- 상품 가격 -->
+                                                            <p class="text-dark fs-5 fw-bold mb-0">
+                                                                <fmt:formatNumber value="${product.p_price}" pattern="#,###"/> 원
+                                                            </p>
+
+                                                            <!-- 장바구니 버튼 (로그인 여부에 따른 버튼 표시) -->
+                                                            <c:if test="${member != null}">
+                                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary bucket_btn" id="${product.p_id}">
+                                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart
+                                                                </a>
+                                                            </c:if>
+
+                                                            <c:if test="${member == null}">
+                                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary bucket_noLoginBtn" id="${product.p_id}">
+                                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i>Add to cart
+                                                                </a>
+                                                            </c:if>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Raspberries</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Apricots</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Banana</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Oranges</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Raspberries</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-4 col-xl-3">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/test/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Grapes</h4>
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <div id="tab-2" class="tab-pane fade show p-0">
                             <div class="row g-4">
                                 <div class="col-lg-12">
@@ -1185,6 +1117,106 @@
 
     <!-- Template Javascript -->
     <script src="/test/js/main.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+
+      $(document).ready(function() {
+
+          // member_id 가져오기
+          var member_id = '<c:out value="${member.member_id}"/>';
+
+          // 장바구니 사이즈 가져오기
+          $.getJSON("/shop/getBucketSize", { member_id: member_id }, function(size) {
+              console.log("사이즈: " + size);
+
+              // 장바구니 아이콘과 사이즈 표시
+              var str = "";
+              str += "<i class='fa fa-shopping-bag fa-2x'></i>";
+              str += "<span class='position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1' style='top: -5px; left: 15px; height: 20px; min-width: 20px;'>" + size + "</span>";
+
+              // 장바구니 아이콘을 원하는 위치에 추가
+              $(".my-auto").append(str);
+          });
+
+          // 로그아웃 버튼 클릭 시 start
+          $("#logout_btn").on("click", function(e) {
+
+              $.ajax({
+                  type: "post",
+                  url: "/member/logout",
+                  success: function() {
+                      alert("로그아웃 되었습니다.");
+                      self.location = "/shop/main";  // 로그아웃 후 메인 페이지로 이동
+                  }
+              }); // ajax
+          }); // 로그아웃 버튼 클릭 시 end
+
+          // 상품 이미지 추가
+          <c:forEach items="${product}" var="product">
+              var uploadPath = '<c:out value="${product.attachUploadPath}"/>';
+              var uuid = '<c:out value="${product.attachUuid}"/>';
+              var filename = '<c:out value="${product.attachFilename}"/>';
+              var uploadResult = $(".result-${product.p_id}");
+              var fileCallPath = encodeURIComponent("C:\\upload2\\" + uploadPath + "/" + uuid + "_" + filename);
+
+              var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="img-fluid w-100 rounded-top" style="height:368px;">';
+              uploadResult.append(imageTag);
+          </c:forEach>
+
+          // 로그인 후 장바구니 추가 버튼 클릭시 start
+          $(".bucket_btn").on("click", function(e) {
+
+              e.preventDefault();
+
+              var productPrice = $(this).parent().find(".text-dark").text().trim().replace("원", "").replace(",", "").trim();
+              var quantity = 1;
+              var p_id = $(this).attr('id');
+              var member_id = '<c:out value="${member.member_id}"/>';
+
+              var data = {
+                  price: productPrice,
+                  p_id: p_id,
+                  quantity: quantity,
+                  member_id: member_id
+              };
+
+              $.ajax({
+                  type: "POST",
+                  url: "/bucket/insert",
+                  contentType: 'application/json',
+                  data: JSON.stringify(data),
+                  success: function(response) {
+                      console.log("전송 성공!");
+                      console.log("서버 응답:", response);
+                      alert("장바구니에 담겼습니다.");
+                      if (confirm("장바구니로 이동하시겠습니까?")) {
+                          location.href = "/bucket/main?member_id=" + member_id;
+                      }
+                  },
+                  error: function(xhr, status, error) {
+                      console.error("전송 실패:", error);
+                  }
+              }); // ajax
+          }); // 로그인 후 장바구니 추가 버튼 클릭시 end
+
+            // 비로그인 상태 장바구니 눌렀을 경우 start
+           $(".bucket_noLoginBtn").on("click",function(e){
+
+                e.preventDefault();
+
+                alert("로그인후 이용가능합니다.");
+                location.href="/member/login";
+           });// 비로그인 상태 장바구니 눌렀을 경우 end
+
+
+      }); // $(document).ready(function())
+
+
+    </script>
+
+
     </body>
 
 </html>

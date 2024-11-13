@@ -178,7 +178,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.05)),   linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), /* 반투명 오버레이 추가 */url();
+    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.05)),   linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), /* 반투명 오버레이 추가 */url(https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547_640.jpg);
     background-position: center center;
     background-blend-mode: overlay; /* 두 개의 배경을 섞는 방식 설정 */
     background-repeat: no-repeat;

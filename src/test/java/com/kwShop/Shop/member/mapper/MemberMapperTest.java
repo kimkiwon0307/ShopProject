@@ -1,5 +1,6 @@
 package com.kwShop.Shop.member.mapper;
 
+import com.kwShop.Shop.member.vo.Criteria;
 import com.kwShop.Shop.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -79,8 +80,20 @@ class MemberMapperTest {
     @Test
     @DisplayName("멤버 목록")
     public void memberList() {
+        Criteria cri = new Criteria(1,10);
 
-       List<MemberVO> Members = mapper.memberList();
+       List<MemberVO> Members = mapper.memberList(cri);
        Members.forEach(list -> log.info(list.toString()));
+    }
+
+    @Test
+    @DisplayName("멤버 총인원")
+    public void memberTotalTest(){
+        Criteria cri = new Criteria(1, 10);
+
+        int members = mapper.memberTotal(cri);
+
+        log.info("총인원 : {}", members);
+
     }
 }

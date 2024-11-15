@@ -1,11 +1,14 @@
 package com.kwShop.Shop.member.service;
 
+import com.kwShop.Shop.member.vo.Criteria;
 import com.kwShop.Shop.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,5 +76,14 @@ class MemberServiceImplTest {
         MemberVO findmember = service.memberLogin(member_id, member_pw);
 
         log.info(findmember.toString());   // 찾아온 멤버 toString으로 보기
+    }
+
+    @Test
+    @DisplayName("회원 목록 테스트")
+    public void memberListTest() throws Exception {
+        Criteria cri = new Criteria(1,10);
+
+        List<MemberVO> Members = service.memberList(cri);
+        Members.forEach(list -> log.info(list.toString()));
     }
 }

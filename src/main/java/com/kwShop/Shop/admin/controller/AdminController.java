@@ -4,6 +4,7 @@ import com.kwShop.Shop.admin.mapper.AdminMapper;
 import com.kwShop.Shop.admin.service.AdminService;
 import com.kwShop.Shop.admin.vo.*;
 import com.kwShop.Shop.member.service.MemberService;
+import com.kwShop.Shop.member.vo.MemberPageDTO;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
@@ -52,7 +53,7 @@ public class AdminController {
 
         model.addAttribute("pageMaker", pageMaker);
 
-        model.addAttribute("members", memberService.memberList());
+        model.addAttribute("members", memberService.memberList(new com.kwShop.Shop.member.vo.Criteria()));
 
     }
 
@@ -136,9 +137,16 @@ public class AdminController {
 
     //회원관리
     @GetMapping("/memberManage")
-    public void memberManage(Model model) throws Exception {
+    public void memberManage(com.kwShop.Shop.member.vo.Criteria cri, Model model) throws Exception {
 
-        model.addAttribute("members", memberService.memberList());
+        model.addAttribute("members", memberService.memberList(cri));
+
+        int total = memberService.memberTotal(cri);
+
+        MemberPageDTO pageMaker = new MemberPageDTO(cri, total);
+
+        model.addAttribute("pageMaker", pageMaker);
+
     }
 
     @DeleteMapping("/MemberDelete")

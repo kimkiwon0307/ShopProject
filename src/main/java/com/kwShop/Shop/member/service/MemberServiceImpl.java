@@ -1,6 +1,7 @@
 package com.kwShop.Shop.member.service;
 
 import com.kwShop.Shop.member.mapper.MemberMapper;
+import com.kwShop.Shop.member.vo.Criteria;
 import com.kwShop.Shop.member.vo.MemberVO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<MemberVO> memberList() throws Exception {
-        return mapper.memberList();
+    public List<MemberVO> memberList(Criteria cri) throws Exception {
+        return mapper.memberList(cri);
     }
 
     @Override
@@ -49,6 +50,11 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public MemberVO profile(String member_id) throws Exception {
         return mapper.profile(member_id);
+    }
+
+    @Override
+    public int memberTotal(Criteria cri) throws Exception {
+        return mapper.memberTotal(cri);
     }
 
     @Override

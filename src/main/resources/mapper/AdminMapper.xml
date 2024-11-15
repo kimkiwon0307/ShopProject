@@ -51,7 +51,7 @@
 
 
 
-<!-- 상품 총 갯수-->
+    <!-- 상품 총 갯수-->
     <select id="productTotal" resultType="int">
 
         select count(*)

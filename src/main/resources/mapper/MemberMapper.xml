@@ -21,10 +21,33 @@
         select count(*) from tbl_member where member_id = #{member_id}
     </select>
 
-    <!-- 회원 목록-->
-    <select id="memberList">
 
-        select * from tbl_member;
+    <!--
+
+           SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity, p.p_categoryCode, p.p_categoryName,p.p_discount,
+        a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename
+
+        FROM tbl_product p
+        LEFT JOIN tbl_attach a ON p.p_id = a.p_id
+        <if test="keyword != null">
+            WHERE p.p_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY p.p_id DESC
+        LIMIT #{offset}, #{amount}
+
+        -->
+
+    <!-- 회원 목록-->
+    <select id="memberList" resultType="com.kwShop.Shop.member.vo.MemberVO">
+
+        SELECT member_id, member_name, member_mail, adminCk, regDate
+        FROM tbl_member
+        <if test="keyword != null">
+            WHERE member_id LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+
+        ORDER BY member_id DESC
+        LIMIT #{offset}, #{amount}
 
     </select>
 
@@ -48,5 +71,11 @@
         set member_pw = #{member_pw}, member_name = #{member_name}, member_mail = #{member_mail}, member_Addr1 = #{member_Addr1}, member_Addr2 = #{member_Addr2}, member_Addr3 = #{member_Addr3}
 
     </update>
+
+
+    <select id="memberTotal" resultType="int">
+        SELECT count(*)
+        FROM tbl_member;
+    </select>
 
 </mapper>

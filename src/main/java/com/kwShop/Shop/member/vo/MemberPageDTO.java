@@ -1,9 +1,9 @@
-package com.kwShop.Shop.admin.vo;
+package com.kwShop.Shop.member.vo;
 
 import lombok.Data;
 
 @Data
-public class PageDTO {
+public class MemberPageDTO {
 
     private int pageStart; //페이지 시작 번호
     private int pageEnd;  // 페이지 끝 번호
@@ -11,7 +11,7 @@ public class PageDTO {
     private int total; // 전체 갯수
     private Criteria cri;
 
-    public PageDTO(Criteria cri, int total) {
+    public MemberPageDTO(Criteria cri, int total) {
         this.cri = cri;
         this.total = total;
         this.pageEnd = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10;

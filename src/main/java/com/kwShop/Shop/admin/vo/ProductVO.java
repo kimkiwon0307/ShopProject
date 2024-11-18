@@ -24,11 +24,12 @@ public class ProductVO {
     @NotEmpty(message = "상품 내용을 입력하세요.")
     private String p_content;    //   상품 등록 내용
 
-    @NotNull(message = "상품 갯수를 입력하세요.")
+    @NotNull(message = "상품 갯수 (0 ~ 100) 를 입력하세요.")
     @PositiveOrZero(message = "수량은 0 이상이어야 합니다.")
+    @Max(100)
     private Integer  p_quantity;        // 상품 갯수
 
-    @NotNull(message = "상품 할인율을 입력하세요.")
+    @NotNull(message = "상품 할인율(0~99) 을 입력하세요.")
     @Min(value = 0, message = "할인은 0% 이상이어야 합니다.")
     @Max(value = 99, message = "할인은 99% 이하이어야 합니다.")
     private Double  p_discount; // 상품 할인 확률

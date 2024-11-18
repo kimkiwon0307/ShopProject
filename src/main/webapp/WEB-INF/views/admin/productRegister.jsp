@@ -242,44 +242,43 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
    <script>
-          $(document).ready(function(){
+     $(document).ready(function() {
 
-            //카테고리 중분류
-               $('#categorySelect').on('change', function() {
-                   var selectedCategory = $(this).val();
+         // 카테고리 중분류 선택
+         $('#categorySelect').on('change', function() {
 
+             var selectedCategory = $(this).val();
 
-                   if (selectedCategory === "none") {
-                       return;
-                   }
+             if (selectedCategory === "none") {
+                 return;
+             }
 
+             var url = 'getSubCategories?cateCode=' + selectedCategory;
 
-                   var url = 'getSubCategories?cateCode=' + selectedCategory;
+             $.ajax({
+                 url: url,
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(subCategoryList) {
+                     var $subCategorySelect = $('#subCategorySelect');
 
-                   // Ajax 요청
-                   $.ajax({
-                       url: url,
-                       type: 'GET',
-                       dataType: 'json', // 서버에서 JSON 응답을 받을 예정
-                       success: function(subCategoryList) {
-                        var $subCategorySelect = $('#subCategorySelect');
-                        $subCategorySelect.html('<option selected value="none">중분류를 선택하세요</option>');
+                     // 기존 옵션을 초기화하고 "중분류를 선택하세요" 옵션 추가
+                     $subCategorySelect.html('<option selected value="none">중분류를 선택하세요</option>');
 
-               // 새로운 중분류 옵션 추가
-                $.each(subCategoryList, function(index, subCategory) {
-                // 서버에서 받은 각각의 중분류 데이터를 option 태그로 추가
-                var option = $('<option></option>').val(subCategory.cateName).text(subCategory.cateName);
-                $subCategorySelect.append(option);
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: ", error);
-            console.log("Response Text: ", xhr.responseText); // 오류가 발생하면 서버 응답을 확인
-        }
-                   });
-               });
-
-
+                     // 새로운 중분류 옵션 추가
+                     $.each(subCategoryList, function(index, subCategory) {
+                         var option = $('<option></option>')
+                             .val(subCategory.cateName)  // 값 설정
+                             .text(subCategory.cateName); // 텍스트 설정
+                         $subCategorySelect.append(option);
+                     });
+                 },
+                 error: function(xhr, status, error) {
+                     console.error("Error: ", error);
+                     console.log("Response Text: ", xhr.responseText); // 오류가 발생하면 서버 응답을 확인
+                 }
+             });
+          });
 
 var formObj = $("#formObj");
 var obj; // obj가 어떻게 초기화되는지 확인 필요
@@ -361,6 +360,7 @@ $("#product_register_btn1").on("click", function(e) {
 
         formObj.submit();
     }
+
 });
 
 
@@ -497,7 +497,6 @@ $("#product_register_btn1").on("click", function(e) {
                                    return;
                                    }
 
-
                });
 
 
@@ -533,7 +532,7 @@ $("#product_register_btn1").on("click", function(e) {
                           uploadResult2.append(str);
 
                           formObj.submit();
-                 })
+                 });
 
           });
 

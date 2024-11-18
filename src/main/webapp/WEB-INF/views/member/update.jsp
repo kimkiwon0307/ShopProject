@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +20,7 @@
   <div class="signup-container">
 
     <form class="signup-form" action="/member/update" method="post" id="joinForm">
+
            <c:if test="${not empty errors}">
                  <div class="alert alert-danger" role="alert">
                      <strong>유효성 검사 에러:</strong>
@@ -30,20 +30,26 @@
                             </c:forEach>
                         </ul>
                   </div>
-              </c:if>
+           </c:if>
 
       <h2>내 정보 수정</h2>
 
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-            <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' value="${Member.member_id}" readonly>
+             <input type="text"  class="form-control" id="id_check" placeholder="아이디"  name='member_id' value="${member.member_id}" readonly>
+
       </div>
 
       <div class="input-group" style="margin-bottom:20px;">
         <span class="input-group-text"><i class="bi bi-key"></i></span>
-        <input type="password" class="form-control" placeholder="비밀번호" id="member_password"  name= 'member_pw' value="${Member.member_pw}">
+        <input type="password" class="form-control" placeholder="비밀번호" id="member_password"  name= 'member_pw' value="${member.member_pw}">
+
+
+
         <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
         <input type="password"  class="form-control" id="pw_check" placeholder="비밀번호 확인" >
+
+
      	<span  class="input-group" id="s_pwd_check_success">비밀번호가 같습니다.</span>
 	 	<span  class="input-group" id="s_pwd_check_fail">비밀번호가 다릅니다.</span>
       </div>
@@ -51,13 +57,13 @@
 
        <div class="input-group" style="margin-bottom:20px;">
              <span class="input-group-text"><i class="bi bi-vector-pen"></i></span>
-            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" value="${Member.member_name}">
+            <input type="text" class="form-control" id="nameCk" name="member_name" placeholder="이름" value="${member.member_name}">
 
       </div>
 
      <div class="input-group" style="margin-bottom:20px;">
            <span class="input-group-text"><i class="bi bi-mailbox"></i></span>
-           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' value="${Member.member_mail}">
+           <input type="email" id="mail_chk" class="form-control" placeholder="이메일"  name='member_mail' value="${member.member_mail}">
            <button class="btn btn-outline-secondary" type="button" id="email_chcK_btn"  >인증번호 전송</button>
       </div>
 
@@ -70,22 +76,23 @@
 
     <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-       <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1' value="${Member.member_Addr1}"  >
+       <input type="text" class="form-control" placeholder="지역번호" aria-label="Recipient's username" aria-describedby="button-addon2"   id='address_input_1' name='member_Addr1' value="${member.member_Addr1}"  >
        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="execution_daum_address()" >주소찾기</button>
      </div>
 
       <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-         <input type="text" class="form-control" placeholder="주소" id='address_input_2'name='member_Addr2' value="${Member.member_Addr2}" >
+         <input type="text" class="form-control" placeholder="주소" id='address_input_2'name='member_Addr2' value="${member.member_Addr2}" >
       </div>
 
       <div class="input-group" style="margin-bottom:20px;">
        <span class="input-group-text"><i class="bi bi-building"></i></span>
-         <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3' value="${Member.member_Addr3}" >
+         <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3' value="${member.member_Addr3}" >
       </div>
 
       <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">수정 완료</button>
       <button type="button" class="btn btn-danger" id="loginBtn">취소</button>
+
     </form>
   </div>
 

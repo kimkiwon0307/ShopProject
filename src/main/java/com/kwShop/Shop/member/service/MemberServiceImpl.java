@@ -4,12 +4,13 @@ import com.kwShop.Shop.member.mapper.MemberMapper;
 import com.kwShop.Shop.member.vo.Criteria;
 import com.kwShop.Shop.member.vo.MemberVO;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper mapper;
@@ -39,6 +40,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public List<MemberVO> memberList(Criteria cri) throws Exception {
+        System.out.println(cri.toString());
+        cri.setOffset( (cri.getPageNum() - 1) * cri.getAmount());
+        System.out.println(cri.toString());
         return mapper.memberList(cri);
     }
 

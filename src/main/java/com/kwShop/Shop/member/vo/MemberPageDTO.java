@@ -12,6 +12,7 @@ public class MemberPageDTO {
     private Criteria cri;
 
     public MemberPageDTO(Criteria cri, int total) {
+
         this.cri = cri;
         this.total = total;
         this.pageEnd = (int) (Math.ceil(cri.getPageNum() / 10.0)) * 10;

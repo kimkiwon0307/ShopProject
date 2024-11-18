@@ -36,7 +36,7 @@ public class MemberController {
     @GetMapping({"/profile","/update"})
     public void profile(String member_id, Model model) throws Exception {
 
-        model.addAttribute("Member", service.profile(member_id));
+        model.addAttribute("member", service.profile(member_id));
     }
 
 
@@ -63,10 +63,15 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
+
+
+
     @PostMapping("/update")
-    public String update(@Valid MemberVO member, BindingResult bindingResult,Model model) throws  Exception {
+    public String update(@Valid MemberVO member, BindingResult bindingResult, Model model) throws Exception {
+
         log.info("업데이트" + member.toString());
-        if(bindingResult.hasErrors()){
+
+        if (bindingResult.hasErrors()) {
 
             model.addAttribute("errors", bindingResult.getAllErrors());
             model.addAttribute("member", member);

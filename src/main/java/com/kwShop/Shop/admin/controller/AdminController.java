@@ -139,6 +139,8 @@ public class AdminController {
     @GetMapping("/memberManage")
     public void memberManage(com.kwShop.Shop.member.vo.Criteria cri, Model model) throws Exception {
 
+        log.info(cri.toString());
+
         model.addAttribute("members", memberService.memberList(cri));
 
         int total = memberService.memberTotal(cri);

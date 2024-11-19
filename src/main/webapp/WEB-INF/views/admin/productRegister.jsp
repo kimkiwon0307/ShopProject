@@ -436,7 +436,7 @@
                               var filename = obj.fileName;
                               var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename);
                           // var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename);
-                           var imageTag = '<div style="position: relative; display: inline-block;"> <img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..." style="margin-bottom:20px;">' +
+                             var imageTag = '<div style="position: relative; display: inline-block;"> <img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..." style="margin-bottom:20px;">' +
                                           '<button class="deleteImgBtn" style="position: absolute; top: 0; right: 0;" id="deleteImgBtn" data-imgpath =' + fileCallPath + '>  <i class="bi bi-x-circle"></i></button></div>';
 
                              uploadResult.append(imageTag);
@@ -451,9 +451,9 @@
 
 
 
-                /* var, method related with attachFile */
-                	let regex = new RegExp("(.*?)\.(jpg|png)$");
-                	let maxSize = 1048576; //1MB
+                    /* 이미지 파일 체크 */
+                	var regex = new RegExp("(.*?)\.(jpg|png)$");
+                	var maxSize = 1048576; //1MB
 
                 	function fileCheck(fileName, fileSize){
 

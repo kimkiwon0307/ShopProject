@@ -37,6 +37,7 @@
     </select>-->
 
     <select id="productList" resultType="com.kwShop.Shop.admin.vo.ProductVO">
+
         SELECT p.p_id, p.p_name, p.p_price, p.p_title, p.p_content, p.p_date, p.p_udate, p.p_quantity, p.p_categoryCode, p.p_categoryName,p.p_discount,
         a.uuid AS attachUuid, a.uploadPath AS attachUploadPath, a.filename AS attachFilename
 

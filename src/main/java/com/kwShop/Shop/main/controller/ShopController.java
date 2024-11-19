@@ -48,24 +48,8 @@ public class ShopController {
 
         PageDTO pageMaker = new PageDTO(cri, total);
 
-        List<ProductVO> productss = service.productList(cri);
-
-        List<ProductVO> product = new ArrayList<>();
-
-
-        for(ProductVO products : productss){
-
-            log.info("C:\\upload2\\"+products.getAttachUploadPath()+"/"+products.getAttachUuid()+"_"+products.getAttachFilename());
-
-            products.setAttachUploadPath(products.getAttachUploadPath().replaceAll("\\\\","\\\\\\\\"));
-
-            product.add(products);
-        }
-
-        log.info(product.toString());
-
         model.addAttribute("pageMaker", pageMaker);
-        model.addAttribute("product", product);
+        model.addAttribute("product", service.productList(cri));
 
 
     }
@@ -85,6 +69,7 @@ public class ShopController {
     @GetMapping("/getAttachList")
     @ResponseBody
     public ResponseEntity<List<AttachImageVO>> getAttachList(@RequestParam("p_id") int p_id) {
+
 
         return new ResponseEntity<>(service.productImages(p_id), HttpStatus.OK);
     }

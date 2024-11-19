@@ -7,6 +7,7 @@ import com.kwShop.Shop.member.service.MemberService;
 import com.kwShop.Shop.member.vo.MemberPageDTO;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -91,7 +94,7 @@ public class AdminController {
     //상품 리스트
     @GetMapping("/productList")
     public void productList(Model model, Criteria cri) throws Exception{
-        log.info("상품 리스트");
+        service.productList(cri).forEach(i -> log.info(i.toString()));
         model.addAttribute("list", service.productList(cri));
     }
 
@@ -217,6 +220,16 @@ public class AdminController {
             /* 파일 저장 */
             try {
                 uploadFile.transferTo(saveFile);
+
+                String thumbnailFileName = "thumb_" + uploadFileName;
+                Path thumbnailPath = Paths.get(String.valueOf(uploadPath), thumbnailFileName);
+                File thumbnailFile = thumbnailPath.toFile();
+
+                Thumbnails.of(saveFile)
+                        .size(200, 200) // 섬네일 크기 설정
+                        .toFile(thumbnailFile);
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

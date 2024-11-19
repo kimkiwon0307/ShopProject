@@ -298,7 +298,7 @@
 
                       var filename = '<c:out value="${product.attachFilename}"/>';
                       var uploadResult = $(".result-${product.p_id}");
-                      var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename);
+                      var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/thumb_"+uuid+"_"+filename);
                      // var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename);
                       var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..."  style="height:368px;">';
 

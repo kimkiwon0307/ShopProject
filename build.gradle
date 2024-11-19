@@ -49,6 +49,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'// 유효성검사 (@Notblank)
 	//implementation 'org.springframework.boot:spring-boot-starter-security' //  BCryptPasswordEncoder 사용을 위해 추가
 
+	implementation 'net.coobird:thumbnailator:0.4.18' // 썸네일
+
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
 

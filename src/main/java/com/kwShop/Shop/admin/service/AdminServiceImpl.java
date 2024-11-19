@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,7 +39,17 @@ public class AdminServiceImpl implements AdminService {
         int offset = (cri.getPageNum() - 1) * cri.getAmount();
         int amount = cri.getAmount();
         String keyword = cri.getKeyword();
-        return mapper.productList(offset, amount, keyword);
+
+        List<ProductVO> product = new ArrayList<>();
+
+        for(ProductVO products :  mapper.productList(offset, amount, keyword)){
+
+            products.setAttachUploadPath(products.getAttachUploadPath().replaceAll("\\\\","\\\\\\\\"));
+
+            product.add(products);
+        }
+
+        return product;
     }
 
     // 상품 수정

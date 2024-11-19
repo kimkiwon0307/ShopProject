@@ -64,8 +64,6 @@ public class MemberController {
     }
 
 
-
-
     @PostMapping("/update")
     public String update(@Valid MemberVO member, BindingResult bindingResult, Model model) throws Exception {
 
@@ -94,7 +92,8 @@ public class MemberController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity<String> member_login(@RequestParam("member_id") String member_id, @RequestParam("member_pw") String member_pw, HttpServletRequest request) throws Exception {
+    public ResponseEntity<String> member_login(@RequestParam("member_id") String member_id,
+                                               @RequestParam("member_pw") String member_pw, HttpServletRequest request) throws Exception {
 
         log.info(member_id + ":" + member_pw);
 

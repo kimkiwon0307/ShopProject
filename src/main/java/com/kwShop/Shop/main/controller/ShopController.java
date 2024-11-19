@@ -62,6 +62,7 @@ public class ShopController {
             product.add(products);
         }
 
+        log.info(product.toString());
 
         model.addAttribute("pageMaker", pageMaker);
         model.addAttribute("product", product);

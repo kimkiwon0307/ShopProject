@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 <!DOCTYPE html>
@@ -138,7 +139,6 @@
     <div class="container mt-5">
         <h1 class="mb-4">상품 등록 </h1>
 
-
       <div class="container mt-3">
          <ul class="list-group list-group-horizontal">
            <li class="list-group-item" id="productManage"><a href="/admin/main"> 상품 관리</a></li>
@@ -146,11 +146,13 @@
            <li class="list-group-item" id="memberManage"><a href="/admin/memberManage"> 회원 관리</a></li>
          </ul>
        </div>
+
         <!-- 상품 추가 폼 -->
         <div class="card mt-5">
             <div class="card-header">
               <button  class="btn btn-success" id="product_register_btn"> 상품 등록 </button>
             </div>
+
             <div class="card-body" id="product_register_card">
 
                           <c:if test="${not empty errors}">
@@ -164,7 +166,9 @@
                               </div>
                           </c:if>
 
-               <form role="form" method="post" action="/admin/productRegister" id="formObj" >
+
+
+                <form:form method="post" action="/admin/productRegister" modelAttribute="product" id="formObj">
 
                       <div class="form-group" style="margin-bottom:20px;">
                             <label for="product_name"><span class="badge bg-primary">대분류</span></label>
@@ -177,6 +181,7 @@
                                </c:forEach>
                             </select>
                       </div>
+
                      <div class="form-group" style="margin-bottom:20px;">
                              <label for="product_name"><span class="badge bg-primary">중분류</span></label>
                              <select class="form-select" name="p_categoryName" id="subCategorySelect" >
@@ -186,32 +191,39 @@
 
                      <div class="form-group" style="margin-bottom:20px;">
                            <label for="product_name"><span class="badge bg-primary">상품 이름</span></label>
-                           <input type="text" class="form-control" name="p_name" placeholder="상품 이름을 입력하세요"/>
+                                <form:input path="p_name" type="text" class="form-control" placeholder="이름을 입력하세요"/>
+                                <form:errors path="p_name" cssClass="text-danger" />
+
                        </div>
 
                    <div class="form-group" style="margin-bottom:20px;">
                      <label for="product_price"><span class="badge bg-primary">상품 가격</span></label>
-                     <input type="number" class="form-control" name="p_price" placeholder="상품 가격을 입력하세요" >
+                       <form:input path="p_price" type="text"  class="form-control" placeholder="가격을 입력하세요" />
+                       <form:errors path="p_price" cssClass="text-danger" />
                    </div>
 
                     <div class="form-group" style="margin-bottom:20px;">
                       <label for="product_price"><span class="badge bg-primary">상품 할인율</span></label>
-                      <input type="number" class="form-control" name="p_discount" placeholder="상품 할인율을 입력하세요. (1.00 ~ 99.00)" >
+                         <form:input path="p_discount" type="text" class="form-control" placeholder="할인율을 입력하세요"/>
+                         <form:errors path="p_discount" cssClass="text-danger" />
                     </div>
 
 
                     <div class="form-group" style="margin-bottom:20px;">
                       <label for="product_price"><span class="badge bg-primary">등록 제목</span></label>
-                      <input type="text" class="form-control" name="p_title"  placeholder="상품 등록 제목을 입력하세요" >
+                        <form:input path="p_title" type="text"  class="form-control" placeholder="상품 등록 제목을 입력하세요"/>
+                        <form:errors path="p_title" cssClass="text-danger" />
                     </div>
 
                     <div class="form-group" style="margin-bottom:20px;">
                        <label for="product_price"><span class="badge bg-primary">등록 내용</span></label>
-                       <input type="text" class="form-control"  name="p_content" placeholder="상품 판매 내용을 입력하세요." >
+                       <form:input path="p_content" type="text"  class="form-control" placeholder="상품 등록 내용을 입력하세요" />
+                       <form:errors path="p_content" cssClass="text-danger" />
                     </div>
                     <div class="form-group" style="margin-bottom:20px;">
                         <label for="product_price"><span class="badge bg-primary">상품 수량</span></label>
-                        <input type="number" class="form-control" name="p_quantity" placeholder="상품 수량을 입력하세요." >
+                        <form:input path="p_quantity" type="text"  class="form-control" placeholder="상품 수량을 입력하세요"/>
+                        <form:errors path="p_quantity" cssClass="text-danger" />
                     </div>
                 <br>
                 <div class="form-group" style="margin-bottom:20px;">
@@ -224,18 +236,86 @@
                 	</ul>
                 </div>
                 <div>
-                        <button type="submit" class="btn btn-primary" id="product_register_btn1">상품 등록</button>
+                        <button type="submit" class="btn btn-primary" id="register_btn">상품 등록</button>
                         <button type="button" class="btn btn-danger" id="cancle_btn">취소</button>
                 </div>
-                </form>
+               </form:form>
             </div>
         </div>
     </div>
+     <!-- Footer Start -->
+            <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+                <div class="container py-5">
+                    <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
+                        <div class="row g-4">
+                            <div class="col-lg-3">
+                                <a href="#">
+                                    <h1 class="text-primary mb-0">Fruitables</h1>
+                                    <p class="text-secondary mb-0">Fresh products</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="position-relative mx-auto">
+                                    <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="number" placeholder="Your Email">
+                                    <button type="submit" class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white" style="top: 0; right: 0;">Subscribe Now</button>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="d-flex justify-content-end pt-3">
+                                    <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                                    <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-5">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-item">
+                                <h4 class="text-light mb-3">Why People Like us!</h4>
+                                <p class="mb-4">typesetting, remaining essentially unchanged. It was
+                                    popularised in the 1960s with the like Aldus PageMaker including of Lorem Ipsum.</p>
+                                <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Read More</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column text-start footer-item">
+                                <h4 class="text-light mb-3">Shop Info</h4>
+                                <a class="btn-link" href="">About Us</a>
+                                <a class="btn-link" href="">Contact Us</a>
+                                <a class="btn-link" href="">Privacy Policy</a>
+                                <a class="btn-link" href="">Terms & Condition</a>
+                                <a class="btn-link" href="">Return Policy</a>
+                                <a class="btn-link" href="">FAQs & Help</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column text-start footer-item">
+                                <h4 class="text-light mb-3">Account</h4>
+                                <a class="btn-link" href="">My Account</a>
+                                <a class="btn-link" href="">Shop details</a>
+                                <a class="btn-link" href="">Shopping Cart</a>
+                                <a class="btn-link" href="">Wishlist</a>
+                                <a class="btn-link" href="">Order History</a>
+                                <a class="btn-link" href="">International Orders</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="footer-item">
+                                <h4 class="text-light mb-3">Contact</h4>
+                                <p>Address: 1429 Netus Rd, NY 48247</p>
+                                <p>Email: Example@gmail.com</p>
+                                <p>Phone: +0123 4567 8910</p>
+                                <p>Payment Accepted</p>
 
-      <!-- Footer-->
-            <footer class="py-5 bg-dark" style="margin-top : 20px;">
-                <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-            </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+
     <!-- Bootstrap JS 및 필요한 기타 스크립트 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -243,6 +323,11 @@
 
    <script>
      $(document).ready(function() {
+
+          $('#cancle_btn').on("click",function(e){
+                self.location="/admin/main";
+           })
+
 
          // 카테고리 중분류 선택
          $('#categorySelect').on('change', function() {
@@ -280,94 +365,45 @@
              });
           });
 
-var formObj = $("#formObj");
-var obj; // obj가 어떻게 초기화되는지 확인 필요
+             var formObj = $("#formObj");
+             var obj; // obj가 어떻게 초기화되는지 확인 필요
 
-// 유효성 검사 변수
-var product_name = false;
-var product_price = false;
-var product_discount = false;
-var product_title = false;
-var product_content = false;
-var product_quantity = false;
-var product_image = false;
 
-// 상품등록 버튼 눌렀을때
-$("#product_register_btn1").on("click", function(e) {
-    e.preventDefault();
+          // 상품등록 버튼 눌렀을때
+          $("#register_btn").on("click", function(e) {
+              e.preventDefault();
 
-    var p_name = $("input[name='p_name']").val();
-    var p_price = $("input[name='p_price']").val();
-    var p_discount = $("input[name='p_discount']").val();
-    var p_title = $("input[name='p_title']").val();
-    var p_content = $("input[name='p_content']").val();
-    var p_quantity = $("input[name='p_quantity']").val();
-    var p_image = $("input[name='uploadFile']").val();
+              var p_image = $("input[name='uploadFile']").val();
 
-    if (!p_name) {
-        alert("상품 이름을 등록하세요.");
-    } else {
-        product_name = true;
-    }
 
-    if (!p_price) {
-        alert("상품 가격을 등록하세요.");
-    } else {
-        product_price = true;
-    }
+              if (!p_image) {
+                  alert("이미지를 등록하세요.");
+              }
 
-    if (!p_discount) {
-        alert("할인율을 등록하세요. (1% ~ 99%)");
-    } else {
-        product_discount = true; // 수정
-    }
 
-    if (!p_title) {
-        alert("상품 설명 제목을 입력하세요.");
-    } else {
-        product_title = true;
-    }
+                  var str = "";
+                  var uploadResult = $("#uploadResult");
 
-    if (!p_content) {
-        alert("상품 설명 내용을 등록하세요.");
-    } else {
-        product_content = true;
-    }
+                  str += "<input type='hidden' name='attachList[0].fileName' value='" + obj.fileName + "'>";
+                  str += "<input type='hidden' name='attachList[0].uuid' value='" + obj.uuid + "'>";
+                  str += "<input type='hidden' name='attachList[0].uploadPath' value='" + obj.uploadPath + "'>";
 
-    if (!p_quantity) {
-        alert("상품 수량을 등록하세요.");
-    } else {
-        product_quantity = true;
-    }
+                  uploadResult.append(str);
 
-    if (!p_image) {
-        alert("이미지를 등록하세요.");
-    } else {
-        product_image = true;
-    }
+                  alert("상품이 등록되었습니다.");
 
-    if (product_name && product_price && product_discount && product_title && product_content && product_quantity && product_image) {
-        var str = "";
-        var uploadResult = $("#uploadResult");
+                  formObj.submit();
 
-        str += "<input type='hidden' name='attachList[0].fileName' value='" + obj.fileName + "'>";
-        str += "<input type='hidden' name='attachList[0].uuid' value='" + obj.uuid + "'>";
-        str += "<input type='hidden' name='attachList[0].uploadPath' value='" + obj.uploadPath + "'>";
 
-        uploadResult.append(str);
 
-        alert("상품이 등록되었습니다.");
-
-        formObj.submit();
-    }
-
-});
+          });
 
 
 
 
                 // 이미지 등록
                 // $("input[type='file']").on("change", function(e){
+
                  $("#product_image").on("change",function(e){
 
                         var formData = new FormData();

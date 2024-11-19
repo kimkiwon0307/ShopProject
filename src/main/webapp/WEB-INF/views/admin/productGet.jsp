@@ -1,8 +1,150 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@include file="../common/header.jsp"%>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shopping Mall Project</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/test/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/test/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/test/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/test/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+       <!-- Navbar start -->
+         <div class="container-fluid fixed-top">
+
+             <div class="container px-0">
+                 <nav class="navbar navbar-light bg-white navbar-expand-xl">
+
+                     <!-- 로고 -->
+                     <a href="/shop/main2" class="navbar-brand">
+                         <h1 class="text-primary display-6">Shoe Heaven</h1>
+                     </a>
+
+                     <!-- 가운데 home, Q&A -->
+                     <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+                         <div class="navbar-nav mx-auto">
+                             <a href="/shop/main2" class="nav-item nav-link">Home</a>
+                             <a href="/shop/Qna" class="nav-item nav-link">Q & A</a>
+                         </div>
+
+                         <!-- 오른쪽 검색, 장바구니, 프로필 -->
+                         <div class="d-flex m-3 me-0 align-items-center">
+
+
+                             <!-- 장바구니 로그인한 후 표시 -->
+                             <c:if test="${member != null }">
+                                 <a href="/bucket/main?member_id=${member.member_id}" class="position-relative me-4 my-auto"></a>
+                             </c:if>
+
+                             <!-- 프로필 메뉴 -->
+                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+                                 <li class="nav-item dropdown">
+                                     <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                         <i class="fas fa-user fa-2x"></i>
+                                     </a>
+
+                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                         <!-- 회원이 없을 경우 로그인/회원가입 링크 -->
+                                         <c:if test="${member == null }">
+                                             <li><a class="dropdown-item" href="/member/login"> 로그인</a></li>
+                                             <li><a class="dropdown-item" href="/member/join"> 회원가입</a></li>
+                                         </c:if>
+
+                                         <!-- 관리자인 경우 관리자 페이지 링크 -->
+                                         <c:if test="${member.adminCk == 1}">
+                                             <li><a class="dropdown-item" href="/admin/main"> 관리자 페이지 </a></li>
+                                         </c:if>
+
+                                         <li><hr class="dropdown-divider"></li>
+
+                                         <!-- 회원이 있을 경우 충전 금액, 포인트 및 내 정보, 로그아웃 링크 -->
+                                         <c:if test="${member != null }">
+                                             <li><a class="dropdown-item"><i class="bi bi-cash-coin"></i> 충전 금액 : ${member.money} 원</a></li>
+                                             <li><a class="dropdown-item"><i class="bi bi-coin"></i> 충전 포인트 : ${member.point} 원</a></li>
+                                             <li><a class="dropdown-item" href="/member/profile?member_id=${member.member_id}"><i class="bi bi-file-earmark-person"></i> 내정보</a></li>
+                                             <li><a class="dropdown-item" id="logout_btn" style="cursor: pointer;"><i class="fas fa-sign-out-alt fa-fw"></i> 로그아웃</a></li>
+                                         </c:if>
+
+                                     </ul>
+                                 </li>
+                             </ul>
+
+                         </div> <!-- d-flex end -->
+                     </div> <!-- navbar-collapse end -->
+                 </nav>
+             </div> <!-- container px-0 end -->
+         </div> <!-- container-fluid end -->
+         <!-- Navbar End -->
+          <!-- Hero Start -->
+                <div class="container-fluid py-5 mb-5 hero-header">
+                    <div class="container py-5">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-md-12 col-lg-7">
+                                <h4 class="mb-3 text-secondary">shopping mall project</h4>
+                                <h1 class="mb-5 display-3 text-primary">shoe heaven</h1>
+                            </div>
+
+                            <div class="col-md-12 col-lg-5">
+                                <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active rounded">
+                                            <img src="https://cdn.pixabay.com/photo/2019/08/20/02/13/boots-4417595_640.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                            <a href="#" class="btn px-4 py-2 text-white rounded">Man</a>
+                                        </div>
+                                        <div class="carousel-item rounded">
+                                            <img src="https://cdn.pixabay.com/photo/2017/07/25/14/50/shoes-2538424_640.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                            <a href="#" class="btn px-4 py-2 text-white rounded">Woman</a>
+                                        </div>
+                                        <div class="carousel-item rounded">
+                                            <img src="https://cdn.pixabay.com/photo/2014/09/03/20/15/shoes-434918_640.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                            <a href="#" class="btn px-4 py-2 text-white rounded">Child</a>
+                                        </div>
+                                    </div>
+
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Hero End -->
 
         <!-- Single Product Start -->
         <div class="container-fluid py-5 mt-5">

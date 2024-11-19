@@ -57,27 +57,30 @@ public class AdminController {
 
     }
 
-    @GetMapping("productRegister")
+    @GetMapping("/productRegister")
     public void productRegister(Model model){
         log.info("상품 등록 페이지 접속");
         model.addAttribute("categoryList", service.categoryList());
+        model.addAttribute("product", new ProductVO());
     }
 
     // 상품 등록
     @PostMapping("/productRegister")
     public String productRegister(@Valid @ModelAttribute("product") ProductVO product, BindingResult bindingResult, Model model) throws Exception{
 
-        System.out.println("반갑고");
-        
+
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "admin/main";
+
+            model.addAttribute("categoryList", service.categoryList());
+            return "admin/productRegister";
         }
+        log.info(product.toString());
 
         if(product.getAttachList() == null){
 
         }else {
-            System.out.println("ㅎㅇㅎㅇ");
+
             service.productRegister(product);
             service.ImageRegister(product, product.getP_id());
         }

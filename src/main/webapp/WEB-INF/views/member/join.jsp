@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +97,7 @@
        <span class="input-group-text"><i class="bi bi-building"></i></span>
          <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3'  >
       </div>
-     <!-- 주소 END -->
+     <!-- 주소 END -->r
 
 
       <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">회원가입</button>

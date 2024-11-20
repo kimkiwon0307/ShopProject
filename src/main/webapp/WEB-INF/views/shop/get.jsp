@@ -297,8 +297,9 @@
 
 
          // 장바구니 버튼 눌렀을때.
-         $("#bucketBtn").on("click",function(){
+         $("#bucketBtn").on("click",function(e){
 
+                e.preventDefault();
 
                 var price =  <c:out value="${product.p_price}"/>; // 상품 가격
                 var quantity = $('#quantityValue').val(); // 상품 갯수

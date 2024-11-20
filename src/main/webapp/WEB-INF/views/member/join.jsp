@@ -97,7 +97,7 @@
        <span class="input-group-text"><i class="bi bi-building"></i></span>
          <input type="text" class="form-control" placeholder="상세 주소" id='address_input_3'name='member_Addr3'  >
       </div>
-     <!-- 주소 END -->r
+     <!-- 주소 END -->
 
 
       <button type="button" class="btn btn-info" id="joinBtn" style="margin-bottom:20px;">회원가입</button>

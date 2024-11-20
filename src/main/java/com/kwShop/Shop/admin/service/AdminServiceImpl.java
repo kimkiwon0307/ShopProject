@@ -29,8 +29,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void productRegister(ProductVO product) {
         mapper.productRegister(product);
-
     }
+
     
     //상품 목록
     @Override

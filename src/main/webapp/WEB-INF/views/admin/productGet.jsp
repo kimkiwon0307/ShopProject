@@ -42,14 +42,14 @@
                  <nav class="navbar navbar-light bg-white navbar-expand-xl">
 
                      <!-- 로고 -->
-                     <a href="/shop/main2" class="navbar-brand">
+                     <a href="/shop/main" class="navbar-brand">
                          <h1 class="text-primary display-6">Shoe Heaven</h1>
                      </a>
 
                      <!-- 가운데 home, Q&A -->
                      <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                          <div class="navbar-nav mx-auto">
-                             <a href="/shop/main2" class="nav-item nav-link">Home</a>
+                             <a href="/shop/main" class="nav-item nav-link">Home</a>
                              <a href="/shop/Qna" class="nav-item nav-link">Q & A</a>
                          </div>
 
@@ -440,8 +440,9 @@
 
 
          // 장바구니 버튼 눌렀을때.
-         $("#bucketBtn").on("click",function(){
+         $("#bucketBtn").on("click",function(e){
 
+                e.preventDefault();
 
                 var price =  <c:out value="${product.p_price}"/>; // 상품 가격
                 var quantity = $('#quantityValue').val(); // 상품 갯수

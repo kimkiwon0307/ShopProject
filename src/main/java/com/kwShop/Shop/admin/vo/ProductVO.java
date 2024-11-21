@@ -3,6 +3,7 @@ package com.kwShop.Shop.admin.vo;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class ProductVO {
     @NotNull(message = "상품 할인율(0~99) 을 입력하세요.")
     @Min(value = 0, message = "할인은 0% 이상이어야 합니다.")
     @Max(value = 99, message = "할인은 99% 이하이어야 합니다.")
-    private Double  p_discount; // 상품 할인 확률
+    private BigDecimal p_discount; // 상품 할인 확률
 
     private Date p_date;         //   상품 등록날짜
     private Date p_udate;         //  상품 수정 날짜
@@ -47,7 +48,7 @@ public class ProductVO {
     @NotBlank
     private String p_categoryName; // 상품 분류
 
-   private String attachUuid;
+    private String attachUuid;
     private String attachUploadPath;
     private String attachFilename;
 

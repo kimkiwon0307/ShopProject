@@ -55,7 +55,7 @@ public class ShopController {
     }
 
 
-    @GetMapping({"/get","/get2"})
+    @GetMapping({"/get","/get2","productGet"})
     public void getPage(@RequestParam("p_id") int p_id, Criteria cri, Model model) throws Exception {
 
         log.info("상품 조회 페이지");

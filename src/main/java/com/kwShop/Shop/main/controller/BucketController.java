@@ -30,7 +30,7 @@ public class BucketController {
         for(BucketVO bucket : buckets){
 
            bucket.setUploadPath(bucket.getUploadPath().replaceAll("\\\\","\\\\\\\\"));
-            log.info(bucket.toString());
+            log.info("gd"+ bucket.toString());
         }
 
         model.addAttribute("list", buckets);

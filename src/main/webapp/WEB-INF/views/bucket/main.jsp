@@ -130,19 +130,19 @@
                              <input type="checkbox" class="product-checkbox" value="${item.p_id}">
                           </td>
 
-                         <td style="width: 300px; height: 300px;">
-                             <a href="/shop/get?p_id=${item.p_id}">
+                         <td style="width: 300px; height: 300px;" data-id="${item.p_id}">
+                             <a href="/shop/productGet?p_id=${item.p_id}">
                                  <div class="result-${item.b_id}" style="width: 100%; height: 100%;"></div>
                              </a>
                          </td>
-                         <td style="width: 180px; text-align: center; vertical-align: middle;">
+                         <td style="width: 180px; text-align: center; vertical-align: middle;" data-name="${item.p_name}">
                              <h5 class="fw-bold mb-3">${item.p_name}</h5>
                          </td>
-                         <td style="width: 180px; text-align: center; vertical-align: middle;">
+                         <td style="width: 180px; text-align: center; vertical-align: middle;" data-quantity="${item.quantity}">
                              <h5 class="fw-bold mb-3">${item.quantity}</h5>
                          </td>
-                         <td style="width: 200px; text-align: center; vertical-align: middle;">
-                             <h5 class="fw-bold mb-3" style="text-decoration: line-through;">
+                         <td style="width: 230px; text-align: center; vertical-align: middle;" >
+                             <h5 class="fw-bold mb-3" style="text-decoration: line-through;" >
                                  정가 : <fmt:formatNumber value="${item.p_price * item.quantity}" pattern="#,###" />원
                              </h5>
                              <h5 class="fw-bold mb-3">
@@ -167,6 +167,7 @@
                      주문하기
                  </button>
              </div>
+
          </div>
 
          <br><br>
@@ -256,10 +257,21 @@
 
                          $('.product-checkbox').on("change",function(){
 
+                                  var $row = $(this).closest('tr');
+                                    // 해당 행의 p_name 값 가져오기
+
+                                  var p_name = $row.find('td:nth-child(3) h5').text().trim();
+                                  var p_quantity = $row.find('td[data-quantity]').data('quantity');
+
+                                  alert(p_quantity);
+
+
                                if($(this).is(':checked')){
 
                                   if(!selectedProduct.includes($(this).val())){
+
                                     selectedProduct.push($(this).val());
+
                                  }
 
                                }else {
@@ -277,8 +289,9 @@
                             var uuid = '<c:out value="${list.uuid}" />';
                             var filename = '<c:out value="${list.fileName}" />';
                             var uploadResult = $(".result-${list.b_id}");
-                            var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/"+uuid+"_"+filename)
-                            //var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/"+uuid+"_"+filename)
+                            var fileCallPath = encodeURIComponent("C:\\upload2\\"+uploadPath+"/thumb_"+uuid+"_"+filename)
+                            console.log(uuid);
+                            //var fileCallPath = encodeURIComponent("//tmp//img//"+uploadPath+"/thumb_"+uuid+"_"+filename)
                             var imageTag = '<img src="/shop/display?fileName=' + fileCallPath + '" class="card-img-top" alt="..." style="height:300px;">';
 
                                 uploadResult.append(imageTag);
@@ -316,6 +329,40 @@
                         });
 
                         $(".buyBtn").on("click", function () {
+
+                            var member_id = '<c:out value="${member.member_id}"/>';
+                            var productList;
+                            var id; // 아이템 ID
+                            var order_id; // 주문 ID (Order 클래스와 연결)
+
+                            var product_id; // 상품 ID
+                            var p_name; // 상품명 (선택 사항)
+                            var p_price; // 상품 단가
+                            var p_quantity; // 수량
+                            var totalPrice; // 총 결제 금액 (price * quantity)
+                            var p_discount; // 상품 할인율
+
+
+
+                            var data = {
+                                 member_id : member_id,
+                                 productIds : selectedProduct
+                            }
+
+                                   $.ajax({
+                                      url: '/order/orderProduct',
+                                      type: 'POST',
+                                      contentType: 'application/json',
+                                      data: JSON.stringify(data),
+                                      success: function (response) {
+                                            alert("보내짐")
+                                      },
+                                      error: function (error) {
+                                            alert("안보내짐")
+                                      }
+                                  });
+
+
 
                             alert(selectedProduct);
                             alert("구매되었습니다.");

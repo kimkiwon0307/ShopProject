@@ -20,4 +20,8 @@
         </foreach>
     </insert>
 
+    <select id="orderList" resultType="com.kwShop.Shop.order.vo.Order">
+            select * from tbl_order where member_id = #{member_id}
+    </select>
+
 </mapper>

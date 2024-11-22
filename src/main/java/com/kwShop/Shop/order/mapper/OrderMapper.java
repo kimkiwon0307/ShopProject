@@ -13,6 +13,8 @@ public interface OrderMapper {
 
     public void insertOrderItems(List<OrderItem> orderItems);
 
+    public List<Order> orderList (String member_id);
+
 
 
 }

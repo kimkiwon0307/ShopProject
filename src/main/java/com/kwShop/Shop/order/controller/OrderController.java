@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-@RestController
+@Controller
 @RequestMapping("/order/*")
 @Slf4j
 @RequiredArgsConstructor
@@ -34,10 +34,17 @@ public class OrderController {
     private final OrderService service;
 
         @PostMapping("/orderProduct")
+        @ResponseBody
         public void orderProduct(@RequestBody Order order) throws Exception {
 
             service.insertOrder(order);
-
         }
+
+        @GetMapping("/orderList")
+        public void orderList(String member_id) throws Exception {
+           List<Order> order = service.orderedList("admin");
+            log.info(order.toString());
+        }
+
 
 }

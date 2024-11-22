@@ -38,4 +38,10 @@ public class OrderServiceImpl implements OrderService{
         }
 
     }
+
+    @Override
+    public List<Order> orderedList(String member_id) throws Exception {
+        return mapper.orderList("admin");
+    }
+
 }

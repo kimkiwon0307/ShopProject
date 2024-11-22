@@ -4,10 +4,13 @@ import com.kwShop.Shop.admin.service.AdminService;
 import com.kwShop.Shop.admin.vo.*;
 import com.kwShop.Shop.member.service.MemberService;
 import com.kwShop.Shop.member.vo.MemberPageDTO;
+import com.kwShop.Shop.order.service.OrderService;
 import com.kwShop.Shop.order.vo.Order;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,14 +28,15 @@ import java.util.*;
 @RestController
 @RequestMapping("/order/*")
 @Slf4j
+@RequiredArgsConstructor
 public class OrderController {
 
+    private final OrderService service;
+
         @PostMapping("/orderProduct")
-        public void orderProduct(@RequestBody Order order){
+        public void orderProduct(@RequestBody Order order) throws Exception {
 
-
-
-            log.info(order.toString());
+            service.insertOrder(order);
 
         }
 

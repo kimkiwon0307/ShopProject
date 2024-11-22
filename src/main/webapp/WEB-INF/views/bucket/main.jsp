@@ -123,11 +123,14 @@
                      <td><h5>삭제</h5></td>
                  </tr>
 
+
+
+
                  <c:forEach items="${list}" var="item">
                      <tr>
-
                            <td style="text-align: center; vertical-align: middle;">
-                             <input type="checkbox" class="product-checkbox" value="${item.p_id}">
+                             <input type="checkbox" class="product-checkbox" value="${item.p_id}" data-id="${item.p_id}">
+
                           </td>
 
                          <td style="width: 300px; height: 300px;" data-id="${item.p_id}">
@@ -141,7 +144,7 @@
                          <td style="width: 180px; text-align: center; vertical-align: middle;" data-quantity="${item.quantity}">
                              <h5 class="fw-bold mb-3">${item.quantity}</h5>
                          </td>
-                         <td style="width: 230px; text-align: center; vertical-align: middle;" >
+                         <td style="width: 230px; text-align: center; vertical-align: middle;"  data-price="${item.p_price}"  data-discount="${item.p_discount}">
                              <h5 class="fw-bold mb-3" style="text-decoration: line-through;" >
                                  정가 : <fmt:formatNumber value="${item.p_price * item.quantity}" pattern="#,###" />원
                              </h5>
@@ -149,7 +152,8 @@
                                  할인율 : <fmt:formatNumber value="${item.p_discount}" pattern="#,###" /> %
                              </h5>
                              <c:set var="discountedPrice" value="${item.p_price - (item.p_price * (item.p_discount / 100.0))}" />
-                             <h5 class="fw-bold mb-3">
+
+                             <h5 class="fw-bold mb-3"  data-totalPrice="${discountedPrice * item.quantity}">
                                  판매가 : <fmt:formatNumber value="${discountedPrice * item.quantity}" type="number" maxFractionDigits="0" />원
                              </h5>
                          </td>
@@ -255,28 +259,47 @@
 
                         var selectedProduct = [];
 
+                        var orderItemList =[];
+                        var product_id;
+                        var product_name;
+                        var product_quantity;
+                        var product_price;
+                        var product_discount;
+
                          $('.product-checkbox').on("change",function(){
-
-                                  var $row = $(this).closest('tr');
-                                    // 해당 행의 p_name 값 가져오기
-
-                                  var p_name = $row.find('td:nth-child(3) h5').text().trim();
-                                  var p_quantity = $row.find('td[data-quantity]').data('quantity');
-
-                                  alert(p_quantity);
-
+                               var product_id = $(this).data('id');
 
                                if($(this).is(':checked')){
+                                 if(!selectedProduct.includes($(this).val())){
 
-                                  if(!selectedProduct.includes($(this).val())){
+
+
+                                       product_name = $(this).closest('td').next('td').next('td').data('name');
+                                       product_quantity = $(this).closest('td').next('td').next('td').next('td').data('quantity');
+                                       product_price = $(this).closest('td').next('td').next('td').next('td').next('td').data('price');
+                                       product_discount = $(this).closest('td').next('td').next('td').next('td').next('td').data('discount');
+                                       totalPrice = (product_price * product_quantity) - ((product_price * product_quantity) * (product_discount / 100.0));
+
+
+                                            var orderItem ={
+                                                                                      product_id : product_id,
+                                                                                      product_name : product_name,
+                                                                                      product_quantity : product_quantity,
+                                                                                      product_price : product_price,
+                                                                                      product_discount : product_discount,
+                                                                                      totalPrice : totalPrice
+                                                                                      }
+
 
                                     selectedProduct.push($(this).val());
+                                    orderItemList.push(orderItem);
 
                                  }
 
                                }else {
                                    selectedProduct.splice(selectedProduct.indexOf($(this).val()),1);
 
+                                    orderItemList = orderItemList.filter(item => item.product_id !== product_id);
                                }
 
 
@@ -346,7 +369,7 @@
 
                             var data = {
                                  member_id : member_id,
-                                 productIds : selectedProduct
+                                 orderItemList : orderItemList
                             }
 
                                    $.ajax({

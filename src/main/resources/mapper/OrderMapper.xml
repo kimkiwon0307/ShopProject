@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kwShop.Shop.order.mapper.OrderMapper">
+
+    <insert id="insertOrder" parameterType="com.kwShop.Shop.order.vo.Order" useGeneratedKeys="true" keyProperty="order_id">
+
+        insert into tbl_order (member_id, order_date)
+        values (#{member_id}, now())
+
+    </insert>
+
+    <!-- 여러 OrderItem 삽입 -->
+    <insert id="insertOrderItems" parameterType="java.util.List">
+        INSERT INTO tbl_orderItem (order_id, product_id, product_name, product_quantity, product_price, product_discount, totalPrice)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.order_id}, #{item.product_id}, #{item.product_name}, #{item.product_quantity}, #{item.product_price}, #{item.product_discount}, #{item.totalPrice})
+        </foreach>
+    </insert>
+
+</mapper>

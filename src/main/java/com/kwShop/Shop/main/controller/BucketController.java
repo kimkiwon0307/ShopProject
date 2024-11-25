@@ -28,9 +28,7 @@ public class BucketController {
      //   List<BucketVO> bucketss = new ArrayList<>();
 
         for(BucketVO bucket : buckets){
-
            bucket.setUploadPath(bucket.getUploadPath().replaceAll("\\\\","\\\\\\\\"));
-            log.info("gd"+ bucket.toString());
         }
 
         model.addAttribute("list", buckets);

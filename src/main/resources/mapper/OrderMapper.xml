@@ -8,7 +8,6 @@
 
         insert into tbl_order (member_id, order_date)
         values (#{member_id}, now())
-
     </insert>
 
     <!-- 여러 OrderItem 삽입 -->
@@ -21,7 +20,16 @@
     </insert>
 
     <select id="orderList" resultType="com.kwShop.Shop.order.vo.Order">
-            select * from tbl_order where member_id = #{member_id}
+        SELECT o.order_id, o.member_id, o.order_date,
+               oi.orderItem_id, oi.product_id, oi.product_name, oi.product_quantity, oi.product_price, oi.product_discount, oi.totalPrice, a.uploadPath, a.uuid, a.fileName
+        FROM tbl_order o
+        LEFT join tbl_orderItem oi ON o.order_id = oi.order_id
+        LEFT join tbl_attach a ON oi.product_id = a.p_id
+        ORDER BY o.order_date DESC
+
     </select>
+
+
+
 
 </mapper>

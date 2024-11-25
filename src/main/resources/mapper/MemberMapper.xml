@@ -66,9 +66,13 @@
 
     <update id="memberUpdate" parameterType="com.kwShop.Shop.member.vo.MemberVO">
 
-        update tbl_member
+        UPDATE tbl_member
 
-        set member_pw = #{member_pw}, member_name = #{member_name}, member_mail = #{member_mail}, member_Addr1 = #{member_Addr1}, member_Addr2 = #{member_Addr2}, member_Addr3 = #{member_Addr3}
+        SET member_pw = #{member_pw}, member_name = #{member_name}, member_mail = #{member_mail},
+            member_Addr1 = #{member_Addr1}, member_Addr2 = #{member_Addr2}, member_Addr3 = #{member_Addr3},
+            money = #{money}
+
+        where member_id = #{member_id}
 
     </update>
 

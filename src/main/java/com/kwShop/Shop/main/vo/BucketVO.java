@@ -37,10 +37,8 @@ public class BucketVO {
 
     // tbl_attach 테이블
     private String uploadPath;
-
     /* uuid */
     private String uuid;
-
     /* 파일 이름 */
     private String fileName;
 

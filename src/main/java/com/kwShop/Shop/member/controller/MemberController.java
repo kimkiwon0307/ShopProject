@@ -100,7 +100,7 @@ public class MemberController {
         MemberVO member = service.memberLogin(member_id, member_pw); // 로그인한 멤버 객체
 
         if(member != null) {
-            HttpSession session = request.getSession(); // 세션 획득
+             session = request.getSession(); // 세션 획득
             session.setAttribute("member", member); // 세션에 로그인한 멤버 객체 저장
             return ResponseEntity.ok("로그인 성공");
         }

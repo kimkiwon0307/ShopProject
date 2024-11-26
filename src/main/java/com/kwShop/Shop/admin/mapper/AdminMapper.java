@@ -37,4 +37,6 @@ public interface AdminMapper {
 
     public List<CategoryVO> subCategory(@Param("cateCode") int cateCode); // 서브카테고리 리스트
 
+
+
 }

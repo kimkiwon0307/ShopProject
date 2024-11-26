@@ -282,21 +282,9 @@
 
                         });
 
-                        $(".buyBtn").on("click", function () {
+                        $(".buyBtn").on("click", function() {
 
                             var member_id = '<c:out value="${member.member_id}"/>';
-                            var productList;
-                            var id; // 아이템 ID
-                            var order_id; // 주문 ID (Order 클래스와 연결)
-
-                            var product_id; // 상품 ID
-                            var p_name; // 상품명 (선택 사항)
-                            var p_price; // 상품 단가
-                            var p_quantity; // 수량
-                            var totalPrice; // 총 결제 금액 (price * quantity)
-                            var p_discount; // 상품 할인율
-
-
 
                             var data = {
                                  member_id : member_id,
@@ -311,14 +299,15 @@
                                       data: JSON.stringify(data),
                                       success: function (response) {
                                             self.location = "/shop/main";
+                                            alert("구매되었습니다.");
                                       },
                                       error: function (error) {
-                                            alert("안보내짐")
+                                            alert("가진 돈이 부족합니다.")
                                       }
                                   });
 
 
-                            alert("구매되었습니다.");
+
 
 
                         })

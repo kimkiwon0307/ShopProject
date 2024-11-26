@@ -74,7 +74,6 @@ public class AdminController {
 
         if(bindingResult.hasErrors()){
             model.addAttribute("errors", bindingResult.getAllErrors());
-
             model.addAttribute("categoryList", service.categoryList());
             return "admin/productRegister";
         }

@@ -467,7 +467,7 @@
                // 삭제버튼
                $(document).on("click", ".d_btn", function() {
                    var p_id = $(this).data("p_id");
-                   if(confirm("정말 삭1제하시겠습니까?")){
+                   if(confirm("정말 삭제하시겠습니까?")){
                    $.ajax({
                        url: '/admin/ProductDelete',
                        type: 'POST',

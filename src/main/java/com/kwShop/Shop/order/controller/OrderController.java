@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,33 +46,37 @@ public class OrderController {
 
         @PostMapping("/orderProduct")
         @ResponseBody
-        public void orderProduct(@RequestBody Order order,  HttpSession session) throws Exception {
+        public ResponseEntity<String> orderProduct(@RequestBody Order order, HttpSession session) throws Exception {
 
             int result = 0;
 
-            log.info(order.toString());
-
             for (OrderItem o :  order.getOrderItemList()) {
-                 result += o.getTotalPrice().intValue();
+                result += o.getTotalPrice().intValue();
             };
 
-            for (int b : order.getB_id()) {
-                bucketService.delete(b);
-            }
 
             MemberVO member = memberService.profile(order.getMember_id());
 
-         if(member.getMoney() >= result ) {
-                log.info("그래서 남은돈 {}", member.getMoney() - result);
+            if(member.getMoney() >= result ) {
 
+                log.info("남은돈 {}", member.getMoney() - result);
                 member.setMoney(member.getMoney() - result);
                 memberService.memberUpdate(member);
-              session.setAttribute("member", member);
+                session.setAttribute("member", member);
 
+              for (int b : order.getB_id()) {
+                  bucketService.delete(b);
+              }
+
+
+
+                service.insertOrder(order);
+
+                return  new ResponseEntity<>(HttpStatus.OK);
             }else {
-                return;
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            service.insertOrder(order);
+
         }
 
         @GetMapping("/orderList")

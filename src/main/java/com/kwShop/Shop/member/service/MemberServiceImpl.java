@@ -5,6 +5,7 @@ import com.kwShop.Shop.member.vo.Criteria;
 import com.kwShop.Shop.member.vo.MemberVO;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,12 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService{
 
     private final MemberMapper mapper;
+//    private final BCryptPasswordEncoder passwordEncoder;
+
 
     @Override
     public void memberJoin(MemberVO member) throws Exception {
+
         mapper.memberJoin(member);
     }
 
@@ -65,4 +69,7 @@ public class MemberServiceImpl implements MemberService{
     public void memberUpdate(MemberVO member) throws Exception {
         mapper.memberUpdate(member);
     }
+
+
+
 }

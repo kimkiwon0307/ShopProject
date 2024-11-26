@@ -50,7 +50,7 @@
                      <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                          <div class="navbar-nav mx-auto">
                              <a href="/shop/main" class="nav-item nav-link">Home</a>
-                             <a href="/shop/Qna" class="nav-item nav-link">Q & A</a>
+
                          </div>
 
                          <!-- 오른쪽 검색, 장바구니, 프로필 -->
@@ -288,8 +288,8 @@
                 var str ="";
                 var obj = arr[0];
 
-                var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/thumb_"+obj.uuid+"_"+obj.fileName);
-                //var fileCallPath = encodeURIComponent("//tmp//img//"+obj.uploadPath+"/"+obj.uuid+"_thumb_"+obj.fileName);
+                var fileCallPath = encodeURIComponent("C:\\upload2\\"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+                //var fileCallPath = encodeURIComponent("//tmp//img//"+obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
 		        str += "<img src='/shop/display?fileName=" + fileCallPath + "'class='img-fluid rounded' alt='Slide 2'>";
 		        str += "</div>";
 		        console.log(fileCallPath);

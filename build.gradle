@@ -43,11 +43,11 @@ dependencies {
 	implementation 'jakarta.servlet:jakarta.servlet-api' //스프링부트 3.0 이상
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' //스프링부트 3.0 이상
 	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' //스프링부트 3.0 이상
-
+	implementation 'org.springframework.boot:spring-boot-starter-batch' // 스프링배치
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '3.0.5' // 이메일 인증
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'// 유효성검사 (@Notblank)
-	//implementation 'org.springframework.boot:spring-boot-starter-security' //  BCryptPasswordEncoder 사용을 위해 추가
+
 
 	implementation 'net.coobird:thumbnailator:0.4.18' // 썸네일
 
@@ -55,7 +55,7 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-
+	
 
 
 }

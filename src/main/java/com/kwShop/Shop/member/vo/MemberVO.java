@@ -11,8 +11,8 @@ import java.util.Date;
 public class MemberVO {
 
     @NotBlank(message = "아이디를 입력해주세요.")
-    @Pattern(regexp = "^[a-zA-Z]{2,10}$", message = "영문 2자 이상 10자 이하로 입력해주세요.")
-    private String member_id;                    //아이디
+    @Pattern(regexp = "^[a-zA-Z]{2,10}$", message = "아이디는 영문 2자 이상 10자 이하로 입력해주세요.")
+    private String member_id;                    //아이디+
 
     @NotBlank(message = "패스워드 입력해주세요.")
     @Pattern(

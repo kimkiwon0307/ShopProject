@@ -58,6 +58,8 @@ public class MemberController {
             return "/member/join";
         }
 
+      //  String encryptedPassword = service.encryptPassword(member.getMember_pw());
+       // log.info(encryptedPassword.toString());
         service.memberJoin(member);
 
         return "redirect:/member/login";

@@ -24,7 +24,7 @@ Data-Base
 
 ## 주요기능
 ### * 회원 기능 : 회원 CRUD, 아이디 및 비밀번호 중복확인, 다음주소API, 이메일 인증 구현
-![image](https://github.com/kimkiwon0307/ShopProject/assets/46276548/e10e7430-e53a-4197-b6a9-e7fe3fb0966a)
+![image](https://github.com/user-attachments/assets/14f37e92-5555-4866-9db5-42b9667341b1)
 
 ### * 상품 기능 : 상품 CRUD, 리뷰 기능 구현, 장바구니 기능 구현
 ![image](https://github.com/kimkiwon0307/ShopProject/assets/46276548/84d5ac33-f13c-4bbb-b1c0-3a408df766e0)

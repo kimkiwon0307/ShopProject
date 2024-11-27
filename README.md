@@ -20,7 +20,7 @@ Data-Base
 * MySQL
 
 ## ERD
-![image](https://github.com/kimkiwon0307/ShopProject/assets/46276548/a7fb8264-ed32-4100-8374-fc69e3e1df53)
+![image](https://github.com/user-attachments/assets/d3a00108-5abf-4652-bbb5-666dece8100d)
 
 ## 주요기능
 ### * 회원 기능 : 회원 CRUD, 아이디 및 비밀번호 중복확인, 다음주소API, 이메일 인증 구현

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
-
+   // 하이
     public void productRegister(ProductVO product); // 상품 등록
 
     public List<ProductVO> productList(@Param("offset") int offset, @Param("amount") int amount, @Param("keyword") String keyword); // 상품 목록
